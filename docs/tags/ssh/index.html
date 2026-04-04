@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>STL | OK Komputer</title>
+<title>Ssh | OK Komputer</title>
 <meta name="keywords" content="">
 <meta name="description" content="Everything in it&#39;s right place.">
 <meta name="author" content="ok-komputer">
-<link rel="canonical" href="https://ok-komputer.github.io/tags/stl/">
+<link rel="canonical" href="https://ok-komputer.github.io/tags/ssh/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://ok-komputer.github.io/tags/stl/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/tags/stl/">
+<link rel="alternate" type="application/rss+xml" href="https://ok-komputer.github.io/tags/ssh/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/tags/ssh/">
 <noscript>
     <style>
         #theme-toggle,
@@ -71,16 +71,16 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ok-komputer.github.io/tags/stl/">
+</script><meta property="og:url" content="https://ok-komputer.github.io/tags/ssh/">
   <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="STL">
+  <meta property="og:title" content="Ssh">
   <meta property="og:description" content="Everything in it&#39;s right place.">
   <meta property="og:locale" content="zh-cn">
   <meta property="og:type" content="website">
       <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="STL">
+<meta name="twitter:title" content="Ssh">
 <meta name="twitter:description" content="Everything in it&#39;s right place.">
 
 </head>
@@ -124,8 +124,8 @@
 <main class="main"> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://ok-komputer.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://ok-komputer.github.io/tags/">Tags</a></div>
   <h1>
-    STL
-    <a href="/tags/stl/index.xml" title="RSS" aria-label="RSS">
+    Ssh
+    <a href="/tags/ssh/index.xml" title="RSS" aria-label="RSS">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" height="23">
         <path d="M4 11a9 9 0 0 1 9 9" />
@@ -138,15 +138,17 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">C&#43;&#43; Vector
+    <h2 class="entry-hint-parent">使用 SSH 建立 Socks5 代理
     </h2>
   </header>
   <div class="entry-content">
-    <p>创建 vector #include &lt;vector&gt; vector&lt;int&gt; v0; // 创建一个初始空间为 3 的 vector，元素默认值为 0 vector&lt;int&gt; v1(3); // 创建一个初始空间为 3 的 vector，元素默认值是 2 vector&lt;int&gt; v2(3, 2); // 创建一个 v2 的拷贝 v3，元素内容和 v2 一样 vector&lt;int&gt; v3(v2); // 创建一个 v3 的拷贝到 v4，内容是 { v3[1], v3[2] }，包前不包后; vector&lt;int&gt; v4(v3.begin() &#43; 1, v3.begin() &#43; 3); 元素访问 vector.at(pos) 返回 vector 中下标为 pos 的引用 vector[pos] 返回 vector 中下标为 pos 的引用，不执行越界检查 vector.front() 返回首元素的引用（vector.begin() 是迭代器，和这个不同） vector.back() 返回末元素的引用 （vector.end() 是迭代器，没有元素，和这个不同） vector.data() 返回首元素的指针（vector 的空间是连续的） 迭代器 vector.begin() 返回首元素的迭代器，*begin = front vector.end() 返回末元素的迭代器，没有元素 vector.rbegin() 返回指向逆向数组的首元素的迭代器，可以理解为正向容器的末元素 vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应容器首的前一个位置，没有元素 上述迭代器名前加上一个 c 为只读迭代器 长度和容量 注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度
-...</p>
+    <p>只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件
+在本地执行：
+ssh -D port user@passwd 然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。
+</p>
   </div>
-  <footer class="entry-footer"><span title='2026-03-09 07:54:32 +0800 CST'>2026/03/09</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>156 words</span>&nbsp;·&nbsp;<span>ok-komputer</span></footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; Vector" href="https://ok-komputer.github.io/posts/cpp-vector/"></a>
+  <footer class="entry-footer"><span title='2026-04-04 12:38:49 +0800 CST'>2026/04/04</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>17 words</span>&nbsp;·&nbsp;<span>ok-komputer</span></footer>
+  <a class="entry-link" aria-label="post link to 使用 SSH 建立 Socks5 代理" href="https://ok-komputer.github.io/posts/ssh-socks5/"></a>
 </article>
     </main>
     

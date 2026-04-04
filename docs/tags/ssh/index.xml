@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ssh on OK Komputer</title>
+    <link>https://ok-komputer.github.io/tags/ssh/</link>
+    <description>Recent content in Ssh on OK Komputer</description>
+    <image>
+      <title>OK Komputer</title>
+      <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
+      <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
+    </image>
+    <generator>Hugo -- 0.151.0</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 04 Apr 2026 12:38:49 +0800</lastBuildDate>
+    <atom:link href="https://ok-komputer.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 SSH 建立 Socks5 代理</title>
+      <link>https://ok-komputer.github.io/posts/ssh-socks5/</link>
+      <pubDate>Sat, 04 Apr 2026 12:38:49 +0800</pubDate>
+      <guid>https://ok-komputer.github.io/posts/ssh-socks5/</guid>
+      <description>&lt;p&gt;只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件&lt;/p&gt;
+&lt;p&gt;在本地执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh -D port user@passwd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 &lt;code&gt;Socks5&lt;/code&gt; 类型的代理：&lt;code&gt;127.0.0.1:port&lt;/code&gt; 即可。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
