@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@ ssh -D port user@passwd
 然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/posts/ssh-socks5/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ad59631f6c2768a4592d27068d54364d637cac5c853d949b7849073cb1aa97d.css" integrity="sha256-atWWMfbCdopFktJwaNVDZNY3ysXIU9lJt4SQc8saqX0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -21,7 +21,7 @@ ssh -D port user@passwd
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/posts/ssh-socks5/">
+<link rel="alternate" hreflang="zh-cn" href="https://ok-komputer.github.io/posts/ssh-socks5/">
 <noscript>
     <style>
         #theme-toggle,
@@ -42,57 +42,41 @@ ssh -D port user@passwd
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-                color-scheme: dark;
             }
 
             .list {
                 background: var(--theme);
             }
 
-            .toc {
-                background: var(--entry);
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
             }
-        }
 
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
             }
         }
 
     </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://ok-komputer.github.io/posts/ssh-socks5/">
-  <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="使用 SSH 建立 Socks5 代理">
-  <meta property="og:description" content="只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件
+</noscript><meta property="og:title" content="使用 SSH 建立 Socks5 代理" />
+<meta property="og:description" content="只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件
 在本地执行：
-ssh -D port user@passwd 然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-04-04T12:38:49+08:00">
-    <meta property="article:modified_time" content="2026-04-04T12:38:49+08:00">
-    <meta property="article:tag" content="Ssh">
-      <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="使用 SSH 建立 Socks5 代理">
+ssh -D port user@passwd
+然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ok-komputer.github.io/posts/ssh-socks5/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-04-04T12:38:49+08:00" />
+<meta property="article:modified_time" content="2026-04-04T12:38:49+08:00" /><meta property="og:site_name" content="OK Komputer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="使用 SSH 建立 Socks5 代理"/>
 <meta name="twitter:description" content="只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件
 在本地执行：
 ssh -D port user@passwd
-然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。">
+然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。"/>
 
 
 <script type="application/ld+json">
@@ -127,7 +111,7 @@ ssh -D port user@passwd
   ],
   "articleBody": "只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件\n在本地执行：\nssh -D port user@passwd 然后输入密码连接，看上去跟平常使用 SSH 一样，但是在本地已经建立了一个连接到服务器的 Socks5 代理，这个时候更改代理为 Socks5 类型的代理：127.0.0.1:port 即可。\n",
   "wordCount" : "17",
-  "inLanguage": "en",
+  "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2026-04-04T12:38:49+08:00",
   "dateModified": "2026-04-04T12:38:49+08:00",
   "author":{
@@ -149,13 +133,25 @@ ssh -D port user@passwd
 }
 </script>
 </head>
-<body id="top">
-    <header class="header">
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://ok-komputer.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -194,7 +190,7 @@ ssh -D port user@passwd
     <h1 class="post-title entry-hint-parent">
       使用 SSH 建立 Socks5 代理
     </h1>
-    <div class="post-meta"><span title='2026-04-04 12:38:49 +0800 CST'>2026/04/04</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>17 words</span>&nbsp;·&nbsp;<span>ok-komputer</span>
+    <div class="post-meta"><span title='2026-04-04 12:38:49 +0800 CST'>2026/04/04</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;17 words&nbsp;·&nbsp;ok-komputer
 
 </div>
   </header> 
@@ -213,7 +209,7 @@ ssh -D port user@passwd
     </ul>
 <nav class="paginav">
   <a class="next" href="https://ok-komputer.github.io/posts/cpp-string/">
-    <span class="title">Next »</span>
+    <span class="title"> »</span>
     <br>
     <span>C&#43;&#43; String</span>
   </a>
@@ -287,21 +283,7 @@ ssh -D port user@passwd
     </li>
 </ul>
 
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="ok-komputer/ok-komputer.github.io"
-        data-repo-id="R_kgDOQSEoqQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+  </footer>
 </article>
     </main>
     
@@ -321,14 +303,9 @@ ssh -D port user@passwd
 </a>
 
 <script>
-    let menu = document.getElementById('menu');
+    let menu = document.getElementById('menu')
     if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -369,12 +346,11 @@ ssh -D port user@passwd
 </script>
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            html.dataset.theme = 'dark';
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     })

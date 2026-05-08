@@ -9,7 +9,7 @@
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
-    <generator>Hugo -- 0.151.0</generator>
+    <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 08 Feb 2026 22:43:14 +0800</lastBuildDate>
     <atom:link href="https://ok-komputer.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
@@ -229,7 +229,7 @@
       <guid>https://ok-komputer.github.io/posts/pctf-wp/</guid>
       <description>&lt;h2 id=&#34;web&#34;&gt;Web&lt;/h2&gt;
 &lt;h3 id=&#34;ezphp&#34;&gt;EZPHP&lt;/h3&gt;
-&lt;p&gt;爆破数字，为 114514，然后发送 POST 请求 &lt;a href=&#34;http://challenge2.pctf.top:31855/?number=114514&amp;amp;action=include&#34;&gt;http://challenge2.pctf.top:31855/?number=114514&amp;amp;action=include&lt;/a&gt;，&lt;code&gt;filename=data://text/plain,&amp;lt;?php system(&#39;ls -a /&#39;); ?&amp;gt;&lt;/code&gt;，看下 flag 在 &lt;code&gt;2t9I0T6BaYFEZGqu&lt;/code&gt; 这个文件里，然后再发送一个 &lt;code&gt;data://text/plain,&amp;lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&amp;gt;&lt;/code&gt; 即可拿到 flag。&lt;/p&gt;
+&lt;p&gt;爆破数字，为 114514，然后发送 POST 请求 &lt;a href=&#34;http://challenge2.pctf.top:31855/?number=114514&amp;amp;action=include&#34;&gt;http://challenge2.pctf.top:31855/?number=114514&amp;action=include&lt;/a&gt;，&lt;code&gt;filename=data://text/plain,&amp;lt;?php system(&#39;ls -a /&#39;); ?&amp;gt;&lt;/code&gt;，看下 flag 在 &lt;code&gt;2t9I0T6BaYFEZGqu&lt;/code&gt; 这个文件里，然后再发送一个 &lt;code&gt;data://text/plain,&amp;lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&amp;gt;&lt;/code&gt; 即可拿到 flag。&lt;/p&gt;
 &lt;h3 id=&#34;jwt_password_manager&#34;&gt;Jwt_password_manager&lt;/h3&gt;
 &lt;p&gt;打开 &lt;code&gt;app.py&lt;/code&gt;，发现 &lt;code&gt;SECRET_KEY&lt;/code&gt; 都给了，访问 &lt;a href=&#34;https://jwt.io/&#34;&gt;jwt.io&lt;/a&gt;，找到 JWT Encoder，把 payload 改成 &lt;code&gt;{ &#39;username&#39;: &#39;admin&#39; }&lt;/code&gt;，把 &lt;code&gt;SECRET_KEY&lt;/code&gt; 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。&lt;/p&gt;
 &lt;h3 id=&#34;we_will_rockyou&#34;&gt;We_will_rockyou&lt;/h3&gt;

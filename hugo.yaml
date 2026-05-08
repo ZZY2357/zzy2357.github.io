@@ -1,6 +1,9 @@
 baseURL: "https://ok-komputer.github.io/"
-languageCode: "zh-cn"
+defaultContentLanguage: zh-cn
 title: "OK Komputer"
+languages:
+  zh-cn:
+    locale: zh-cn
 theme: ["PaperMod"]
 publishDir: "docs"
 

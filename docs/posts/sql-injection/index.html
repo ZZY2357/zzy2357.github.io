@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 注释掉后面的条件以直接绕过条件。">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/posts/sql-injection/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ad59631f6c2768a4592d27068d54364d637cac5c853d949b7849073cb1aa97d.css" integrity="sha256-atWWMfbCdopFktJwaNVDZNY3ysXIU9lJt4SQc8saqX0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -48,7 +48,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/posts/sql-injection/">
+<link rel="alternate" hreflang="zh-cn" href="https://ok-komputer.github.io/posts/sql-injection/">
 <noscript>
     <style>
         #theme-toggle,
@@ -69,56 +69,64 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-                color-scheme: dark;
             }
 
             .list {
                 background: var(--theme);
             }
 
-            .toc {
-                background: var(--entry);
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
             }
-        }
 
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
             }
         }
 
     </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
+</noscript><meta property="og:title" content="SQL 注入 - CTF Web 学习笔记" />
+<meta property="og:description" content="SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。
+SQL 基本查询语句
+从 users 表中查询 id 为 123 的数据：
+SELECT username, password FROM users where id = 123;
 
-</script><meta property="og:url" content="https://ok-komputer.github.io/posts/sql-injection/">
-  <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="SQL 注入 - CTF Web 学习笔记">
-  <meta property="og:description" content="SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。
-SQL 基本查询语句 从 users 表中查询 id 为 123 的数据：
-SELECT username, password FROM users where id = 123; UNION 用于合并两个或多个 SELECT 语句的结果 LIMIT 用于限制返回的记录数量 ORDER BY 对结果进行排序 -- 用于单行注释 /* */ 用于多行注释 SELECT username, password FROM users1 ORDER BY id UNION SELECT username, password FROM users2 LIMIT 10; -- 查询 注意：使用 UNION 的时候要注意两个表的列数量必须相同。
-SQL 常用参数 user()：当前数据库用户 database()：当前数据库名 version()：当前使用的数据库版本 @@datadir：数据库储存数据路径 concat()：联合数据，用于联合两条数据结果，如 concat(username, 0x3a, password) group_concat()：和 concat() 类似，如 group_concat(DISTINCT&#43;user,0x3a,password)，用于把多条数据一次注入出来 concat_ws()：用法类似 hex() 和 unhex()：用于 hex 编码解码 ASCII()：返回字符的 ASCII 码值 CHAR()：把整数转换为对应的字符 load_file()：以文本方式读取文件，在 Windows 中，路径设置为 \ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件 基本注入 注释掉后面的条件以直接绕过条件。">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-12T19:32:31+08:00">
-    <meta property="article:modified_time" content="2025-11-12T19:32:31+08:00">
-    <meta property="article:tag" content="Ctf">
-    <meta property="article:tag" content="Sql">
-    <meta property="article:tag" content="Web">
-      <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="SQL 注入 - CTF Web 学习笔记">
+UNION 用于合并两个或多个 SELECT 语句的结果
+LIMIT 用于限制返回的记录数量
+ORDER BY 对结果进行排序
+-- 用于单行注释
+/* */ 用于多行注释
+
+SELECT username, password FROM users1 ORDER BY id
+    UNION SELECT username, password FROM users2 LIMIT 10; -- 查询
+注意：使用 UNION 的时候要注意两个表的列数量必须相同。
+SQL 常用参数
+
+user()：当前数据库用户
+database()：当前数据库名
+version()：当前使用的数据库版本
+@@datadir：数据库储存数据路径
+concat()：联合数据，用于联合两条数据结果，如 concat(username, 0x3a, password)
+group_concat()：和 concat() 类似，如 group_concat(DISTINCT&#43;user,0x3a,password)，用于把多条数据一次注入出来
+concat_ws()：用法类似
+hex() 和 unhex()：用于 hex 编码解码
+ASCII()：返回字符的 ASCII 码值
+CHAR()：把整数转换为对应的字符
+load_file()：以文本方式读取文件，在 Windows 中，路径设置为 \
+select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
+
+基本注入
+注释掉后面的条件以直接绕过条件。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ok-komputer.github.io/posts/sql-injection/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-11-12T19:32:31+08:00" />
+<meta property="article:modified_time" content="2025-11-12T19:32:31+08:00" /><meta property="og:site_name" content="OK Komputer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="SQL 注入 - CTF Web 学习笔记"/>
 <meta name="twitter:description" content="SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。
 SQL 基本查询语句
 从 users 表中查询 id 为 123 的数据：
@@ -149,7 +157,7 @@ load_file()：以文本方式读取文件，在 Windows 中，路径设置为 \
 select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 
 基本注入
-注释掉后面的条件以直接绕过条件。">
+注释掉后面的条件以直接绕过条件。"/>
 
 
 <script type="application/ld+json">
@@ -184,7 +192,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
   ],
   "articleBody": "SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。\nSQL 基本查询语句 从 users 表中查询 id 为 123 的数据：\nSELECT username, password FROM users where id = 123; UNION 用于合并两个或多个 SELECT 语句的结果 LIMIT 用于限制返回的记录数量 ORDER BY 对结果进行排序 -- 用于单行注释 /* */ 用于多行注释 SELECT username, password FROM users1 ORDER BY id UNION SELECT username, password FROM users2 LIMIT 10; -- 查询 注意：使用 UNION 的时候要注意两个表的列数量必须相同。\nSQL 常用参数 user()：当前数据库用户 database()：当前数据库名 version()：当前使用的数据库版本 @@datadir：数据库储存数据路径 concat()：联合数据，用于联合两条数据结果，如 concat(username, 0x3a, password) group_concat()：和 concat() 类似，如 group_concat(DISTINCT+user,0x3a,password)，用于把多条数据一次注入出来 concat_ws()：用法类似 hex() 和 unhex()：用于 hex 编码解码 ASCII()：返回字符的 ASCII 码值 CHAR()：把整数转换为对应的字符 load_file()：以文本方式读取文件，在 Windows 中，路径设置为 \\ select xxoo into outfile '路径'：权限较高时可直接写文件 基本注入 注释掉后面的条件以直接绕过条件。\nSELECT username, password FROM users WHERE username = 'admin' AND password = 'admin' 此时如果 username 为 admin'--，那么将会截断前一个引号并注释掉后面的密码验证，攻击者可以直接绕过身份验证。\nUNION 注入 通过 UNION 将攻击者构造的查询结果与合法查询结果合并，从而获取敏感数据。\n输入：\n' UNION SELECT null, username, password FROM users -- 将 users 表的 username 和 password 数据作为结果返回。\n错误型注入 通过故意触发数据库错误，利用错误信息推测表名、列名或数据。\n输入：\n' AND 1=CONVERT(int, (SELECT @@version)) -- 可以通过报错获得数据库版本信息。\n盲注（布尔注入、时间注入） 布尔注入 无法直接获取查询结果，攻击者通过判断返回页面的响应（如布尔值或时间延迟）来逐步推测数据。\n输入：\n' AND (SELECT 1 WHERE SUBSTRING((SELECT database()), 1, 1)='t') -- SUBSTRING 函数用于从字符串中提取子字符串,它接受三个参数：表达式、起始位置和长度，并返回指定部分的字符串。此语句根据返回结果判断数据库名首字母是否为 “t”。\n时间注入 输入：\n' AND IF(1=1, SLEEP(5), 0) -- 如果盲注成功，则等待 5 秒。\n堆叠查询注入 允许多条 SQL 语句同时执行。\n输入：\n'; DROP TABLE users; -- 这将导致 users 表被删除。某些数据库（如 MySQL）默认不支持多语句执行。\n存储过程注入 利用存储过程的输入参数注入恶意 SQL。\n输入：\n'; EXEC xp_cmdshell('dir'); -- 执行的语句：\nEXEC LoginProcedure 'username', ''; EXEC xp_cmdshell('dir'); --' EXEC 用于执行动态 SQL 语句。此语句将执行系统命令（如列出目录）。\nCookie 注入 利用修改浏览器存储的 Cookie 值进行注入。\nCookie: session_id=' OR '1'='1; 服务器在解析 Cookie 时执行了恶意 SQL。\n",
   "wordCount" : "216",
-  "inLanguage": "en",
+  "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2025-11-12T19:32:31+08:00",
   "dateModified": "2025-11-12T19:32:31+08:00",
   "author":{
@@ -206,13 +214,25 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 }
 </script>
 </head>
-<body id="top">
-    <header class="header">
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://ok-komputer.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -251,7 +271,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
     <h1 class="post-title entry-hint-parent">
       SQL 注入 - CTF Web 学习笔记
     </h1>
-    <div class="post-meta"><span title='2025-11-12 19:32:31 +0800 CST'>2025/11/12</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>216 words</span>&nbsp;·&nbsp;<span>ok-komputer</span>
+    <div class="post-meta"><span title='2025-11-12 19:32:31 +0800 CST'>2025/11/12</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;216 words&nbsp;·&nbsp;ok-komputer
 
 </div>
   </header> <div class="toc">
@@ -363,7 +383,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://ok-komputer.github.io/posts/pctf-wp/">
-    <span class="title">« Prev</span>
+    <span class="title">« </span>
     <br>
     <span>2025 PCTF WriteUp</span>
   </a>
@@ -437,21 +457,7 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
     </li>
 </ul>
 
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="ok-komputer/ok-komputer.github.io"
-        data-repo-id="R_kgDOQSEoqQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+  </footer>
 </article>
     </main>
     
@@ -471,14 +477,9 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 </a>
 
 <script>
-    let menu = document.getElementById('menu');
+    let menu = document.getElementById('menu')
     if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -519,12 +520,11 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
 </script>
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            html.dataset.theme = 'dark';
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     })

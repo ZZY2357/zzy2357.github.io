@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/posts/cpp-vector/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.ade297085aa589dc983d8c19610af8dfc347deef17b183b06b333077375045ad.css" integrity="sha256-reKXCFqlidyYPYwZYQr438NH3u8XsYOwazMwdzdQRa0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ad59631f6c2768a4592d27068d54364d637cac5c853d949b7849073cb1aa97d.css" integrity="sha256-atWWMfbCdopFktJwaNVDZNY3ysXIU9lJt4SQc8saqX0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -51,7 +51,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 <link rel="mask-icon" href="https://ok-komputer.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://ok-komputer.github.io/posts/cpp-vector/">
+<link rel="alternate" hreflang="zh-cn" href="https://ok-komputer.github.io/posts/cpp-vector/">
 <noscript>
     <style>
         #theme-toggle,
@@ -72,52 +72,67 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
                 --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
-                color-scheme: dark;
             }
 
             .list {
                 background: var(--theme);
             }
 
-            .toc {
-                background: var(--entry);
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
             }
-        }
 
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
             }
         }
 
     </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
+</noscript><meta property="og:title" content="C&#43;&#43; Vector" />
+<meta property="og:description" content="创建 vector
+#include &lt;vector&gt;
 
-</script><meta property="og:url" content="https://ok-komputer.github.io/posts/cpp-vector/">
-  <meta property="og:site_name" content="OK Komputer">
-  <meta property="og:title" content="C&#43;&#43; Vector">
-  <meta property="og:description" content="创建 vector #include &lt;vector&gt; vector&lt;int&gt; v0; // 创建一个初始空间为 3 的 vector，元素默认值为 0 vector&lt;int&gt; v1(3); // 创建一个初始空间为 3 的 vector，元素默认值是 2 vector&lt;int&gt; v2(3, 2); // 创建一个 v2 的拷贝 v3，元素内容和 v2 一样 vector&lt;int&gt; v3(v2); // 创建一个 v3 的拷贝到 v4，内容是 { v3[1], v3[2] }，包前不包后; vector&lt;int&gt; v4(v3.begin() &#43; 1, v3.begin() &#43; 3); 元素访问 vector.at(pos) 返回 vector 中下标为 pos 的引用 vector[pos] 返回 vector 中下标为 pos 的引用，不执行越界检查 vector.front() 返回首元素的引用（vector.begin() 是迭代器，和这个不同） vector.back() 返回末元素的引用 （vector.end() 是迭代器，没有元素，和这个不同） vector.data() 返回首元素的指针（vector 的空间是连续的） 迭代器 vector.begin() 返回首元素的迭代器，*begin = front vector.end() 返回末元素的迭代器，没有元素 vector.rbegin() 返回指向逆向数组的首元素的迭代器，可以理解为正向容器的末元素 vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应容器首的前一个位置，没有元素 上述迭代器名前加上一个 c 为只读迭代器 长度和容量 注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-03-09T07:54:32+08:00">
-    <meta property="article:modified_time" content="2026-03-09T07:54:32+08:00">
-    <meta property="article:tag" content="C&#43;&#43;">
-    <meta property="article:tag" content="STL">
-      <meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4">
-<meta name="twitter:title" content="C&#43;&#43; Vector">
+vector&lt;int&gt; v0;
+
+// 创建一个初始空间为 3 的 vector，元素默认值为 0
+vector&lt;int&gt; v1(3);
+
+// 创建一个初始空间为 3 的 vector，元素默认值是 2
+vector&lt;int&gt; v2(3, 2);
+
+// 创建一个 v2 的拷贝 v3，元素内容和 v2 一样
+vector&lt;int&gt; v3(v2);
+
+// 创建一个 v3 的拷贝到 v4，内容是 { v3[1], v3[2] }，包前不包后;
+vector&lt;int&gt; v4(v3.begin() &#43; 1, v3.begin() &#43; 3);
+元素访问
+
+vector.at(pos) 返回 vector 中下标为 pos 的引用
+vector[pos] 返回 vector 中下标为 pos 的引用，不执行越界检查
+vector.front() 返回首元素的引用（vector.begin() 是迭代器，和这个不同）
+vector.back() 返回末元素的引用 （vector.end() 是迭代器，没有元素，和这个不同）
+vector.data() 返回首元素的指针（vector 的空间是连续的）
+
+迭代器
+
+vector.begin() 返回首元素的迭代器，*begin = front
+vector.end() 返回末元素的迭代器，没有元素
+vector.rbegin() 返回指向逆向数组的首元素的迭代器，可以理解为正向容器的末元素
+vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应容器首的前一个位置，没有元素
+上述迭代器名前加上一个 c 为只读迭代器
+
+长度和容量
+注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ok-komputer.github.io/posts/cpp-vector/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-03-09T07:54:32+08:00" />
+<meta property="article:modified_time" content="2026-03-09T07:54:32+08:00" /><meta property="og:site_name" content="OK Komputer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="C&#43;&#43; Vector"/>
 <meta name="twitter:description" content="创建 vector
 #include &lt;vector&gt;
 
@@ -151,7 +166,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 上述迭代器名前加上一个 c 为只读迭代器
 
 长度和容量
-注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度">
+注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度"/>
 
 
 <script type="application/ld+json">
@@ -186,7 +201,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
   ],
   "articleBody": "创建 vector #include vector\u003cint\u003e v0; // 创建一个初始空间为 3 的 vector，元素默认值为 0 vector\u003cint\u003e v1(3); // 创建一个初始空间为 3 的 vector，元素默认值是 2 vector\u003cint\u003e v2(3, 2); // 创建一个 v2 的拷贝 v3，元素内容和 v2 一样 vector\u003cint\u003e v3(v2); // 创建一个 v3 的拷贝到 v4，内容是 { v3[1], v3[2] }，包前不包后; vector\u003cint\u003e v4(v3.begin() + 1, v3.begin() + 3); 元素访问 vector.at(pos) 返回 vector 中下标为 pos 的引用 vector[pos] 返回 vector 中下标为 pos 的引用，不执行越界检查 vector.front() 返回首元素的引用（vector.begin() 是迭代器，和这个不同） vector.back() 返回末元素的引用 （vector.end() 是迭代器，没有元素，和这个不同） vector.data() 返回首元素的指针（vector 的空间是连续的） 迭代器 vector.begin() 返回首元素的迭代器，*begin = front vector.end() 返回末元素的迭代器，没有元素 vector.rbegin() 返回指向逆向数组的首元素的迭代器，可以理解为正向容器的末元素 vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应容器首的前一个位置，没有元素 上述迭代器名前加上一个 c 为只读迭代器 长度和容量 注意，vector 的长度（size）指有效元素数量，而容量（capacity）指分配的内存长度\n长度 vector.empty() 返回一个 bool 值，即 vector.begin() == vector.end() vector.size() 返回容器长度，即 distance(vector.begin(), vector.end()) vector.resize(n) 改变 vector 的长度为 n，如果 n 大于当前长度，则会补充元素，如果参数中提供了要补充的元素，则使用参数，否则使用默认值；如果 n 小于当前长度，则保留前 n 的元素，舍弃后面的元素 veector.max_size() 返回容器的最大可能大小（一般为 2305843009213693951） 容量 vector.reserve() 使得 vector 预留一定的内存空间，避免不必要的内存分配 vector.capacity() 返回容器的容量，即已经为多少个元素分配了空间 vector.shrink_to_fint() 使得 vector 的容量与长度一致，去除该 vector 没有用到的容量 增删改 vector.push_back(element) 在末尾添加元素\nvector.insert(iterator, ...) 有以下几种用法：\nvector.insert(iterator, element) vector.insert(iterator, element1, element2) vector.insert(iterator, element_iterator_begin, element_iterator_end) vector.insert(iterator, { element1, element2 }) vector.clear() 清空\nvector.erase(iterator) 删除元素\nvector.pop_back() 删除末尾元素\nvector.swap(vector) 交换两个 vector 的内容\n",
   "wordCount" : "156",
-  "inLanguage": "en",
+  "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2026-03-09T07:54:32+08:00",
   "dateModified": "2026-03-09T07:54:32+08:00",
   "author":{
@@ -208,13 +223,25 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 }
 </script>
 </head>
-<body id="top">
-    <header class="header">
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://ok-komputer.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -253,7 +280,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
     <h1 class="post-title entry-hint-parent">
       C&#43;&#43; Vector
     </h1>
-    <div class="post-meta"><span title='2026-03-09 07:54:32 +0800 CST'>2026/03/09</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>156 words</span>&nbsp;·&nbsp;<span>ok-komputer</span>
+    <div class="post-meta"><span title='2026-03-09 07:54:32 +0800 CST'>2026/03/09</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;156 words&nbsp;·&nbsp;ok-komputer
 
 </div>
   </header> <div class="toc">
@@ -282,20 +309,20 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 
   <div class="post-content"><h2 id="创建-vector">创建 vector<a hidden class="anchor" aria-hidden="true" href="#创建-vector">#</a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建一个初始空间为 3 的 vector，元素默认值为 0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建一个初始空间为 3 的 vector，元素默认值是 2
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建一个 v2 的拷贝 v3，元素内容和 v2 一样
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v3</span><span class="p">(</span><span class="n">v2</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v3</span><span class="p">(</span><span class="n">v2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建一个 v3 的拷贝到 v4，内容是 { v3[1], v3[2] }，包前不包后;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v4</span><span class="p">(</span><span class="n">v3</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">v3</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v4</span><span class="p">(</span><span class="n">v3</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">v3</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
 </span></span></code></pre></div><h2 id="元素访问">元素访问<a hidden class="anchor" aria-hidden="true" href="#元素访问">#</a></h2>
 <ul>
 <li><code>vector.at(pos)</code> 返回 <code>vector</code> 中下标为 <code>pos</code> 的引用</li>
@@ -365,12 +392,12 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://ok-komputer.github.io/posts/cpp-string/">
-    <span class="title">« Prev</span>
+    <span class="title">« </span>
     <br>
     <span>C&#43;&#43; String</span>
   </a>
   <a class="next" href="https://ok-komputer.github.io/posts/new-yer-cup-wp/">
-    <span class="title">Next »</span>
+    <span class="title"> »</span>
     <br>
     <span>2026 新春杯 WP</span>
   </a>
@@ -444,21 +471,7 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
     </li>
 </ul>
 
-  </footer><script src="https://giscus.app/client.js"
-        data-repo="ok-komputer/ok-komputer.github.io"
-        data-repo-id="R_kgDOQSEoqQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+  </footer>
 </article>
     </main>
     
@@ -478,14 +491,9 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 </a>
 
 <script>
-    let menu = document.getElementById('menu');
+    let menu = document.getElementById('menu')
     if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -526,12 +534,11 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
 </script>
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
             localStorage.setItem("pref-theme", 'light');
         } else {
-            html.dataset.theme = 'dark';
+            document.body.classList.add('dark');
             localStorage.setItem("pref-theme", 'dark');
         }
     })
