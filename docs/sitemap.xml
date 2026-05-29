@@ -2,16 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ok-komputer.github.io/tags/ai/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ok-komputer.github.io/posts/omo-agent-not-showing/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ok-komputer.github.io/tags/oh-my-openagent/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
     <loc>https://ok-komputer.github.io/</loc>
-    <lastmod>2026-04-04T12:38:49+08:00</lastmod>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ok-komputer.github.io/tags/omo/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ok-komputer.github.io/tags/opencode/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
   </url><url>
     <loc>https://ok-komputer.github.io/posts/</loc>
-    <lastmod>2026-04-04T12:38:49+08:00</lastmod>
-  </url><url>
-    <loc>https://ok-komputer.github.io/tags/ssh/</loc>
-    <lastmod>2026-04-04T12:38:49+08:00</lastmod>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
   </url><url>
     <loc>https://ok-komputer.github.io/tags/</loc>
+    <lastmod>2026-05-29T13:50:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ok-komputer.github.io/tags/ssh/</loc>
     <lastmod>2026-04-04T12:38:49+08:00</lastmod>
   </url><url>
     <loc>https://ok-komputer.github.io/posts/ssh-socks5/</loc>

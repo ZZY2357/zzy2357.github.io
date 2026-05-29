@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ai on OK Komputer</title>
+    <link>https://ok-komputer.github.io/tags/ai/</link>
+    <description>Recent content in Ai on OK Komputer</description>
+    <image>
+      <title>OK Komputer</title>
+      <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
+      <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
+    </image>
+    <generator>Hugo -- 0.161.1</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 29 May 2026 13:50:00 +0800</lastBuildDate>
+    <atom:link href="https://ok-komputer.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录</title>
+      <link>https://ok-komputer.github.io/posts/omo-agent-not-showing/</link>
+      <pubDate>Fri, 29 May 2026 13:50:00 +0800</pubDate>
+      <guid>https://ok-komputer.github.io/posts/omo-agent-not-showing/</guid>
+      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;装了 oh-my-openagent 之后，&lt;code&gt;opencode agent list&lt;/code&gt; 和执行 &lt;code&gt;npx oh-my-openagent doctor&lt;/code&gt; 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里&lt;strong&gt;只显示 &lt;code&gt;plan&lt;/code&gt; 和 &lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。&lt;/p&gt;
+&lt;p&gt;这个问题在官方仓库有多人在追踪：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3456&#34;&gt;#3456&lt;/a&gt; — &amp;ldquo;[Question]: installed OMO, reopen opencode can not find Sisyphus in agents&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3835&#34;&gt;#3835&lt;/a&gt; — &amp;ldquo;[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;原因分析&#34;&gt;原因分析&lt;/h2&gt;
+&lt;p&gt;实际导致这个症状的原因有两种，需要对症排查：&lt;/p&gt;
+&lt;h3 id=&#34;原因一配置作用域不匹配&#34;&gt;原因一：配置作用域不匹配&lt;/h3&gt;
+&lt;p&gt;OpenCode 的配置文件有两个层级：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;作用域&lt;/th&gt;
+          &lt;th&gt;路径&lt;/th&gt;
+          &lt;th&gt;优先级&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;全局&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;低&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;项目本地&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;通过 &lt;code&gt;npx oh-my-openagent install&lt;/code&gt; 安装时，写入的是&lt;strong&gt;全局&lt;/strong&gt;配置。但如果启动 opencode 的工作目录下恰好存在 &lt;code&gt;.opencode/opencode.json&lt;/code&gt;（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

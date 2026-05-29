@@ -192,6 +192,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>问题 装了 oh-my-openagent 之后，opencode agent list 和执行 npx oh-my-openagent doctor 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里只显示 plan 和 build，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。
+这个问题在官方仓库有多人在追踪：
+#3456 — “[Question]: installed OMO, reopen opencode can not find Sisyphus in agents” #3835 — “[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update” 原因分析 实际导致这个症状的原因有两种，需要对症排查：
+原因一：配置作用域不匹配 OpenCode 的配置文件有两个层级：
+作用域 路径 优先级 全局 ~/.config/opencode/opencode.json 低 项目本地 .opencode/opencode.json（启动目录下） 高 通过 npx oh-my-openagent install 安装时，写入的是全局配置。但如果启动 opencode 的工作目录下恰好存在 .opencode/opencode.json（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-29 13:50:00 +0800 CST'>2026/05/29</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;203 words&nbsp;·&nbsp;ok-komputer</footer>
+  <a class="entry-link" aria-label="post link to Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录" href="https://ok-komputer.github.io/posts/omo-agent-not-showing/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">使用 SSH 建立 Socks5 代理
     </h2>
   </header>
