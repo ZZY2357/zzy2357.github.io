@@ -80,6 +80,10 @@ menu:
       name: tags
       url: /tags/
       weight: 10
+    - identifier: friends
+      name: friends
+      url: /friends/
+      weight: 20
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true

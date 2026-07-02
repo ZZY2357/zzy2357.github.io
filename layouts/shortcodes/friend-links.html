@@ -1,0 +1,13 @@
+<div class="friend-links-container">
+{{ range .Site.Data.friends }}
+  <div class="friend-card">
+    <a class="friend-avatar-link" href="{{ .url }}" rel="noopener noreferrer" target="_blank">
+      <img src="{{ .avatar }}" alt="{{ .name }}" class="friend-avatar" onerror="this.style.display='none'">
+    </a>
+    <div class="friend-name">
+      <a class="link" href="{{ .url }}" rel="noopener noreferrer" target="_blank">{{ .name }}</a>
+    </div>
+    <div class="friend-bio">{{ .bio }}</div>
+  </div>
+{{ end }}
+</div>

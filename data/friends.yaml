@@ -1,0 +1,44 @@
+- name: "ok-komputer"
+  url: "https://ok-komputer.github.io/"
+  avatar: "/assets/friends/ok-komputer.webp"
+  bio: "取这个名字也是高寿了"
+
+- name: "saga131"
+  url: "http://happyprimes.cn/"
+  avatar: "/assets/friends/saga131.webp"
+  bio: "虎！"
+
+- name: "Sevedy"
+  url: "https://www.cnblogs.com/Sevedy"
+  avatar: "/assets/friends/sevedy.webp"
+  bio: "超强会审"
+
+- name: "hxyz486"
+  url: "https://www.cnblogs.com/hxyz486"
+  avatar: "/assets/friends/hxyz486.webp"
+  bio: "旮旯game钛郝玩了！"
+
+- name: "C1za_Star"
+  url: "https://www.cnblogs.com/c1zastar"
+  avatar: "/assets/friends/c1za-star.webp"
+  bio: "好吃的三角形可以对鲨鱼产生依恋之情"
+
+- name: "yiyouyy"
+  url: "https://www.cnblogs.com/fwxblog"
+  avatar: "/assets/friends/yiyouyy.webp"
+  bio: "秀神"
+
+- name: "w0e6x"
+  url: "https://www.cnblogs.com/w0e6x-hiahiahia-go"
+  avatar: "/assets/friends/w0e6x.webp"
+  bio: "汪神"
+
+- name: "1ceLAND"
+  url: "https://www.cnblogs.com/1ceLAND"
+  avatar: "/assets/friends/1celand.webp"
+  bio: "霖神"
+
+- name: "Joyooo"
+  url: "https://www.cnblogs.com/Joyooo"
+  avatar: "/assets/friends/joyooo.webp"
+  bio: "Joy神"

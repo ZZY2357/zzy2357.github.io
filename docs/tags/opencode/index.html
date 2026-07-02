@@ -10,7 +10,7 @@
 <meta name="description" content="Everything in it&#39;s right place.">
 <meta name="author" content="ok-komputer">
 <link rel="canonical" href="https://ok-komputer.github.io/tags/opencode/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.1391b00b827a2db342ac98419d0ca21e6c886336af5a6dfa467607dc4a8afec4.css" integrity="sha256-E5GwC4J6LbNCrJhBnQyiHmyIYzavWm36RnYH3EqK/sQ=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8b4df2114dc8387a98eecb7fe314cf5ff90e4105f8d5e54298fc8f98d6796a5a.css" integrity="sha256-i03yEU3IOHqY7st/4xTPX/kOQQX41eVCmPyPmNZ5alo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ok-komputer.github.io/%3Clink%20/%20abs%20url%3E">
 <link rel="icon" type="image/png" sizes="16x16" href="https://ok-komputer.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://ok-komputer.github.io/favicon-32x32.png">
@@ -115,6 +115,11 @@
                     <span>tags</span>
                 </a>
             </li>
+            <li>
+                <a href="https://ok-komputer.github.io/friends/" title="friends">
+                    <span>friends</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -141,12 +146,12 @@
   <div class="entry-content">
     <p>问题 装了 oh-my-openagent 之后，opencode agent list 和执行 npx oh-my-openagent doctor 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里只显示 plan 和 build，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。
 这个问题在官方仓库有多人在追踪：
-#3456 — “[Question]: installed OMO, reopen opencode can not find Sisyphus in agents” #3835 — “[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update” 原因分析 实际导致这个症状的原因有两种，需要对症排查：
+#3456 — “[Question]: installed OMO, reopen opencode can not find Sisyphus in agents” #3835 — “[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update” anomalyco/opencode#30855 — “Plugin-registered Agents Unavailable after Update Operation on Opencode Desktop” 原因分析 实际导致这个症状的原因有三种，严重程度递增：
 原因一：配置作用域不匹配 OpenCode 的配置文件有两个层级：
 作用域 路径 优先级 全局 ~/.config/opencode/opencode.json 低 项目本地 .opencode/opencode.json（启动目录下） 高 通过 npx oh-my-openagent install 安装时，写入的是全局配置。但如果启动 opencode 的工作目录下恰好存在 .opencode/opencode.json（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2026-05-29 13:50:00 +0800 CST'>2026/05/29</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;203 words&nbsp;·&nbsp;ok-komputer</footer>
+  <footer class="entry-footer"><span title='2026-06-28 17:30:00 +0800 CST'>2026/06/28</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;462 words&nbsp;·&nbsp;ok-komputer</footer>
   <a class="entry-link" aria-label="post link to Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录" href="https://ok-komputer.github.io/posts/omo-agent-not-showing/"></a>
 </article>
     </main>

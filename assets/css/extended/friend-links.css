@@ -1,0 +1,108 @@
+/* friend-links.css
+ * PaperMod 友链卡片样式
+ * 通过 PaperMod CSS 变量自动适配亮色/暗色模式
+ */
+
+.friend-links-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap);
+    margin: var(--gap) 0;
+}
+
+.friend-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    box-sizing: border-box;
+    padding: 24px 16px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.friend-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--tertiary);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.friend-avatar-link {
+    display: block;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.friend-avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.25s ease;
+}
+
+/* 覆盖 PaperMod 的 .post-content img { margin: 1rem 0; border-radius: 4px; } */
+.post-content .friend-avatar {
+    margin: 0;
+    border-radius: 0;
+}
+
+.friend-avatar-link:hover .friend-avatar {
+    transform: scale(1.06);
+}
+
+.friend-name {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.friend-name a.link {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.2s ease;
+}
+
+.friend-name a.link:hover {
+    color: var(--secondary);
+}
+
+.friend-bio {
+    margin: 0;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* 平板：2 列 */
+@media (max-width: 768px) {
+    .friend-links-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--gap) * 0.75);
+    }
+
+    .friend-card {
+        padding: 20px 14px;
+    }
+}
+
+/* 手机：1 列 */
+@media (max-width: 480px) {
+    .friend-links-container {
+        grid-template-columns: 1fr;
+    }
+}

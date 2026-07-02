@@ -11,12 +11,111 @@
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 29 May 2026 13:50:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://ok-komputer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Friends</title>
+      <link>https://ok-komputer.github.io/friends/</link>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://ok-komputer.github.io/friends/</guid>
+      <description>&lt;div class=&#34;friend-links-container&#34;&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://ok-komputer.github.io/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/ok-komputer.webp&#34; alt=&#34;ok-komputer&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://ok-komputer.github.io/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;ok-komputer&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;取这个名字也是高寿了&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;http://happyprimes.cn/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/saga131.webp&#34; alt=&#34;saga131&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;http://happyprimes.cn/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;saga131&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;虎！&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/Sevedy&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/sevedy.webp&#34; alt=&#34;Sevedy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Sevedy&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Sevedy&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;超强会审&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/hxyz486&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/hxyz486.webp&#34; alt=&#34;hxyz486&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/hxyz486&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;hxyz486&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;旮旯game钛郝玩了！&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/c1zastar&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/c1za-star.webp&#34; alt=&#34;C1za_Star&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/c1zastar&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;C1za_Star&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;好吃的三角形可以对鲨鱼产生依恋之情&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/fwxblog&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/yiyouyy.webp&#34; alt=&#34;yiyouyy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/fwxblog&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;yiyouyy&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;秀神&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/w0e6x-hiahiahia-go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/w0e6x.webp&#34; alt=&#34;w0e6x&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/w0e6x-hiahiahia-go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;w0e6x&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;汪神&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/1ceLAND&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/1celand.webp&#34; alt=&#34;1ceLAND&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/1ceLAND&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;1ceLAND&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;霖神&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&#34;friend-card&#34;&gt;
+    &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/Joyooo&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://ok-komputer.github.io/assets/friends/joyooo.webp&#34; alt=&#34;Joyooo&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+    &lt;/a&gt;
+    &lt;div class=&#34;friend-name&#34;&gt;
+      &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Joyooo&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Joyooo&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;friend-bio&#34;&gt;Joy神&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</description>
+    </item>
     <item>
       <title>Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录</title>
       <link>https://ok-komputer.github.io/posts/omo-agent-not-showing/</link>
-      <pubDate>Fri, 29 May 2026 13:50:00 +0800</pubDate>
+      <pubDate>Sun, 28 Jun 2026 17:30:00 +0800</pubDate>
       <guid>https://ok-komputer.github.io/posts/omo-agent-not-showing/</guid>
       <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
 &lt;p&gt;装了 oh-my-openagent 之后，&lt;code&gt;opencode agent list&lt;/code&gt; 和执行 &lt;code&gt;npx oh-my-openagent doctor&lt;/code&gt; 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里&lt;strong&gt;只显示 &lt;code&gt;plan&lt;/code&gt; 和 &lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。&lt;/p&gt;
@@ -24,9 +123,10 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3456&#34;&gt;#3456&lt;/a&gt; — &amp;ldquo;[Question]: installed OMO, reopen opencode can not find Sisyphus in agents&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3835&#34;&gt;#3835&lt;/a&gt; — &amp;ldquo;[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/anomalyco/opencode/issues/30855&#34;&gt;anomalyco/opencode#30855&lt;/a&gt; — &amp;ldquo;Plugin-registered Agents Unavailable after Update Operation on Opencode Desktop&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;原因分析&#34;&gt;原因分析&lt;/h2&gt;
-&lt;p&gt;实际导致这个症状的原因有两种，需要对症排查：&lt;/p&gt;
+&lt;p&gt;实际导致这个症状的原因有三种，严重程度递增：&lt;/p&gt;
 &lt;h3 id=&#34;原因一配置作用域不匹配&#34;&gt;原因一：配置作用域不匹配&lt;/h3&gt;
 &lt;p&gt;OpenCode 的配置文件有两个层级：&lt;/p&gt;
 &lt;table&gt;
