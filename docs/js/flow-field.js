@@ -77,8 +77,8 @@
       }
     }
   };
-  FlowField.prototype.update = function (mouse) {
-    this.zoff += FIELD_EVOLVE_SPEED;
+  FlowField.prototype.update = function (mouse, dt) {
+    this.zoff += FIELD_EVOLVE_SPEED * dt;
     var xoffStep = 0.08, yoffStep = 0.08;
     for (var i = 0; i < this.cols; i++) {
       for (var j = 0; j < this.rows; j++) {
@@ -195,7 +195,7 @@
     if (this.y < -20) this.y = H + 20;
     else if (this.y > H + 20) this.y = -20;
   };
-  Particle.prototype.update = function () {
+  Particle.prototype.update = function (dt) {
     var maxSpeed = PARTICLE_MAX_SPEED;
     var maxForce = PARTICLE_MAX_FORCE;
     var angle = field.lookup(this.x, this.y);
@@ -210,15 +210,15 @@
     }
     steerX /= this.mass;
     steerY /= this.mass;
-    this.vx += steerX;
-    this.vy += steerY;
+    this.vx += steerX * dt;
+    this.vy += steerY * dt;
     var speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
     if (speed > maxSpeed) {
       this.vx = (this.vx / speed) * maxSpeed;
       this.vy = (this.vy / speed) * maxSpeed;
     }
-    this.x += this.vx;
-    this.y += this.vy;
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
     this.wrap();
   };
   Particle.prototype.draw = function (ctx) {
@@ -261,12 +261,17 @@
     }
   }
 
-  function animate() {
-    field.update(mouse);
+  var lastTime = 0;
+
+  function animate(timestamp) {
+    var dt = Math.min((timestamp - lastTime) / 1000, 0.1) * 60;
+    lastTime = timestamp;
+
+    field.update(mouse, dt);
     drawField();
     pctx.clearRect(0, 0, W, H);
     for (var i = 0; i < particles.length; i++) {
-      particles[i].update();
+      particles[i].update(dt);
       particles[i].draw(pctx);
     }
     requestAnimationFrame(animate);
@@ -274,5 +279,5 @@
 
   resize();
   window.addEventListener("resize", resize);
-  animate();
+  requestAnimationFrame(animate);
 })();
