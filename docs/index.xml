@@ -11,8 +11,34 @@
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 02 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2026 20:38:00 +0800</lastBuildDate>
     <atom:link href="https://ok-komputer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从 Vue &#43; fetch 到现代 Web 架构：一些踩坑后的认知</title>
+      <link>https://ok-komputer.github.io/posts/spa-ssr-bff/</link>
+      <pubDate>Tue, 07 Jul 2026 20:38:00 +0800</pubDate>
+      <guid>https://ok-komputer.github.io/posts/spa-ssr-bff/</guid>
+      <description>&lt;p&gt;最近用 Vue 3 + Spring Boot 写论坛，踩了不少坑。回头整理一下，发现很多我以为&amp;quot;理所应当&amp;quot;的认知其实都是错的。&lt;/p&gt;
+&lt;h2 id=&#34;url-里的--号&#34;&gt;URL 里的 # 号&lt;/h2&gt;
+&lt;p&gt;一开始路由全是 &lt;code&gt;localhost/#/user&lt;/code&gt; 这种带 &lt;code&gt;#&lt;/code&gt; 的，以为 Vue Router 就这样。后来才知道这是 Hash 模式——默认值，不需要后端配合但 URL 丑。&lt;/p&gt;
+&lt;p&gt;换成 History 模式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Vue Router
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;createRouter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;history&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;createWebHistory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 不是 createWebHashHistory()
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;routes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[...]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;改完访问 &lt;code&gt;localhost/user&lt;/code&gt; 确实干净了，但一刷新就 404。因为浏览器把 &lt;code&gt;/user&lt;/code&gt; 当成真实路径发给了后端，后端根本没这个路由。&lt;/p&gt;
+&lt;p&gt;Nginx 加一行兜底就解决了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kn&#34;&gt;try_files&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$uri&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$uri/&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/index.html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;找不到对应文件就把请求还给前端入口，让 Vue Router 自己接管。这个组合才是 SPA 的标准玩法。&lt;/p&gt;
+&lt;h2 id=&#34;前后端分离不等于前端直接调后端&#34;&gt;前后端分离不等于前端直接调后端&lt;/h2&gt;
+&lt;p&gt;我之前理解的&amp;quot;前后端分离&amp;quot;就是：浏览器 &lt;code&gt;fetch&lt;/code&gt; 后端 API，拿到 JSON 渲染。简单粗暴。&lt;/p&gt;
+&lt;p&gt;但像淘宝这种体量的网站不可能这么搞。实际架构是三层：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;后端（Spring Boot / Go）&lt;/strong&gt; → 管数据库和业务逻辑，不直接对着浏览器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;BFF 层（Node.js）&lt;/strong&gt; → 把后端几十个零散接口聚合成前端一个页面需要的数据，该裁的裁、该拼的拼。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Friends</title>
       <link>https://ok-komputer.github.io/friends/</link>
