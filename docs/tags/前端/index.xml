@@ -14,11 +14,11 @@
     <lastBuildDate>Tue, 07 Jul 2026 20:38:00 +0800</lastBuildDate>
     <atom:link href="https://ok-komputer.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>从 Vue &#43; fetch 到现代 Web 架构：一些踩坑后的认知</title>
+      <title>从 Vue &#43; fetch 到现代 Web 架构：一次对话后的认知刷新</title>
       <link>https://ok-komputer.github.io/posts/spa-ssr-bff/</link>
       <pubDate>Tue, 07 Jul 2026 20:38:00 +0800</pubDate>
       <guid>https://ok-komputer.github.io/posts/spa-ssr-bff/</guid>
-      <description>&lt;p&gt;最近用 Vue 3 + Spring Boot 写论坛，踩了不少坑。回头整理一下，发现很多我以为&amp;quot;理所应当&amp;quot;的认知其实都是错的。&lt;/p&gt;
+      <description>&lt;p&gt;最近和 GLM 聊前端架构，被纠正了一堆自以为是的认知。之前我对前后端分离的理解基本停留在&amp;quot;后端写接口、前端 &lt;code&gt;fetch&lt;/code&gt; 拿数据渲染&amp;quot;。聊完之后发现这四个点我之前全想错了。&lt;/p&gt;
 &lt;h2 id=&#34;url-里的--号&#34;&gt;URL 里的 # 号&lt;/h2&gt;
 &lt;p&gt;一开始路由全是 &lt;code&gt;localhost/#/user&lt;/code&gt; 这种带 &lt;code&gt;#&lt;/code&gt; 的，以为 Vue Router 就这样。后来才知道这是 Hash 模式——默认值，不需要后端配合但 URL 丑。&lt;/p&gt;
 &lt;p&gt;换成 History 模式：&lt;/p&gt;
@@ -37,7 +37,8 @@
 &lt;p&gt;我之前理解的&amp;quot;前后端分离&amp;quot;就是：浏览器 &lt;code&gt;fetch&lt;/code&gt; 后端 API，拿到 JSON 渲染。简单粗暴。&lt;/p&gt;
 &lt;p&gt;但像淘宝这种体量的网站不可能这么搞。实际架构是三层：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;后端（Spring Boot / Go）&lt;/strong&gt; → 管数据库和业务逻辑，不直接对着浏览器。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;BFF 层（Node.js）&lt;/strong&gt; → 把后端几十个零散接口聚合成前端一个页面需要的数据，该裁的裁、该拼的拼。&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;BFF 层（Node.js）&lt;/strong&gt; → 把后端几十个零散接口聚合成前端一个页面需要的数据，该裁的裁、该拼的拼。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前端（Vue / React）&lt;/strong&gt; → 只管交互和渲染。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
