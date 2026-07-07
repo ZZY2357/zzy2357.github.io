@@ -95,7 +95,26 @@ string.replace(first: iterator, last: iterator, str) 将以含 first 开始，�
         }
 
     </style>
-</noscript><meta property="og:title" content="C&#43;&#43; String" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="C&#43;&#43; String" />
 <meta property="og:description" content="创建
 #include &lt;string&gt; // 注意不是 &lt;string.h&gt;
 
@@ -493,7 +512,9 @@ string.replace(first: iterator, last: iterator, str) 将以含 first 开始，�
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

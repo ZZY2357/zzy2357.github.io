@@ -85,7 +85,26 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
         }
 
     </style>
-</noscript><meta property="og:title" content="SQL 注入 - CTF Web 学习笔记" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="SQL 注入 - CTF Web 学习笔记" />
 <meta property="og:description" content="SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。
 SQL 基本查询语句
 从 users 表中查询 id 为 123 的数据：
@@ -494,7 +513,9 @@ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

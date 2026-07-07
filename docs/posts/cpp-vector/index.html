@@ -88,7 +88,26 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
         }
 
     </style>
-</noscript><meta property="og:title" content="C&#43;&#43; Vector" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="C&#43;&#43; Vector" />
 <meta property="og:description" content="创建 vector
 #include &lt;vector&gt;
 
@@ -508,7 +527,9 @@ vector.rend() 返回指向逆向数组末元素后一位置的迭代器，对应
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

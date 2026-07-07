@@ -159,7 +159,26 @@ Sign_in
         }
 
     </style>
-</noscript><meta property="og:title" content="2025 纳新赛 WriteUp" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="2025 纳新赛 WriteUp" />
 <meta property="og:description" content="Misc
 Crossfire
 用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。
@@ -850,7 +869,9 @@ Sign_in
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

@@ -88,7 +88,26 @@ OpenCode 的配置文件有两个层级：
         }
 
     </style>
-</noscript><meta property="og:title" content="Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录" />
 <meta property="og:description" content="问题
 装了 oh-my-openagent 之后，opencode agent list 和执行 npx oh-my-openagent doctor 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里只显示 plan 和 build，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。
 这个问题在官方仓库有多人在追踪：
@@ -606,7 +625,9 @@ Cannot find module &#39;...\node_modules\zod\index.js&#39;
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

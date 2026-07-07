@@ -65,7 +65,26 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
         }
 
     </style>
-</noscript><meta property="og:title" content="2025 PCTF WriteUp" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="2025 PCTF WriteUp" />
 <meta property="og:description" content="Web
 EZPHP
 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
@@ -619,7 +638,9 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

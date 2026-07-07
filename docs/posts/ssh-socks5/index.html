@@ -58,7 +58,26 @@ ssh -D port user@passwd
         }
 
     </style>
-</noscript><meta property="og:title" content="使用 SSH 建立 Socks5 代理" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="使用 SSH 建立 Socks5 代理" />
 <meta property="og:description" content="只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件
 在本地执行：
 ssh -D port user@passwd
@@ -325,7 +344,9 @@ ssh -D port user@passwd
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

@@ -116,7 +116,26 @@ Content-Disposition: form-data; name=&#34;2&#34;
         }
 
     </style>
-</noscript><meta property="og:title" content="2026 新春杯 WP" />
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="2026 新春杯 WP" />
 <meta property="og:description" content="Web
 够了够了，谢谢大家
 写脚本注册 100 个账号并登录点赞，由于需要保持登录状态，所以需要用 requests.session() 来保持会话：
@@ -884,7 +903,9 @@ cd /d &#34;D:\phpstudy_pro\WWW\default\&#34;&amp;echo &#34;flag{7bbbe13f-458b-45
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')
