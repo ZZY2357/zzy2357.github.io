@@ -57,7 +57,27 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="OK Komputer" />
+</noscript>
+<style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="OK Komputer" />
 <meta property="og:description" content="Everything in it&#39;s right place." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ok-komputer.github.io/" />
@@ -353,6 +373,9 @@ SQL 常用参数 user()：当前数据库用户 database()：当前数据库名 
         <path d="M12 6H0l6-6z" />
     </svg>
 </a>
+<canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
 
 <script>
     let menu = document.getElementById('menu')

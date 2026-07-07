@@ -1,0 +1,24 @@
+{{- /* Head custom content area start */ -}}
+{{- if .IsHome }}
+<style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style>
+{{- end }}
+{{- /* Head custom content area end */ -}}
