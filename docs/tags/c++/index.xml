@@ -11,8 +11,46 @@
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 09 Mar 2026 14:31:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 18:20:00 +0800</lastBuildDate>
     <atom:link href="https://zzy2357.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MinGW-w64 编译通过运行崩？Code Runner 踩坑记</title>
+      <link>https://zzy2357.github.io/posts/cpp-mingw-segfault/</link>
+      <pubDate>Mon, 13 Jul 2026 18:20:00 +0800</pubDate>
+      <guid>https://zzy2357.github.io/posts/cpp-mingw-segfault/</guid>
+      <description>&lt;h2 id=&#34;症状&#34;&gt;症状&lt;/h2&gt;
+&lt;p&gt;VS Code 里写了个 hello world：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;namespace&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Hello world!&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Ctrl+Alt+N&lt;/strong&gt;（Code Runner）→ 编译通过 → 运行崩：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Done] exited with code=3221225477 in 1.097 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;退出的 &lt;code&gt;3221225477&lt;/code&gt; 就是 &lt;code&gt;0xC0000005&lt;/code&gt;，也就是 &lt;strong&gt;STATUS_ACCESS_VIOLATION&lt;/strong&gt;——俗称段错误（segfault）。&lt;/p&gt;
+&lt;p&gt;一个 hello world 能 segfault，说明问题不在代码，在环境。&lt;/p&gt;
+&lt;h2 id=&#34;排查&#34;&gt;排查&lt;/h2&gt;
+&lt;h3 id=&#34;第一坑路径错了&#34;&gt;第一坑：路径错了&lt;/h3&gt;
+&lt;p&gt;看看编译器的实际位置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ ls /d/Apps/mingw64/mingw64/bin/g++.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果是 &lt;strong&gt;MinGW-w64 15.2.0&lt;/strong&gt;（UCRT 版本），而我 Code Runner 里配的是 &lt;code&gt;D:\Apps\TDM-GCC\bin\g++.exe&lt;/code&gt;——一个根本不存在的目录。&lt;/p&gt;
+&lt;p&gt;嗯，之前不知道哪个助手写进记忆里的，信了。&lt;/p&gt;
+&lt;h3 id=&#34;第二坑运行时缺-dll&#34;&gt;第二坑：运行时缺 DLL&lt;/h3&gt;
+&lt;p&gt;路径改对后，编译确实过了，但运行还是崩。手动跑一下试试：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ g++ hello.cpp -o hello.exe -static-libgcc -fexec-charset=gbk
+$ ./hello.exe
+Segmentation fault
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;查一下编译产物依赖的 DLL：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ objdump -p hello.exe | grep &amp;#34;DLL Name&amp;#34;
+    DLL Name: libstdc++-6.dll
+    DLL Name: KERNEL32.dll
+    DLL Name: api-ms-win-crt-environment-l1-1-0.dll
+    DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+    ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看到了吧——&lt;code&gt;libstdc++-6.dll&lt;/code&gt;。这个 DLL 在 MinGW 的 bin 目录下，但&lt;strong&gt;不在系统的 PATH 里&lt;/strong&gt;。运行时找不到它，直接崩。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>C&#43;&#43; String</title>
       <link>https://zzy2357.github.io/posts/cpp-string/</link>

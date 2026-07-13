@@ -216,6 +216,28 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MinGW-w64 编译通过运行崩？Code Runner 踩坑记
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>症状 VS Code 里写了个 hello world：
+#include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &#34;Hello world!&#34; &lt;&lt; endl; return 0; } Ctrl&#43;Alt&#43;N（Code Runner）→ 编译通过 → 运行崩：
+[Done] exited with code=3221225477 in 1.097 seconds 退出的 3221225477 就是 0xC0000005，也就是 STATUS_ACCESS_VIOLATION——俗称段错误（segfault）。
+一个 hello world 能 segfault，说明问题不在代码，在环境。
+排查 第一坑：路径错了 看看编译器的实际位置：
+$ ls /d/Apps/mingw64/mingw64/bin/g&#43;&#43;.exe 结果是 MinGW-w64 15.2.0（UCRT 版本），而我 Code Runner 里配的是 D:\Apps\TDM-GCC\bin\g&#43;&#43;.exe——一个根本不存在的目录。
+嗯，之前不知道哪个助手写进记忆里的，信了。
+第二坑：运行时缺 DLL 路径改对后，编译确实过了，但运行还是崩。手动跑一下试试：
+$ g&#43;&#43; hello.cpp -o hello.exe -static-libgcc -fexec-charset=gbk $ ./hello.exe Segmentation fault 查一下编译产物依赖的 DLL：
+$ objdump -p hello.exe | grep &#34;DLL Name&#34; DLL Name: libstdc&#43;&#43;-6.dll DLL Name: KERNEL32.dll DLL Name: api-ms-win-crt-environment-l1-1-0.dll DLL Name: api-ms-win-crt-heap-l1-1-0.dll ... 看到了吧——libstdc&#43;&#43;-6.dll。这个 DLL 在 MinGW 的 bin 目录下，但不在系统的 PATH 里。运行时找不到它，直接崩。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-07-13 18:20:00 +0800 CST'>2026/07/13</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;192 words&nbsp;·&nbsp;zzy2357</footer>
+  <a class="entry-link" aria-label="post link to MinGW-w64 编译通过运行崩？Code Runner 踩坑记" href="https://zzy2357.github.io/posts/cpp-mingw-segfault/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">从 Vue &#43; fetch 到现代 Web 架构：一次对话后的认知刷新
     </h2>
   </header>
@@ -363,22 +385,12 @@ if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可�
   <footer class="entry-footer"><span title='2025-11-30 21:09:19 +0800 CST'>2025/11/30</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;818 words&nbsp;·&nbsp;zzy2357</footer>
   <a class="entry-link" aria-label="post link to 2025 PCTF WriteUp" href="https://zzy2357.github.io/posts/pctf-wp/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">SQL 注入 - CTF Web 学习笔记
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。
-SQL 基本查询语句 从 users 表中查询 id 为 123 的数据：
-SELECT username, password FROM users where id = 123; UNION 用于合并两个或多个 SELECT 语句的结果 LIMIT 用于限制返回的记录数量 ORDER BY 对结果进行排序 -- 用于单行注释 /* */ 用于多行注释 SELECT username, password FROM users1 ORDER BY id UNION SELECT username, password FROM users2 LIMIT 10; -- 查询 注意：使用 UNION 的时候要注意两个表的列数量必须相同。
-SQL 常用参数 user()：当前数据库用户 database()：当前数据库名 version()：当前使用的数据库版本 @@datadir：数据库储存数据路径 concat()：联合数据，用于联合两条数据结果，如 concat(username, 0x3a, password) group_concat()：和 concat() 类似，如 group_concat(DISTINCT&#43;user,0x3a,password)，用于把多条数据一次注入出来 concat_ws()：用法类似 hex() 和 unhex()：用于 hex 编码解码 ASCII()：返回字符的 ASCII 码值 CHAR()：把整数转换为对应的字符 load_file()：以文本方式读取文件，在 Windows 中，路径设置为 \ select xxoo into outfile &#39;路径&#39;：权限较高时可直接写文件 基本注入 注释掉后面的条件以直接绕过条件。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-11-12 19:32:31 +0800 CST'>2025/11/12</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;216 words&nbsp;·&nbsp;zzy2357</footer>
-  <a class="entry-link" aria-label="post link to SQL 注入 - CTF Web 学习笔记" href="https://zzy2357.github.io/posts/sql-injection/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://zzy2357.github.io/page/2/">&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">
