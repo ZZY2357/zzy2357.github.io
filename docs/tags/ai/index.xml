@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Ai on OK Komputer</title>
-    <link>https://ok-komputer.github.io/tags/ai/</link>
-    <description>Recent content in Ai on OK Komputer</description>
+    <title>Ai on zzy2357</title>
+    <link>https://zzy2357.github.io/tags/ai/</link>
+    <description>Recent content in Ai on zzy2357</description>
     <image>
-      <title>OK Komputer</title>
+      <title>zzy2357</title>
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 28 Jun 2026 17:30:00 +0800</lastBuildDate>
-    <atom:link href="https://ok-komputer.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录</title>
-      <link>https://ok-komputer.github.io/posts/omo-agent-not-showing/</link>
+      <link>https://zzy2357.github.io/posts/omo-agent-not-showing/</link>
       <pubDate>Sun, 28 Jun 2026 17:30:00 +0800</pubDate>
-      <guid>https://ok-komputer.github.io/posts/omo-agent-not-showing/</guid>
+      <guid>https://zzy2357.github.io/posts/omo-agent-not-showing/</guid>
       <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
 &lt;p&gt;装了 oh-my-openagent 之后，&lt;code&gt;opencode agent list&lt;/code&gt; 和执行 &lt;code&gt;npx oh-my-openagent doctor&lt;/code&gt; 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里&lt;strong&gt;只显示 &lt;code&gt;plan&lt;/code&gt; 和 &lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。&lt;/p&gt;
 &lt;p&gt;这个问题在官方仓库有多人在追踪：&lt;/p&gt;

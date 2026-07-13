@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>前端 on OK Komputer</title>
-    <link>https://ok-komputer.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
-    <description>Recent content in 前端 on OK Komputer</description>
+    <title>前端 on zzy2357</title>
+    <link>https://zzy2357.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on zzy2357</description>
     <image>
-      <title>OK Komputer</title>
+      <title>zzy2357</title>
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 07 Jul 2026 20:38:00 +0800</lastBuildDate>
-    <atom:link href="https://ok-komputer.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从 Vue &#43; fetch 到现代 Web 架构：一次对话后的认知刷新</title>
-      <link>https://ok-komputer.github.io/posts/spa-ssr-bff/</link>
+      <link>https://zzy2357.github.io/posts/spa-ssr-bff/</link>
       <pubDate>Tue, 07 Jul 2026 20:38:00 +0800</pubDate>
-      <guid>https://ok-komputer.github.io/posts/spa-ssr-bff/</guid>
+      <guid>https://zzy2357.github.io/posts/spa-ssr-bff/</guid>
       <description>&lt;p&gt;最近和 GLM 聊前端架构，被纠正了一堆自以为是的认知。之前我对前后端分离的理解基本停留在&amp;quot;后端写接口、前端 &lt;code&gt;fetch&lt;/code&gt; 拿数据渲染&amp;quot;。聊完之后发现这四个点我之前全想错了。&lt;/p&gt;
 &lt;h2 id=&#34;url-里的--号&#34;&gt;URL 里的 # 号&lt;/h2&gt;
 &lt;p&gt;一开始路由全是 &lt;code&gt;localhost/#/user&lt;/code&gt; 这种带 &lt;code&gt;#&lt;/code&gt; 的，以为 Vue Router 就这样。后来才知道这是 Hash 模式——默认值，不需要后端配合但 URL 丑。&lt;/p&gt;

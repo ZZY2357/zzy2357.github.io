@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Ssh on OK Komputer</title>
-    <link>https://ok-komputer.github.io/tags/ssh/</link>
-    <description>Recent content in Ssh on OK Komputer</description>
+    <title>Ssh on zzy2357</title>
+    <link>https://zzy2357.github.io/tags/ssh/</link>
+    <description>Recent content in Ssh on zzy2357</description>
     <image>
-      <title>OK Komputer</title>
+      <title>zzy2357</title>
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
     <generator>Hugo -- 0.161.1</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 04 Apr 2026 12:38:49 +0800</lastBuildDate>
-    <atom:link href="https://ok-komputer.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 SSH 建立 Socks5 代理</title>
-      <link>https://ok-komputer.github.io/posts/ssh-socks5/</link>
+      <link>https://zzy2357.github.io/posts/ssh-socks5/</link>
       <pubDate>Sat, 04 Apr 2026 12:38:49 +0800</pubDate>
-      <guid>https://ok-komputer.github.io/posts/ssh-socks5/</guid>
+      <guid>https://zzy2357.github.io/posts/ssh-socks5/</guid>
       <description>&lt;p&gt;只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件&lt;/p&gt;
 &lt;p&gt;在本地执行：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh -D port user@passwd

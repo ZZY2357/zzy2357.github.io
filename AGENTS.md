@@ -1,6 +1,6 @@
 # OK Komputer — AGENTS.md
 
-Personal blog at <https://ok-komputer.github.io/>. Built with Hugo + PaperMod, deployed via GitHub Pages.
+Personal blog at <https://zzy2357.github.io/>. Built with Hugo + PaperMod, deployed via GitHub Pages.
 
 ## Tech stack
 

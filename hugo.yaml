@@ -1,6 +1,6 @@
-baseURL: "https://ok-komputer.github.io/"
+baseURL: "https://zzy2357.github.io/"
 defaultContentLanguage: zh-cn
-title: "OK Komputer"
+title: "zzy2357"
 languages:
   zh-cn:
     locale: zh-cn
@@ -9,10 +9,10 @@ publishDir: "docs"
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: OK Komputer
+  title: zzy2357
   description: "Everything in it's right place."
   keywords: [OK Komputer, zzy2357, blog]
-  author: ok-komputer
+  author: zzy2357
   images: ["https://avatars.githubusercontent.com/u/226872255?v=4"]
   DateFormat: "2006/01/02"
   defaultTheme: auto # dark, light
@@ -49,7 +49,7 @@ params:
 
   socialIcons:
     - name: github
-      url: "https://github.com/ok-komputer"
+      url: "https://github.com/zzy2357"
     - name: email
       url: "mailto:zzy2357@outlook.com"
     - name: qq

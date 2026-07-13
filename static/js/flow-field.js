@@ -1,6 +1,6 @@
 /**
  * Flow Field Background Animation
- * Homepage-only canvas background for ok-komputer.github.io
+ * Homepage-only canvas background for zzy2357.github.io
  * Adapted from background.html — no dat.gui, transparent field bg, subtle colors
  */
 (function () {
