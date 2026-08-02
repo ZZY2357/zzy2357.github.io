@@ -9,7 +9,7 @@
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
-    <generator>Hugo -- 0.161.1</generator>
+    <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 28 Jun 2026 17:30:00 +0800</lastBuildDate>
     <atom:link href="https://zzy2357.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
@@ -31,25 +31,25 @@
 &lt;h3 id=&#34;原因一配置作用域不匹配&#34;&gt;原因一：配置作用域不匹配&lt;/h3&gt;
 &lt;p&gt;OpenCode 的配置文件有两个层级：&lt;/p&gt;
 &lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;作用域&lt;/th&gt;
-          &lt;th&gt;路径&lt;/th&gt;
-          &lt;th&gt;优先级&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;全局&lt;/td&gt;
-          &lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;低&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;项目本地&lt;/td&gt;
-          &lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
-          &lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;作用域&lt;/th&gt;
+					&lt;th&gt;路径&lt;/th&gt;
+					&lt;th&gt;优先级&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;全局&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;低&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;项目本地&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;通过 &lt;code&gt;npx oh-my-openagent install&lt;/code&gt; 安装时，写入的是&lt;strong&gt;全局&lt;/strong&gt;配置。但如果启动 opencode 的工作目录下恰好存在 &lt;code&gt;.opencode/opencode.json&lt;/code&gt;（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。&lt;/p&gt;</description>
     </item>

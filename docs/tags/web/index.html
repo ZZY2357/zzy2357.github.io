@@ -159,6 +159,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">网络是如何运作的
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>我一边学一边记，本文章持续更新。
+网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。
+OSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。
+层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 每个层具体干什么 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;146 words&nbsp;·&nbsp;zzy2357</footer>
+  <a class="entry-link" aria-label="post link to 网络是如何运作的" href="https://zzy2357.github.io/posts/how-network-works/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">SQL 注入 - CTF Web 学习笔记
     </h2>
   </header>

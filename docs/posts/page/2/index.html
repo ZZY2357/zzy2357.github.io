@@ -174,6 +174,24 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">2025 PCTF WriteUp
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Web EZPHP 爆破数字，为 114514，然后发送 POST 请求 http://challenge2.pctf.top:31855/?number=114514&amp;action=include，filename=data://text/plain,&lt;?php system(&#39;ls -a /&#39;); ?&gt;，看下 flag 在 2t9I0T6BaYFEZGqu 这个文件里，然后再发送一个 data://text/plain,&lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&gt; 即可拿到 flag。
+Jwt_password_manager 打开 app.py，发现 SECRET_KEY 都给了，访问 jwt.io，找到 JWT Encoder，把 payload 改成 { &#39;username&#39;: &#39;admin&#39; }，把 SECRET_KEY 填进去，把得到的 token 写到 cookie 里面，即可以 admin 的身份登录并拿到 flag。
+We_will_rockyou 在网上找 rockyou.txt，逐个爆破，用户名是 admin123，密码是 lovers（每次的密码都不一样），进入仪表盘后运行 ls 发现 flag.txt，由于这个命令检查只检查第一个命令，所以运行 ls ;cat flag.txt，发现 PCTF{flag_is_not_here}，再看题目发现 flag 原来在 /flag，修改后重新运行命令拿到 flag。
+php_with_md5 先通过弱比较，然后再碰撞通过强比较。
+if(isset($_GET[&#39;begin&#39;])==&#39;admin&#39;) 只需 begin 存在即可。
+if(!preg_match(&#39;/admin/i&#39;,$begin)) 只需 begin 不包含 admin 即可，因此输入 123。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-11-30 21:09:19 +0800 CST'>2025/11/30</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;818 words&nbsp;·&nbsp;zzy2357</footer>
+  <a class="entry-link" aria-label="post link to 2025 PCTF WriteUp" href="https://zzy2357.github.io/posts/pctf-wp/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">SQL 注入 - CTF Web 学习笔记
     </h2>
   </header>

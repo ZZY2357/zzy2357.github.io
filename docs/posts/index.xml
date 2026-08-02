@@ -9,10 +9,88 @@
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
       <link>https://avatars.githubusercontent.com/u/226872255?v=4</link>
     </image>
-    <generator>Hugo -- 0.161.1</generator>
+    <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 13 Jul 2026 18:20:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 20:36:04 +0800</lastBuildDate>
     <atom:link href="https://zzy2357.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>网络是如何运作的</title>
+      <link>https://zzy2357.github.io/posts/how-network-works/</link>
+      <pubDate>Sun, 02 Aug 2026 20:36:04 +0800</pubDate>
+      <guid>https://zzy2357.github.io/posts/how-network-works/</guid>
+      <description>&lt;p&gt;我一边学一边记，本文章持续更新。&lt;/p&gt;
+&lt;h2 id=&#34;网络的分层模型&#34;&gt;网络的分层模型&lt;/h2&gt;
+&lt;p&gt;网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。&lt;/p&gt;
+&lt;h3 id=&#34;osi-七层模型&#34;&gt;OSI 七层模型&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;层（由底层到表层）&lt;/th&gt;
+					&lt;th&gt;描述&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;物理层 Physical&lt;/td&gt;
+					&lt;td&gt;直接与&lt;strong&gt;物理介质&lt;/strong&gt;打交道&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;数据链路层 Data Link&lt;/td&gt;
+					&lt;td&gt;给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;网络层 Network&lt;/td&gt;
+					&lt;td&gt;决定数据的流动路径，IP 协议就是这层的&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;传输层 Transport&lt;/td&gt;
+					&lt;td&gt;就是 TCP &amp;amp; UDP 所在的层，netcat 处理的那一层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;会话层 Session&lt;/td&gt;
+					&lt;td&gt;就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;表示层 Presentation&lt;/td&gt;
+					&lt;td&gt;你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;应用层 Application&lt;/td&gt;
+					&lt;td&gt;HTTP、FTP、SMTP 等就是这层的&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;tcpip-四层模型&#34;&gt;TCP/IP 四层模型&lt;/h3&gt;
+&lt;p&gt;TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;层（由底层到表层）&lt;/th&gt;
+					&lt;th&gt;描述&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;网络接口层&lt;/td&gt;
+					&lt;td&gt;处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;网络层 Network&lt;/td&gt;
+					&lt;td&gt;决定数据的流动路径，IP 协议就是这层的&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;传输层 Transport&lt;/td&gt;
+					&lt;td&gt;就是 TCP &amp;amp; UDP 所在的层，netcat 处理的那一层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;应用层 Application&lt;/td&gt;
+					&lt;td&gt;HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;每个层具体干什么&#34;&gt;每个层具体干什么&lt;/h2&gt;
+&lt;p&gt;由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>MinGW-w64 编译通过运行崩？Code Runner 踩坑记</title>
       <link>https://zzy2357.github.io/posts/cpp-mingw-segfault/</link>
@@ -96,25 +174,25 @@ Segmentation fault
 &lt;h3 id=&#34;原因一配置作用域不匹配&#34;&gt;原因一：配置作用域不匹配&lt;/h3&gt;
 &lt;p&gt;OpenCode 的配置文件有两个层级：&lt;/p&gt;
 &lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;作用域&lt;/th&gt;
-          &lt;th&gt;路径&lt;/th&gt;
-          &lt;th&gt;优先级&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;全局&lt;/td&gt;
-          &lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;低&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;项目本地&lt;/td&gt;
-          &lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
-          &lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;作用域&lt;/th&gt;
+					&lt;th&gt;路径&lt;/th&gt;
+					&lt;th&gt;优先级&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;全局&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;低&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;项目本地&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;通过 &lt;code&gt;npx oh-my-openagent install&lt;/code&gt; 安装时，写入的是&lt;strong&gt;全局&lt;/strong&gt;配置。但如果启动 opencode 的工作目录下恰好存在 &lt;code&gt;.opencode/opencode.json&lt;/code&gt;（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。&lt;/p&gt;</description>
     </item>
