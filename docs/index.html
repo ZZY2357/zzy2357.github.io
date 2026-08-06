@@ -216,6 +216,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">手写 HTTP 服务器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。
+什么是 socket？ Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。
+客户端 Socket # 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world! $ echo &#34;Hello world!&#34; | nc -lvnp 6767 import socket client_socket = socket.socket( socket.AF_INET,	# 使用 IPv4 socket.SOCK_STREAM	# 使用面向流的TCP协议 ) # 连接到 127.0.0.1:6767 client_socket.connect((&#39;127.0.0.1&#39;, 6767)) # 一次性接收最大 1024 字节的数据 print(client_socket.recv(1024)) # b&#39;Hello world!\r\n&#39; 服务端 Socket import socket server_socket = socket.socket( socket.AF_INET,	# 使用 IPv4 socket.SOCK_STREAM	# 使用面向流的TCP协议 ) # 绑定到 127.0.0.1:6767，此时还没有开始监听 server_socket.bind((&#39;127.0.0.1&#39;, 6767)) # 开始监听，括号里填一个整数可以指定最大同时连接数 server_socket.listen() # 允许端口复用，避免重启时 &#34;Address already in use&#34; server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) print(&#39;服务器正在运行&#39;) while True: # 重复等待连接 conn, addr = server_socket.accept() print(f&#39;{ addr } 已连接&#39;) conn.sendall(b&#39;Hello world!&#39;) # 发送完整的数据 conn.close() $ nc 127.0.0.1 6767 Hello world! HTTP 协议（摘自 MDN） HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-08-05 16:55:20 +0800 CST'>2026/08/05</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;707 words&nbsp;·&nbsp;zzy2357</footer>
+  <a class="entry-link" aria-label="post link to 手写 HTTP 服务器" href="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">网络是如何运作的
     </h2>
   </header>
@@ -223,10 +238,10 @@
     <p>我一边学一边记，本文章持续更新。
 网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。
 OSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。
-层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 每个层具体干什么 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。
+层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 详细介绍 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;146 words&nbsp;·&nbsp;zzy2357</footer>
+  <footer class="entry-footer"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;149 words&nbsp;·&nbsp;zzy2357</footer>
   <a class="entry-link" aria-label="post link to 网络是如何运作的" href="https://zzy2357.github.io/posts/how-network-works/"></a>
 </article>
 
@@ -365,23 +380,6 @@ SECRET_KEY: c6242af0-6891-4510-8432-e1cdf051f160 3 找到这一行
   </div>
   <footer class="entry-footer"><span title='2026-01-08 08:27:30 +0800 CST'>2026/01/08</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;732 words&nbsp;·&nbsp;zzy2357</footer>
   <a class="entry-link" aria-label="post link to 2025 国赛 WP" href="https://zzy2357.github.io/posts/guosai-wp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">2025 纳新赛 WriteUp
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Misc Crossfire 用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。
-basic 用 010 Editor 打开，发现上部分是 PNG，下部分是 ZIP，中间是一段 base64，转码过后发现是密码，用这个密码解压 ZIP 就能看到 flag 了。
-Pwn Test your NetCat ls 一下，发现没有文件，ls -a 发现有文件，且有 flag，cat flag 发现是假 flag，只能看看 attachment 这个文件了，结果没权限，最后试了下 cat * 发现出现 flag 了。
-Crypto RSA_Signin RSA 共模攻击，运行脚本：
-import math from functools import reduce def extended_gcd(a, b): &#34;&#34;&#34; 扩展欧几里得算法：求解 ax &#43; by = gcd(a, b) 返回 (gcd, x, y) &#34;&#34;&#34; if a == 0: return (b, 0, 1) else: gcd, x, y = extended_gcd(b % a, a) return (gcd, y - (b // a) * x, x) def mod_inverse(a, mod): &#34;&#34;&#34; 计算a在mod下的逆元（要求a和mod互质） 利用扩展欧几里得算法实现 &#34;&#34;&#34; gcd, x, y = extended_gcd(a, mod) if gcd != 1: raise Exception(&#39;逆元不存在（a与mod不互质）&#39;) else: return x % mod def rsa_common_mod_attack(N, e1, c1, e2, c2): &#34;&#34;&#34; RSA共模攻击核心函数 输入：同一模数N、两组公钥(e1,e2)、两组密文(c1,c2) 输出：明文m（整数形式） &#34;&#34;&#34; # 步骤1：验证e1和e2互质（攻击前提） gcd_e, x, y = extended_gcd(e1, e2) if gcd_e != 1: raise Exception(&#39;e1和e2不互质，无法进行共模攻击&#39;) print(f&#34;e1和e2互质（gcd={gcd_e}），满足攻击条件&#34;) print(f&#34;贝祖等式系数：x={x}, y={y}（满足 e1*x &#43; e2*y = 1）&#34;) # 步骤2：处理负系数（将负指数转换为正逆元） if x &lt; 0: c1_inv = mod_inverse(c1, N) # c1^(-1) mod N x_abs = -x term1 = pow(c1_inv, x_abs, N) # c1^x mod N = (c1^(-1))^|x| mod N else: term1 = pow(c1, x, N) # 正指数直接计算 if y &lt; 0: c2_inv = mod_inverse(c2, N) # c2^(-1) mod N y_abs = -y term2 = pow(c2_inv, y_abs, N) # c2^y mod N = (c2^(-1))^|y| mod N else: term2 = pow(c2, y, N) # 正指数直接计算 # 步骤3：计算明文 m = (term1 * term2) mod N m = (term1 * term2) % N return m def int_to_ascii(m): &#34;&#34;&#34; 将整数明文转换为ASCII字符串（处理CTF常见flag格式） &#34;&#34;&#34; # 整数转换为字节流（大端序） byte_data = m.to_bytes((m.bit_length() &#43; 7) // 8, byteorder=&#39;big&#39;) try: return byte_data.decode(&#39;ascii&#39;) except UnicodeDecodeError: return &#34;明文非ASCII格式，返回整数形式：&#34; &#43; str(m) if __name__ == &#34;__main__&#34;: # -------------------------- 已知参数（可直接替换为其他共模攻击场景）-------------------------- N = 162178605357818616394571566923155907889899677780239882906511996614607940884142045197452389471499799373787832649318837814454679970724845203557871078001956378966434166323827984964942729898095347038272003371167123553368531662277059263517900162297903110415768403265100411543878859321181606008503516896600638590699 e1 = 35422 c1 = 153249315480380808558746807096025628082875635601515291525075274335055878390662930254941118045696231628008256877302589689883059616503108946971165183674522403835250738176157466145855833767128209866527507862726083268576304163200171600023472544755768741118904892489037291247455823396160705615280802805803254323033 e2 = 1033 c2 = 5823189490163315770684717059899864988806118565674660089157163486577056500243194221873916232616081138765317598078910078375360361118674333149663483360677725162911935082290640547407140413703664960164356579153623498735889314476063673352676918268911309402784919521792079943937126634436658784515914270266106683548 # -------------------------- 执行攻击 -------------------------- print(&#34;开始RSA共模攻击...&#34;) try: # 执行攻击得到整数明文 m_int = rsa_common_mod_attack(N, e1, c1, e2, c2) # 转换为可读字符串 m_str = int_to_ascii(m_int) # 输出结果 print(&#34;\n&#34; &#43; &#34;=&#34; * 50) print(&#34;攻击成功！&#34;) print(f&#34;整数明文：{m_int}&#34;) print(f&#34;可读明文：{m_str}&#34;) print(&#34;=&#34;*50) except Exception as e: print(f&#34;攻击失败：{str(e)}&#34;) Sign_in 出题人不喜欢 0，把 0 全部去掉，在网上搜“颜文字加密解密”发现了 AAencode，用这个解密即可拿到 flag。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-12-06 17:32:48 +0800 CST'>2025/12/06</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;632 words&nbsp;·&nbsp;zzy2357</footer>
-  <a class="entry-link" aria-label="post link to 2025 纳新赛 WriteUp" href="https://zzy2357.github.io/posts/isa-wp/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

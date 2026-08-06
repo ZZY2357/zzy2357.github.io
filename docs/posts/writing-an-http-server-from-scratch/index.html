@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>手写 HTTP 服务器 | zzy2357</title>
+<meta name="keywords" content="http, web, python, socket, asyncio">
+<meta name="description" content="本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。
+什么是 socket？
+Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。
+客户端 Socket
+# 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world!
+$ echo &#34;Hello world!&#34; | nc -lvnp 6767
+import socket
+
+client_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+
+# 连接到 127.0.0.1:6767
+client_socket.connect((&#39;127.0.0.1&#39;, 6767))
+# 一次性接收最大 1024 字节的数据
+print(client_socket.recv(1024))
+# b&#39;Hello world!\r\n&#39;
+服务端 Socket
+import socket
+
+server_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+# 绑定到 127.0.0.1:6767，此时还没有开始监听
+server_socket.bind((&#39;127.0.0.1&#39;, 6767))
+# 开始监听，括号里填一个整数可以指定最大同时连接数
+server_socket.listen()
+# 允许端口复用，避免重启时 &#34;Address already in use&#34;
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+print(&#39;服务器正在运行&#39;)
+
+while True: # 重复等待连接
+    conn, addr = server_socket.accept()
+    print(f&#39;{ addr } 已连接&#39;)
+    conn.sendall(b&#39;Hello world!&#39;) # 发送完整的数据
+    conn.close()
+$ nc 127.0.0.1 6767
+Hello world!
+HTTP 协议（摘自 MDN）
+HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。">
+<meta name="author" content="zzy2357">
+<link rel="canonical" href="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8b4df2114dc8387a98eecb7fe314cf5ff90e4105f8d5e54298fc8f98d6796a5a.css" integrity="sha256-i03yEU3IOHqY7st/4xTPX/kOQQX41eVCmPyPmNZ5alo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zzy2357.github.io/%3Clink%20/%20abs%20url%3E">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zzy2357.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zzy2357.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zzy2357.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zzy2357.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh-cn" href="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><style>
+#field-canvas,
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+.header,
+.main,
+.footer {
+    position: relative;
+    z-index: 2;
+}
+.top-link {
+    z-index: 3;
+}
+</style><meta property="og:title" content="手写 HTTP 服务器" />
+<meta property="og:description" content="本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。
+什么是 socket？
+Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。
+客户端 Socket
+# 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world!
+$ echo &#34;Hello world!&#34; | nc -lvnp 6767
+import socket
+
+client_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+
+# 连接到 127.0.0.1:6767
+client_socket.connect((&#39;127.0.0.1&#39;, 6767))
+# 一次性接收最大 1024 字节的数据
+print(client_socket.recv(1024))
+# b&#39;Hello world!\r\n&#39;
+服务端 Socket
+import socket
+
+server_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+# 绑定到 127.0.0.1:6767，此时还没有开始监听
+server_socket.bind((&#39;127.0.0.1&#39;, 6767))
+# 开始监听，括号里填一个整数可以指定最大同时连接数
+server_socket.listen()
+# 允许端口复用，避免重启时 &#34;Address already in use&#34;
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+print(&#39;服务器正在运行&#39;)
+
+while True: # 重复等待连接
+    conn, addr = server_socket.accept()
+    print(f&#39;{ addr } 已连接&#39;)
+    conn.sendall(b&#39;Hello world!&#39;) # 发送完整的数据
+    conn.close()
+$ nc 127.0.0.1 6767
+Hello world!
+HTTP 协议（摘自 MDN）
+HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-08-05T16:55:20+08:00" />
+<meta property="article:modified_time" content="2026-08-05T16:55:20+08:00" /><meta property="og:site_name" content="zzy2357" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/226872255?v=4" />
+<meta name="twitter:title" content="手写 HTTP 服务器"/>
+<meta name="twitter:description" content="本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。
+什么是 socket？
+Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。
+客户端 Socket
+# 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world!
+$ echo &#34;Hello world!&#34; | nc -lvnp 6767
+import socket
+
+client_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+
+# 连接到 127.0.0.1:6767
+client_socket.connect((&#39;127.0.0.1&#39;, 6767))
+# 一次性接收最大 1024 字节的数据
+print(client_socket.recv(1024))
+# b&#39;Hello world!\r\n&#39;
+服务端 Socket
+import socket
+
+server_socket = socket.socket(
+    socket.AF_INET,		# 使用 IPv4
+    socket.SOCK_STREAM	# 使用面向流的TCP协议
+)
+# 绑定到 127.0.0.1:6767，此时还没有开始监听
+server_socket.bind((&#39;127.0.0.1&#39;, 6767))
+# 开始监听，括号里填一个整数可以指定最大同时连接数
+server_socket.listen()
+# 允许端口复用，避免重启时 &#34;Address already in use&#34;
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+print(&#39;服务器正在运行&#39;)
+
+while True: # 重复等待连接
+    conn, addr = server_socket.accept()
+    print(f&#39;{ addr } 已连接&#39;)
+    conn.sendall(b&#39;Hello world!&#39;) # 发送完整的数据
+    conn.close()
+$ nc 127.0.0.1 6767
+Hello world!
+HTTP 协议（摘自 MDN）
+HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zzy2357.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "手写 HTTP 服务器",
+      "item": "https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "手写 HTTP 服务器",
+  "name": "手写 HTTP 服务器",
+  "description": "本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。\n什么是 socket？ Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。\n客户端 Socket # 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world! $ echo \u0026#34;Hello world!\u0026#34; | nc -lvnp 6767 import socket client_socket = socket.socket( socket.AF_INET,\t# 使用 IPv4 socket.SOCK_STREAM\t# 使用面向流的TCP协议 ) # 连接到 127.0.0.1:6767 client_socket.connect((\u0026#39;127.0.0.1\u0026#39;, 6767)) # 一次性接收最大 1024 字节的数据 print(client_socket.recv(1024)) # b\u0026#39;Hello world!\\r\\n\u0026#39; 服务端 Socket import socket server_socket = socket.socket( socket.AF_INET,\t# 使用 IPv4 socket.SOCK_STREAM\t# 使用面向流的TCP协议 ) # 绑定到 127.0.0.1:6767，此时还没有开始监听 server_socket.bind((\u0026#39;127.0.0.1\u0026#39;, 6767)) # 开始监听，括号里填一个整数可以指定最大同时连接数 server_socket.listen() # 允许端口复用，避免重启时 \u0026#34;Address already in use\u0026#34; server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) print(\u0026#39;服务器正在运行\u0026#39;) while True: # 重复等待连接 conn, addr = server_socket.accept() print(f\u0026#39;{ addr } 已连接\u0026#39;) conn.sendall(b\u0026#39;Hello world!\u0026#39;) # 发送完整的数据 conn.close() $ nc 127.0.0.1 6767 Hello world! HTTP 协议（摘自 MDN） HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。\n",
+  "keywords": [
+    "http", "web", "python", "socket", "asyncio"
+  ],
+  "articleBody": "本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。\n什么是 socket？ Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。\n客户端 Socket # 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world! $ echo \"Hello world!\" | nc -lvnp 6767 import socket client_socket = socket.socket( socket.AF_INET,\t# 使用 IPv4 socket.SOCK_STREAM\t# 使用面向流的TCP协议 ) # 连接到 127.0.0.1:6767 client_socket.connect(('127.0.0.1', 6767)) # 一次性接收最大 1024 字节的数据 print(client_socket.recv(1024)) # b'Hello world!\\r\\n' 服务端 Socket import socket server_socket = socket.socket( socket.AF_INET,\t# 使用 IPv4 socket.SOCK_STREAM\t# 使用面向流的TCP协议 ) # 绑定到 127.0.0.1:6767，此时还没有开始监听 server_socket.bind(('127.0.0.1', 6767)) # 开始监听，括号里填一个整数可以指定最大同时连接数 server_socket.listen() # 允许端口复用，避免重启时 \"Address already in use\" server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) print('服务器正在运行') while True: # 重复等待连接 conn, addr = server_socket.accept() print(f'{ addr } 已连接') conn.sendall(b'Hello world!') # 发送完整的数据 conn.close() $ nc 127.0.0.1 6767 Hello world! HTTP 协议（摘自 MDN） HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。\nHTTP 请求 请求由以下元素组成：\nHTTP 方法，通常是由一个动词，像 GET、POST 等，或者一个名词，像 OPTIONS、HEAD 等，来定义客户端执行的动作。典型场景有：客户端意图获取某个资源（使用 GET）；发送 HTML 表单的参数值（使用 POST）；以及其他情况下需要的那些其他操作。 要获取的那个资源的路径——去除了当前上下文中显而易见的信息之后的 URL，比如说，它不包括协议（http://）、域名（这里是 developer.mozilla.org），或是 TCP 的端口（这里是 80）。 HTTP 协议版本号。 为服务端表达其他信息的可选标头。 请求体（body），类似于响应中的请求体，一些像 POST 这样的方法，请求体内包含需要了发送的资源。 HTTP 响应 响应报文包含了下面的元素：\nHTTP 协议版本号。 状态码，来指明对应请求已成功执行与否，以及不成功时相应的原因。 状态信息，这个信息是一个不权威、简短的状态码描述。 HTTP 标头，与请求标头类似。 可选项，一个包含了被获取资源的主体。 异步 socket.accept 函数是会阻塞程序的，因此在循环中，只有有新的连接加入才会从 accept 的那一行跳到下一行，否则将会一直等待。但是服务器是要同时和多个客户端进行交互的，需要在等待新连接的同时处理已连接的 socket，因此这样行不通。\n其中一种解决办法是使用多线程，等待新连接是一个线程，每当有新的连接就新建一个线程专门处理这个连接，这样就不会因为一直等待新的连接而阻断别的事务处理了。\nimport socket import threading def handle_client(conn: socket.socket, addr: tuple): # 处理单个客户端连接（在独立线程中运行） try: data = conn.recv(4096) conn.sendall(b'Hello ' + data) except Exception as e: print(f'{addr} 错误：{e}') finally: conn.close() print(f'{addr} 断连') server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # 允许端口复用，避免重启时 \"Address already in use\" server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) server_socket.bind((\"127.0.0.1\", 6767)) server_socket.listen(5) print(\"服务器运行在 127.0.0.1:6767\") while True: conn, addr = server_socket.accept() print(f\"{addr} 已连接\") # 每个连接启动一个守护线程，主线程不会被阻塞 # 当进程中所有非守护线程（即主线程和其他普通线程）都结束时，Python 解释器会立即退出，不会等待守护线程完成。 t = threading.Thread(target=handle_client, args=(conn, addr), daemon=True) t.start() 但是给每一个会话都分配一个线程实在是太浪费了，一个会话不可能频繁地发消息，在会话空闲的时候，这个线程就无事可做了，在这种低强度的并发需求下，给每一个会话分配一个线程会造成极大浪费。\n那有没有一种方案，能把等待新连接和等待会话的新事务的空闲时间利用起来呢？有的，这就是异步。\n协程 协程又叫微线程，在执行的过程中，可以随时中断，让事件循环去处理下一个任务，这样可以做到一个线程同时做多个事情。\n需要注意的是，异步提升的并不是 CPU 的计算速度，而是 IO 等待期间的利用率。当服务器在等待某个客户端发送数据时，CPU 处于完全空闲状态；异步模型允许事件循环在此期间切换去处理其他已就绪的连接，从而在单线程内实现高并发。如果所有任务都是纯 CPU 计算、没有任何 IO 等待，那么串行执行和异步执行的总耗时确实相同——但这不是网络服务器的典型场景。\nasyncio（代码摘自菜鸟教程） asyncio 是 Python 的一个内置库，主要用于编写单线程并发代码，通过协程实现异步 I/O 操作。它在 Python 3.4 版本中引入，提供了基于事件循环的并发模型。\n定义协程 引入 asyncio 库后，在 def 前加上 async 关键字即可把该函数定义为协程。\nimport asyncio async def say_hello(): print(\"Hello\") await asyncio.sleep(1) print(\"World\") 事件循环 事件循环是 asyncio 的核心组件，负责调度和执行协程。它不断地检查是否有任务需要执行，并在任务完成后调用相应的回调函数。\nasync def main(): await say_hello() asyncio.run(main()) 任务 任务是对协程的封装，表示一个正在执行或将要执行的协程。你可以通过 asyncio.create_task() 函数创建任务，并将其添加到事件循环中。\nasync def main(): task = asyncio.create_task(say_hello()) await task Future Future 是一个表示异步操作结果的对象。它通常用于底层 API，表示一个尚未完成的操作。你可以通过 await 关键字等待 Future 完成。Future 是更底层的机制，通常由库内部使用，你暂时不需要直接操作。\nasync def main(): future = asyncio.Future() await future asyncio 对 socket 进行了封装 asyncio.start_server() 对 socket 进行了封装，可以用来创建一个异步的 TCP 服务器，包含了自动接受连接、自动处理连接的关闭与异常等功能：\nasync def handle_client(reader, writer): ... server = await asyncio.start_server(handle_client, '0.0.0.0', 4000) async with server: await server.serve_forever() 不过，为了更深入地理解异步 IO 与 socket 的底层交互原理，这里我们采用手动结合事件循环 (loop.sock_accept / loop.sock_recv / loop.sock_sendall) 操作原生 socket 的写法。\n开始写代码 使用 asyncio 处理 socket 的话，一定要设置 socket.setblocking(False)，将服务器套接字设置为非阻塞模式，这是配合 asyncio 事件循环的必要前提。若保持默认阻塞模式，socket 等待时会卡住线程。这会导致整个事件循环停滞。其他并发任务也无法被处理。设为非阻塞后，可结合 await 异步方法使用。IO 等待时便能主动让出控制权。事件循环就能继续调度其他协程。最终实现单线程下的高并发处理。\n同时，socket.accept() 和 socket.sendall() 等方法不能直接调用。它们会绕过事件循环并可能引发异常。必须替换为对应的异步版本。首先，需要使用 asyncio.get_running_loop() 函数获取当前正在运行的事件循环对象，然后使用 await loop.sock_accept() 接收连接，使用 await loop.sock_sendall() 发送数据。这样才能保证 IO 操作真正融入异步调度机制。\n以下是基础的主事件循环：\nasync def main(): # 获取当前正在运行的事件循环对象 loop = asyncio.get_running_loop() server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) server_socket.bind(('0.0.0.0', 4000)) server_socket.listen() server_socket.setblocking(False) # 设置为非阻塞模式 print(f'Server running at http://127.0.0.1:4000') while True: # 异步等待新连接 conn, addr = await loop.sock_accept(server_socket) print(f'[+] { addr } connected') # 添加到事件循环 asyncio.create_task(handle_client(conn, addr)) asyncio.run(main()) # `main()` 函数是协程，不能直接运行 现在主循环写好了，该写 handle_client() 函数了。该函数是一个协程，用来 处理单个客户端连接的 HTTP 请求并返回响应（本示例省略了请求解析步骤）：\nasync def handle_client(conn: socket.socket, addr): loop = asyncio.get_running_loop() try: while True: recv = await loop.sock_recv(conn, 4096) if not recv: # 在 TCP 中，空数据代表对方优雅关闭了连接 break await loop.sock_sendall(conn, http_response) except ConnectionResetError: # 对方强制关闭了连接 pass # 引发错误已经打断了 while 循环，pass 到 finally 中 finally: conn.close() print(f'[-] { addr } disconnected') 现在，我们可以专注于 http_response 的编写。该变量应该是一串 bytes 类型的 HTTP 响应。这里，我们读取当前目录下的 index.html，并作为响应主体进行发送：\nwith open('index.html', 'rb') as f: html = f.read() http_response = bytes(f'HTTP/1.1 200 OK\\r\\nContent-Type: text/html\\r\\nContent-Length: { len(html) }\\r\\n\\r\\n'.encode() + html) 完整代码 main.py import socket import asyncio with open('index.html', 'rb') as f: html = f.read() http_response = bytes(f'HTTP/1.1 200 OK\\r\\nContent-Type: text/html\\r\\nContent-Length: { len(html) }\\r\\n\\r\\n'.encode() + html) async def handle_client(conn: socket.socket, addr): loop = asyncio.get_running_loop() try: while True: recv = await loop.sock_recv(conn, 4096) if not recv: # 对方优雅关闭了连接 break await loop.sock_sendall(conn, http_response) except ConnectionResetError: # 对方强制关闭了连接 pass finally: conn.close() print(f'[-] { addr } disconnected') async def main(): loop = asyncio.get_running_loop() server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) server_socket.bind(('0.0.0.0', 4000)) server_socket.listen() server_socket.setblocking(False) print(f'Server running at http://127.0.0.1:4000') while True: conn, addr = await loop.sock_accept(server_socket) print(f'[+] { addr } connected') asyncio.create_task(handle_client(conn, addr)) asyncio.run(main()) index.html \u003c!doctype html\u003e \u003chtml lang=\"en\"\u003e \u003chead\u003e \u003cmeta charset=\"UTF-8\" /\u003e \u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /\u003e \u003ctitle\u003eSocket HTTP Server\u003c/title\u003e \u003cstyle\u003e html { font-size: max(16px, 2vw); } .container { margin: 32px; } \u003c/style\u003e \u003c/head\u003e \u003cbody\u003e \u003cdiv class=\"container\"\u003e \u003ch1\u003eThis is a HTTP server based on socket!\u003c/h1\u003e \u003cp\u003eNo frameworks. No libraries. Just raw sockets and asyncio.\u003c/p\u003e \u003ch2\u003eHow it works\u003c/h2\u003e \u003col\u003e \u003cli\u003e \u003ccode\u003esocket.socket()\u003c/code\u003e creates a TCP listener on port 4000 \u003c/li\u003e \u003cli\u003e \u003ccode\u003easyncio\u003c/code\u003e handles multiple connections concurrently \u003c/li\u003e \u003c/ol\u003e \u003ch2\u003eStack\u003c/h2\u003e \u003cul\u003e \u003cli\u003ePython 3\u003c/li\u003e \u003cli\u003esocket + asyncio\u003c/li\u003e \u003cli\u003eHTTP/1.1\u003c/li\u003e \u003c/ul\u003e \u003c/div\u003e \u003c/body\u003e \u003c/html\u003e 这样，我们就完成了一个基于 asyncio 和原生 socket 的最小可用 HTTP 服务器的实现。你还可以继续完善它，比如让它不仅仅只响应 index.html，而是根据请求的路径来响应正确的内容；以及异常处理等功能。\n",
+  "wordCount" : "707",
+  "inLanguage": "zh-cn",
+  "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2026-08-05T16:55:20+08:00",
+  "dateModified": "2026-08-05T16:55:20+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "zzy2357"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "zzy2357",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zzy2357.github.io/%3Clink%20/%20abs%20url%3E"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zzy2357.github.io/" accesskey="h" title="Home (Alt + H)">Home</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zzy2357.github.io/tags/" title="tags">
+                    <span>tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zzy2357.github.io/friends/" title="friends">
+                    <span>friends</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://zzy2357.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zzy2357.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      手写 HTTP 服务器
+    </h1>
+    <div class="post-meta"><span title='2026-08-05 16:55:20 +0800 CST'>2026/08/05</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;707 words&nbsp;·&nbsp;zzy2357
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是-socket">什么是 socket？</a>
+      <ul>
+        <li><a href="#客户端-socket">客户端 Socket</a></li>
+        <li><a href="#服务端-socket">服务端 Socket</a></li>
+      </ul>
+    </li>
+    <li><a href="#http-协议摘自-mdn">HTTP 协议（摘自 MDN）</a>
+      <ul>
+        <li><a href="#http-请求">HTTP 请求</a></li>
+        <li><a href="#http-响应">HTTP 响应</a></li>
+      </ul>
+    </li>
+    <li><a href="#异步">异步</a>
+      <ul>
+        <li><a href="#协程">协程</a></li>
+        <li><a href="#asyncio代码摘自菜鸟教程">asyncio（代码摘自菜鸟教程）</a></li>
+      </ul>
+    </li>
+    <li><a href="#开始写代码">开始写代码</a>
+      <ul>
+        <li><a href="#完整代码">完整代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。</p>
+<h2 id="什么是-socket">什么是 socket？<a hidden class="anchor" aria-hidden="true" href="#什么是-socket">#</a></h2>
+<p>Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。</p>
+<h3 id="客户端-socket">客户端 Socket<a hidden class="anchor" aria-hidden="true" href="#客户端-socket">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world!</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;Hello world!&#34;</span> <span class="p">|</span> nc -lvnp <span class="m">6767</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">client_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>		<span class="c1"># 使用 IPv4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span>	<span class="c1"># 使用面向流的TCP协议</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 连接到 127.0.0.1:6767</span>
+</span></span><span class="line"><span class="cl"><span class="n">client_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">6767</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 一次性接收最大 1024 字节的数据</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">client_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># b&#39;Hello world!\r\n&#39;</span>
+</span></span></code></pre></div><h3 id="服务端-socket">服务端 Socket<a hidden class="anchor" aria-hidden="true" href="#服务端-socket">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>		<span class="c1"># 使用 IPv4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span>	<span class="c1"># 使用面向流的TCP协议</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 绑定到 127.0.0.1:6767，此时还没有开始监听</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">6767</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 开始监听，括号里填一个整数可以指定最大同时连接数</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 允许端口复用，避免重启时 &#34;Address already in use&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;服务器正在运行&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># 重复等待连接</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server_socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span> <span class="n">addr</span> <span class="si">}</span><span class="s1"> 已连接&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span> <span class="c1"># 发送完整的数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ nc 127.0.0.1 <span class="m">6767</span>
+</span></span><span class="line"><span class="cl">Hello world!
+</span></span></code></pre></div><h2 id="http-协议摘自-mdn">HTTP 协议（摘自 MDN）<a hidden class="anchor" aria-hidden="true" href="#http-协议摘自-mdn">#</a></h2>
+<p>HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。</p>
+<h3 id="http-请求">HTTP 请求<a hidden class="anchor" aria-hidden="true" href="#http-请求">#</a></h3>
+<p><img loading="lazy" src="https://mdn.github.io/shared-assets/images/diagrams/http/overview/http-request.svg" alt="HTTP 请求"  />
+</p>
+<p>请求由以下元素组成：</p>
+<ul>
+<li>HTTP 方法，通常是由一个动词，像 GET、POST 等，或者一个名词，像 OPTIONS、HEAD 等，来定义客户端执行的动作。典型场景有：客户端意图获取某个资源（使用 GET）；发送 HTML 表单的参数值（使用 POST）；以及其他情况下需要的那些其他操作。</li>
+<li>要获取的那个资源的路径——去除了当前上下文中显而易见的信息之后的 URL，比如说，它不包括协议（http://）、域名（这里是 developer.mozilla.org），或是 TCP 的端口（这里是 80）。</li>
+<li>HTTP 协议版本号。</li>
+<li>为服务端表达其他信息的可选标头。</li>
+<li>请求体（body），类似于响应中的请求体，一些像 <code>POST</code> 这样的方法，请求体内包含需要了发送的资源。</li>
+</ul>
+<h3 id="http-响应">HTTP 响应<a hidden class="anchor" aria-hidden="true" href="#http-响应">#</a></h3>
+<p><img loading="lazy" src="https://mdn.github.io/shared-assets/images/diagrams/http/overview/http-response.svg" alt="HTTP 响应"  />
+</p>
+<p>响应报文包含了下面的元素：</p>
+<ul>
+<li>HTTP 协议版本号。</li>
+<li>状态码，来指明对应请求已成功执行与否，以及不成功时相应的原因。</li>
+<li>状态信息，这个信息是一个不权威、简短的状态码描述。</li>
+<li>HTTP 标头，与请求标头类似。</li>
+<li>可选项，一个包含了被获取资源的主体。</li>
+</ul>
+<h2 id="异步">异步<a hidden class="anchor" aria-hidden="true" href="#异步">#</a></h2>
+<p><code>socket.accept</code> 函数是会阻塞程序的，因此在循环中，只有有新的连接加入才会从 <code>accept</code> 的那一行跳到下一行，否则将会一直等待。但是服务器是要同时和多个客户端进行交互的，需要在等待新连接的同时处理已连接的 socket，因此这样行不通。</p>
+<p>其中一种解决办法是使用多线程，等待新连接是一个线程，每当有新的连接就新建一个线程专门处理这个连接，这样就不会因为一直等待新的连接而阻断别的事务处理了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handle_client</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">,</span> <span class="n">addr</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 处理单个客户端连接（在独立线程中运行）</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello &#39;</span> <span class="o">+</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s1"> 错误：</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s1"> 断连&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 允许端口复用，避免重启时 &#34;Address already in use&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s2">&#34;127.0.0.1&#34;</span><span class="p">,</span> <span class="mi">6767</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">server_socket</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;服务器运行在 127.0.0.1:6767&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server_socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2"> 已连接&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 每个连接启动一个守护线程，主线程不会被阻塞</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 当进程中所有非守护线程（即主线程和其他普通线程）都结束时，Python 解释器会立即退出，不会等待守护线程完成。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">handle_client</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">),</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span></code></pre></div><p>但是给每一个会话都分配一个线程实在是太浪费了，一个会话不可能频繁地发消息，在会话空闲的时候，这个线程就无事可做了，在这种低强度的并发需求下，给每一个会话分配一个线程会造成极大浪费。</p>
+<p>那有没有一种方案，能把等待新连接和等待会话的新事务的空闲时间利用起来呢？有的，这就是异步。</p>
+<h3 id="协程">协程<a hidden class="anchor" aria-hidden="true" href="#协程">#</a></h3>
+<p>协程又叫微线程，在执行的过程中，可以随时中断，让事件循环去处理下一个任务，这样可以做到一个线程同时做多个事情。</p>
+<p>需要注意的是，异步提升的并不是 CPU 的计算速度，而是 <strong>IO 等待期间的利用率</strong>。当服务器在等待某个客户端发送数据时，CPU 处于完全空闲状态；异步模型允许事件循环在此期间切换去处理其他已就绪的连接，从而在单线程内实现高并发。如果所有任务都是纯 CPU 计算、没有任何 IO 等待，那么串行执行和异步执行的总耗时确实相同——但这不是网络服务器的典型场景。</p>
+<h3 id="asyncio代码摘自菜鸟教程">asyncio（代码摘自菜鸟教程）<a hidden class="anchor" aria-hidden="true" href="#asyncio代码摘自菜鸟教程">#</a></h3>
+<p><code>asyncio</code> 是 Python 的一个内置库，主要用于编写单线程并发代码，通过协程实现异步 I/O 操作。它在 Python 3.4 版本中引入，提供了基于事件循环的并发模型。</p>
+<h4 id="定义协程">定义协程<a hidden class="anchor" aria-hidden="true" href="#定义协程">#</a></h4>
+<p>引入 <code>asyncio</code> 库后，在 <code>def</code> 前加上 <code>async</code> 关键字即可把该函数定义为协程。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;World&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h4 id="事件循环">事件循环<a hidden class="anchor" aria-hidden="true" href="#事件循环">#</a></h4>
+<p>事件循环是 <code>asyncio</code> 的核心组件，负责调度和执行协程。它不断地检查是否有任务需要执行，并在任务完成后调用相应的回调函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">say_hello</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></span></code></pre></div><h4 id="任务">任务<a hidden class="anchor" aria-hidden="true" href="#任务">#</a></h4>
+<p>任务是对协程的封装，表示一个正在执行或将要执行的协程。你可以通过 <code>asyncio.create_task()</code> 函数创建任务，并将其添加到事件循环中。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">say_hello</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">task</span>
+</span></span></code></pre></div><h4 id="future">Future<a hidden class="anchor" aria-hidden="true" href="#future">#</a></h4>
+<p><code>Future</code> 是一个表示异步操作结果的对象。它通常用于底层 API，表示一个尚未完成的操作。你可以通过 <code>await</code> 关键字等待 <code>Future</code> 完成。Future 是更底层的机制，通常由库内部使用，你暂时不需要直接操作。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">future</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Future</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">future</span>
+</span></span></code></pre></div><h4 id="asyncio-对-socket-进行了封装"><code>asyncio</code> 对 socket 进行了封装<a hidden class="anchor" aria-hidden="true" href="#asyncio-对-socket-进行了封装">#</a></h4>
+<p><code>asyncio.start_server()</code> 对 socket 进行了封装，可以用来创建一个异步的 TCP 服务器，包含了自动接受连接、自动处理连接的关闭与异常等功能：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_client</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">writer</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">start_server</span><span class="p">(</span><span class="n">handle_client</span><span class="p">,</span> <span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">with</span> <span class="n">server</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</span></span></code></pre></div><p>不过，为了更深入地理解异步 IO 与 socket 的底层交互原理，这里我们采用手动结合事件循环 (<code>loop.sock_accept</code> / <code>loop.sock_recv</code> / <code>loop.sock_sendall</code>) 操作原生 socket 的写法。</p>
+<h2 id="开始写代码">开始写代码<a hidden class="anchor" aria-hidden="true" href="#开始写代码">#</a></h2>
+<p>使用 <code>asyncio</code> 处理 socket 的话，一定要设置 <code>socket.setblocking(False)</code>，将服务器套接字设置为非阻塞模式，这是配合 <code>asyncio</code> 事件循环的必要前提。若保持默认阻塞模式，socket 等待时会卡住线程。这会导致整个事件循环停滞。其他并发任务也无法被处理。设为非阻塞后，可结合 <code>await</code> 异步方法使用。IO 等待时便能主动让出控制权。事件循环就能继续调度其他协程。最终实现单线程下的高并发处理。</p>
+<p>同时，<code>socket.accept()</code> 和 <code>socket.sendall()</code> 等方法不能直接调用。它们会绕过事件循环并可能引发异常。必须替换为对应的异步版本。首先，需要使用 <code>asyncio.get_running_loop()</code> 函数获取当前正在运行的事件循环对象，然后使用 <code>await loop.sock_accept()</code> 接收连接，使用 <code>await loop.sock_sendall()</code> 发送数据。这样才能保证 IO 操作真正融入异步调度机制。</p>
+<p>以下是基础的主事件循环：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取当前正在运行的事件循环对象</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># 设置为非阻塞模式</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Server running at http://127.0.0.1:4000&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 异步等待新连接</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_accept</span><span class="p">(</span><span class="n">server_socket</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span> <span class="n">addr</span> <span class="si">}</span><span class="s1"> connected&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 添加到事件循环</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">handle_client</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span> <span class="c1"># `main()` 函数是协程，不能直接运行</span>
+</span></span></code></pre></div><p>现在主循环写好了，该写 <code>handle_client()</code> 函数了。该函数是一个协程，用来 处理单个客户端连接的 HTTP 请求并返回响应（本示例省略了请求解析步骤）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_client</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">recv</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_recv</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">recv</span><span class="p">:</span> <span class="c1"># 在 TCP 中，空数据代表对方优雅关闭了连接</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_sendall</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">http_response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">ConnectionResetError</span><span class="p">:</span> <span class="c1"># 对方强制关闭了连接</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span> <span class="c1"># 引发错误已经打断了 while 循环，pass 到 finally 中</span>
+</span></span><span class="line"><span class="cl">    <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[-] </span><span class="si">{</span> <span class="n">addr</span> <span class="si">}</span><span class="s1"> disconnected&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>现在，我们可以专注于 <code>http_response</code> 的编写。该变量应该是一串 <strong><code>bytes</code></strong> 类型的 HTTP 响应。这里，我们读取当前目录下的 <code>index.html</code>，并作为响应主体进行发送：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">http_response</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s1">Content-Type: text/html</span><span class="se">\r\n</span><span class="s1">Content-Length: </span><span class="si">{</span> <span class="nb">len</span><span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="si">}</span><span class="se">\r\n\r\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="o">+</span> <span class="n">html</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="完整代码">完整代码<a hidden class="anchor" aria-hidden="true" href="#完整代码">#</a></h3>
+<h4 id="mainpy"><code>main.py</code><a hidden class="anchor" aria-hidden="true" href="#mainpy">#</a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">http_response</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s1">Content-Type: text/html</span><span class="se">\r\n</span><span class="s1">Content-Length: </span><span class="si">{</span> <span class="nb">len</span><span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="si">}</span><span class="se">\r\n\r\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="o">+</span> <span class="n">html</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_client</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">recv</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_recv</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">recv</span><span class="p">:</span> <span class="c1"># 对方优雅关闭了连接</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_sendall</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">http_response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">ConnectionResetError</span><span class="p">:</span> <span class="c1"># 对方强制关闭了连接</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">    <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[-] </span><span class="si">{</span> <span class="n">addr</span> <span class="si">}</span><span class="s1"> disconnected&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_socket</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Server running at http://127.0.0.1:4000&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">sock_accept</span><span class="p">(</span><span class="n">server_socket</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span> <span class="n">addr</span> <span class="si">}</span><span class="s1"> connected&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">handle_client</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></span></code></pre></div><h4 id="indexhtml"><code>index.html</code><a hidden class="anchor" aria-hidden="true" href="#indexhtml">#</a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!doctype html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Socket HTTP Server<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">html</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">font-size</span><span class="p">:</span> <span class="nf">max</span><span class="p">(</span><span class="mi">16</span><span class="kt">px</span><span class="p">,</span> <span class="mi">2</span><span class="kt">vw</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">margin</span><span class="p">:</span> <span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>This is a HTTP server based on socket!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>No frameworks. No libraries. Just raw sockets and asyncio.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>How it works<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>socket.socket()<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> creates a TCP listener on port
+</span></span><span class="line"><span class="cl">                    4000
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>asyncio<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span> handles multiple connections
+</span></span><span class="line"><span class="cl">                    concurrently
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Stack<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Python 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>socket + asyncio<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>HTTP/1.1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>这样，我们就完成了一个基于 <code>asyncio</code> 和原生 socket 的最小可用 HTTP 服务器的实现。你还可以继续完善它，比如让它不仅仅只响应 <code>index.html</code>，而是根据请求的路径来响应正确的内容；以及异常处理等功能。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zzy2357.github.io/tags/http/">Http</a></li>
+      <li><a href="https://zzy2357.github.io/tags/web/">Web</a></li>
+      <li><a href="https://zzy2357.github.io/tags/python/">Python</a></li>
+      <li><a href="https://zzy2357.github.io/tags/socket/">Socket</a></li>
+      <li><a href="https://zzy2357.github.io/tags/asyncio/">Asyncio</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://zzy2357.github.io/posts/how-network-works/">
+    <span class="title"> »</span>
+    <br>
+    <span>网络是如何运作的</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on x"
+            href="https://x.com/intent/tweet/?text=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8&amp;url=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f&amp;hashtags=http%2cweb%2cpython%2csocket%2casyncio">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f&amp;title=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8&amp;summary=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8&amp;source=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f&title=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on whatsapp"
+            href="https://api.whatsapp.com/send?text=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8%20-%20https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on telegram"
+            href="https://telegram.me/share/url?text=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8&amp;url=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 手写 HTTP 服务器 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=%e6%89%8b%e5%86%99%20HTTP%20%e6%9c%8d%e5%8a%a1%e5%99%a8&u=https%3a%2f%2fzzy2357.github.io%2fposts%2fwriting-an-http-server-from-scratch%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><script src="https://giscus.app/client.js"
+        data-repo="ok-komputer/ok-komputer.github.io"
+        data-repo-id="R_kgDOQSEoqQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOQSEoqc4C0yaQ"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://zzy2357.github.io/">zzy2357</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a><canvas id="field-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
+<script src="/js/flow-field.js"></script>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

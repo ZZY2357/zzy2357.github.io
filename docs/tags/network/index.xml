@@ -88,7 +88,7 @@
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;每个层具体干什么&#34;&gt;每个层具体干什么&lt;/h2&gt;
+&lt;h2 id=&#34;详细介绍&#34;&gt;详细介绍&lt;/h2&gt;
 &lt;p&gt;由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。&lt;/p&gt;</description>
     </item>
   </channel>

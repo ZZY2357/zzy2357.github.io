@@ -159,6 +159,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">手写 HTTP 服务器
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。
+什么是 socket？ Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。
+客户端 Socket # 用 netcat 建立一个 TCP 服务器，只要连接上就会发送 Hello world! $ echo &#34;Hello world!&#34; | nc -lvnp 6767 import socket client_socket = socket.socket( socket.AF_INET,	# 使用 IPv4 socket.SOCK_STREAM	# 使用面向流的TCP协议 ) # 连接到 127.0.0.1:6767 client_socket.connect((&#39;127.0.0.1&#39;, 6767)) # 一次性接收最大 1024 字节的数据 print(client_socket.recv(1024)) # b&#39;Hello world!\r\n&#39; 服务端 Socket import socket server_socket = socket.socket( socket.AF_INET,	# 使用 IPv4 socket.SOCK_STREAM	# 使用面向流的TCP协议 ) # 绑定到 127.0.0.1:6767，此时还没有开始监听 server_socket.bind((&#39;127.0.0.1&#39;, 6767)) # 开始监听，括号里填一个整数可以指定最大同时连接数 server_socket.listen() # 允许端口复用，避免重启时 &#34;Address already in use&#34; server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) print(&#39;服务器正在运行&#39;) while True: # 重复等待连接 conn, addr = server_socket.accept() print(f&#39;{ addr } 已连接&#39;) conn.sendall(b&#39;Hello world!&#39;) # 发送完整的数据 conn.close() $ nc 127.0.0.1 6767 Hello world! HTTP 协议（摘自 MDN） HTTP 是一种用作获取诸如 HTML 文档这类资源的协议。它是 Web 上进行任何数据交换的基础，同时，也是一种客户端—服务器（client-server）协议，也就是说，请求是由接受方——通常是 Web 浏览器——发起的。完整网页文档通常由文本、布局描述、图片、视频、脚本等资源构成。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-08-05 16:55:20 +0800 CST'>2026/08/05</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;707 words&nbsp;·&nbsp;zzy2357</footer>
+  <a class="entry-link" aria-label="post link to 手写 HTTP 服务器" href="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">网络是如何运作的
     </h2>
   </header>
@@ -166,10 +181,10 @@
     <p>我一边学一边记，本文章持续更新。
 网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。
 OSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。
-层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 每个层具体干什么 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。
+层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP &amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 详细介绍 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;146 words&nbsp;·&nbsp;zzy2357</footer>
+  <footer class="entry-footer"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;149 words&nbsp;·&nbsp;zzy2357</footer>
   <a class="entry-link" aria-label="post link to 网络是如何运作的" href="https://zzy2357.github.io/posts/how-network-works/"></a>
 </article>
 

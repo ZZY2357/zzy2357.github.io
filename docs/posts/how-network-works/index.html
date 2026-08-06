@@ -77,7 +77,7 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
 			
 	
 
-每个层具体干什么
+详细介绍
 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。">
 <meta name="author" content="zzy2357">
 <link rel="canonical" href="https://zzy2357.github.io/posts/how-network-works/">
@@ -216,7 +216,7 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
 			
 	
 
-每个层具体干什么
+详细介绍
 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zzy2357.github.io/posts/how-network-works/" />
@@ -298,7 +298,7 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
 			
 	
 
-每个层具体干什么
+详细介绍
 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。"/>
 
 
@@ -328,12 +328,12 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
   "@type": "BlogPosting",
   "headline": "网络是如何运作的",
   "name": "网络是如何运作的",
-  "description": "我一边学一边记，本文章持续更新。\n网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。\nOSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026amp; UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。\n层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 每个层具体干什么 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。\n",
+  "description": "我一边学一边记，本文章持续更新。\n网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。\nOSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026amp; UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。\n层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026amp; UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 详细介绍 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。\n",
   "keywords": [
     "Network", "web"
   ],
-  "articleBody": "我一边学一边记，本文章持续更新。\n网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。\nOSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026 UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。\n层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026 UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 每个层具体干什么 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。\n物理层 直接和光纤、电缆、无线信号等等打交道，具体的不需要了解太多。\n数据链路层 打包 将数据流打包为帧（Frame），包含了我是谁、发给谁、从哪发到哪、完不完整等。\n处理误差 物理介质的传输会受到环境的影响，干扰数据传输，可能会出现误差，数据链路层会检查数据是否出错，或者纠正错误。由于对效率和成本的考虑，对于出错概率更高的无线物理信道，倾向于纠错；而对于有线物理信道，倾向于检错。\n流量控制 输出端和输入端的速度可能不同，数据链路层要协调双方的传输。\n信道复用 为了提高效率，多个端点会共用一个物理信道，数据链路层提供“介质访问控制”（Media Access Control, MAC）的机制来处理信道复用。\nMac 协议用来确保对下层物理介质的使用，不会出现冲突，相当于铁路调度。因此出现了 MAC 地址，每个网卡都内置了一个唯一的 MAC 地址，虚拟的网卡也会有一个尽可能唯一的 MAC 地址。\n网络层 网络层用来连接不同的网络，分配 IP 地址，规划数据包的路径，让数据包传到正确的地方。常用的 ping 命令就是属于网络层。\nIP 地址 有了 MAC 地址为什么还需要 IP 地址？MAC 地址就像是身份证，是唯一的，但是体现不出关系，相邻的两个 MAC 地址可能相隔甚远；而 IP 地址就像是员工编号，可以看出你属于哪个企业、哪个部门，而且可以动态分配。\n传输层 传输层就接近软件层面了，常见的端口的概念就是传输层的。传输层是面向进程的，为了区分同一个主机上的不同进程，引入了端口的概念。软件编程的话差不多到底就是传输层了，你可以通过 socket 或者 netcat 直接操作传输层，比如用 socket 在 TCP 协议上手写一个 HTTP 服务器。\n应用层 到这里就是我们最熟悉的 HTTP、SSH、FTP、SMTP 等协议所在的地方了。我们平常写的网站都属于应用层。\n一些网络设备是干什么的 交换机 交换机工作在数据链路层，根据 MAC 地址在同一个网络里转发帧。\n路由器 路由器工作在网络层，根据 IP 地址，在不同网络之间转发 IP 包，并选择路径（路由）。\n",
-  "wordCount" : "146",
+  "articleBody": "我一边学一边记，本文章持续更新。\n网络的分层模型 网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。\nOSI 七层模型 层（由底层到表层） 描述 物理层 Physical 直接与物理介质打交道 数据链路层 Data Link 给数据打包、贴标签、检查、管理一段路上的交通，MAC 协议就是这层的 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026 UDP 所在的层，netcat 处理的那一层 会话层 Session 就是你用 socket 写聊天室时自己写的那个处理连接的流程控制的功能 表示层 Presentation 你自己写的聊天室中 socket 间的数据咋传输，可以是序列化、struct、json 的形式，也可以压缩、加密 应用层 Application HTTP、FTP、SMTP 等就是这层的 TCP/IP 四层模型 TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作一层，应用层、表示层、会话层看作一层。\n层（由底层到表层） 描述 网络接口层 处理具体的物理传输（以太网、Wi-Fi）、MAC 寻址和硬件驱动。 网络层 Network 决定数据的流动路径，IP 协议就是这层的 传输层 Transport 就是 TCP \u0026 UDP 所在的层，netcat 处理的那一层 应用层 Application HTTP、FTP、SMTP 等就是这层的，或者自己写的网络程序 详细介绍 由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。\n物理层 直接和光纤、电缆、无线信号等等打交道，具体的不需要了解太多。\n数据链路层 作用 打包 将数据流打包为帧（Frame），包含了我是谁、发给谁、从哪发到哪、完不完整等。\n处理误差 物理介质的传输会受到环境的影响，干扰数据传输，可能会出现误差，数据链路层会检查数据是否出错，或者纠正错误。由于对效率和成本的考虑，对于出错概率更高的无线物理信道，倾向于纠错；而对于有线物理信道，倾向于检错。\n流量控制 输出端和输入端的速度可能不同，数据链路层要协调双方的传输。\n信道复用 为了提高效率，多个端点会共用一个物理信道，数据链路层提供“介质访问控制”（Media Access Control, MAC）的机制来处理信道复用。\nMac 协议用来确保对下层物理介质的使用，不会出现冲突，相当于铁路调度。因此出现了 MAC 地址，每个网卡都内置了一个唯一的 MAC 地址，虚拟的网卡也会有一个尽可能唯一的 MAC 地址。\n设备 交换机 交换机工作在数据链路层，根据 MAC 地址在同一个网络里转发帧。\n网络层 作用 网络层用来连接不同的网络，分配 IP 地址，规划数据包的路径，让数据包传到正确的地方。常用的 ping 命令就是属于网络层。\nIP 地址 有了 MAC 地址为什么还需要 IP 地址？MAC 地址就像是身份证，是唯一的，但是体现不出关系，相邻的两个 MAC 地址可能相隔甚远；而 IP 地址就像是员工编号，可以看出你属于哪个企业、哪个部门，而且可以动态分配。\n设备 路由器 路由器工作在网络层，根据 IP 地址，在不同网络之间转发 IP 包，并选择路径（路由）。\n传输层 传输层就接近软件层面了，常见的端口的概念就是传输层的。传输层是面向进程的，为了区分同一个主机上的不同进程，引入了端口的概念。软件编程的话差不多到底就是传输层了，你可以通过 socket 或者 netcat 直接操作传输层，比如用 socket 在 TCP 协议上手写一个 HTTP 服务器。\n应用层 到这里就是我们最熟悉的 HTTP、SSH、FTP、SMTP 等协议所在的地方了。我们平常写的网站都属于应用层。\n",
+  "wordCount" : "149",
   "inLanguage": "zh-cn",
   "image": "https://avatars.githubusercontent.com/u/226872255?v=4","datePublished": "2026-08-02T20:36:04+08:00",
   "dateModified": "2026-08-02T20:36:04+08:00",
@@ -418,7 +418,7 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
     <h1 class="post-title entry-hint-parent">
       网络是如何运作的
     </h1>
-    <div class="post-meta"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;146 words&nbsp;·&nbsp;zzy2357
+    <div class="post-meta"><span title='2026-08-02 20:36:04 +0800 CST'>2026/08/02</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;149 words&nbsp;·&nbsp;zzy2357
 
 </div>
   </header> <div class="toc">
@@ -435,19 +435,13 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
         <li><a href="#tcpip-四层模型">TCP/IP 四层模型</a></li>
       </ul>
     </li>
-    <li><a href="#每个层具体干什么">每个层具体干什么</a>
+    <li><a href="#详细介绍">详细介绍</a>
       <ul>
         <li><a href="#物理层">物理层</a></li>
         <li><a href="#数据链路层">数据链路层</a></li>
         <li><a href="#网络层">网络层</a></li>
         <li><a href="#传输层">传输层</a></li>
         <li><a href="#应用层">应用层</a></li>
-      </ul>
-    </li>
-    <li><a href="#一些网络设备是干什么的">一些网络设备是干什么的</a>
-      <ul>
-        <li><a href="#交换机">交换机</a></li>
-        <li><a href="#路由器">路由器</a></li>
       </ul>
     </li>
   </ul>
@@ -526,33 +520,36 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
 			</tr>
 	</tbody>
 </table>
-<h2 id="每个层具体干什么">每个层具体干什么<a hidden class="anchor" aria-hidden="true" href="#每个层具体干什么">#</a></h2>
+<h2 id="详细介绍">详细介绍<a hidden class="anchor" aria-hidden="true" href="#详细介绍">#</a></h2>
 <p>由于网络接口层不太熟悉，所以底层按照 OSI 分成两层讲；表层按照 TCP/IP 合并成应用层来讲。</p>
 <h3 id="物理层">物理层<a hidden class="anchor" aria-hidden="true" href="#物理层">#</a></h3>
 <p>直接和光纤、电缆、无线信号等等打交道，具体的不需要了解太多。</p>
 <h3 id="数据链路层">数据链路层<a hidden class="anchor" aria-hidden="true" href="#数据链路层">#</a></h3>
-<h4 id="打包">打包<a hidden class="anchor" aria-hidden="true" href="#打包">#</a></h4>
+<h4 id="作用">作用<a hidden class="anchor" aria-hidden="true" href="#作用">#</a></h4>
+<h5 id="打包">打包<a hidden class="anchor" aria-hidden="true" href="#打包">#</a></h5>
 <p>将数据流打包为帧（Frame），包含了我是谁、发给谁、从哪发到哪、完不完整等。</p>
-<h4 id="处理误差">处理误差<a hidden class="anchor" aria-hidden="true" href="#处理误差">#</a></h4>
+<h5 id="处理误差">处理误差<a hidden class="anchor" aria-hidden="true" href="#处理误差">#</a></h5>
 <p>物理介质的传输会受到环境的影响，干扰数据传输，可能会出现误差，数据链路层会检查数据是否出错，或者纠正错误。由于对效率和成本的考虑，对于出错概率更高的无线物理信道，倾向于纠错；而对于有线物理信道，倾向于检错。</p>
-<h4 id="流量控制">流量控制<a hidden class="anchor" aria-hidden="true" href="#流量控制">#</a></h4>
+<h5 id="流量控制">流量控制<a hidden class="anchor" aria-hidden="true" href="#流量控制">#</a></h5>
 <p>输出端和输入端的速度可能不同，数据链路层要协调双方的传输。</p>
-<h4 id="信道复用">信道复用<a hidden class="anchor" aria-hidden="true" href="#信道复用">#</a></h4>
+<h5 id="信道复用">信道复用<a hidden class="anchor" aria-hidden="true" href="#信道复用">#</a></h5>
 <p>为了提高效率，多个端点会共用一个物理信道，数据链路层提供“介质访问控制”（Media Access Control, MAC）的机制来处理信道复用。</p>
 <p>Mac 协议用来确保对下层物理介质的使用，不会出现冲突，相当于铁路调度。因此出现了 MAC 地址，每个网卡都内置了一个唯一的 MAC 地址，虚拟的网卡也会有一个尽可能唯一的 MAC 地址。</p>
+<h4 id="设备">设备<a hidden class="anchor" aria-hidden="true" href="#设备">#</a></h4>
+<h5 id="交换机">交换机<a hidden class="anchor" aria-hidden="true" href="#交换机">#</a></h5>
+<p>交换机工作在数据链路层，根据 MAC 地址在同一个网络里转发帧。</p>
 <h3 id="网络层">网络层<a hidden class="anchor" aria-hidden="true" href="#网络层">#</a></h3>
+<h4 id="作用-1">作用<a hidden class="anchor" aria-hidden="true" href="#作用-1">#</a></h4>
 <p>网络层用来连接不同的网络，分配 IP 地址，规划数据包的路径，让数据包传到正确的地方。常用的 <code>ping</code> 命令就是属于网络层。</p>
 <h4 id="ip-地址">IP 地址<a hidden class="anchor" aria-hidden="true" href="#ip-地址">#</a></h4>
 <p>有了 MAC 地址为什么还需要 IP 地址？MAC 地址就像是身份证，是唯一的，但是体现不出关系，相邻的两个 MAC 地址可能相隔甚远；而 IP 地址就像是员工编号，可以看出你属于哪个企业、哪个部门，而且可以动态分配。</p>
+<h4 id="设备-1">设备<a hidden class="anchor" aria-hidden="true" href="#设备-1">#</a></h4>
+<h5 id="路由器">路由器<a hidden class="anchor" aria-hidden="true" href="#路由器">#</a></h5>
+<p>路由器工作在网络层，根据 IP 地址，在不同网络之间转发 IP 包，并选择路径（路由）。</p>
 <h3 id="传输层">传输层<a hidden class="anchor" aria-hidden="true" href="#传输层">#</a></h3>
 <p>传输层就接近软件层面了，常见的端口的概念就是传输层的。传输层是面向进程的，为了区分同一个主机上的不同进程，引入了端口的概念。软件编程的话差不多到底就是传输层了，你可以通过 socket 或者 netcat 直接操作传输层，比如用 socket 在 TCP 协议上手写一个 HTTP 服务器。</p>
 <h3 id="应用层">应用层<a hidden class="anchor" aria-hidden="true" href="#应用层">#</a></h3>
 <p>到这里就是我们最熟悉的 HTTP、SSH、FTP、SMTP 等协议所在的地方了。我们平常写的网站都属于应用层。</p>
-<h2 id="一些网络设备是干什么的">一些网络设备是干什么的<a hidden class="anchor" aria-hidden="true" href="#一些网络设备是干什么的">#</a></h2>
-<h3 id="交换机">交换机<a hidden class="anchor" aria-hidden="true" href="#交换机">#</a></h3>
-<p>交换机工作在数据链路层，根据 MAC 地址在同一个网络里转发帧。</p>
-<h3 id="路由器">路由器<a hidden class="anchor" aria-hidden="true" href="#路由器">#</a></h3>
-<p>路由器工作在网络层，根据 IP 地址，在不同网络之间转发 IP 包，并选择路径（路由）。</p>
 
 
   </div>
@@ -563,6 +560,11 @@ TCP/IP 被采用得最广泛，把 OSI 中的数据链路层和物理层看作�
       <li><a href="https://zzy2357.github.io/tags/web/">Web</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/">
+    <span class="title">« </span>
+    <br>
+    <span>手写 HTTP 服务器</span>
+  </a>
   <a class="next" href="https://zzy2357.github.io/posts/cpp-mingw-segfault/">
     <span class="title"> »</span>
     <br>
