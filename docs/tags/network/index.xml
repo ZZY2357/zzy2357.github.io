@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Network on zzy2357</title>
-    <link>http://localhost:1313/tags/network/</link>
+    <link>https://zzy2357.github.io/tags/network/</link>
     <description>Recent content in Network on zzy2357</description>
     <image>
       <title>zzy2357</title>
@@ -12,12 +12,12 @@
     <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 02 Aug 2026 20:36:04 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>网络是如何运作的</title>
-      <link>http://localhost:1313/posts/how-network-works/</link>
+      <link>https://zzy2357.github.io/posts/how-network-works/</link>
       <pubDate>Sun, 02 Aug 2026 20:36:04 +0800</pubDate>
-      <guid>http://localhost:1313/posts/how-network-works/</guid>
+      <guid>https://zzy2357.github.io/posts/how-network-works/</guid>
       <description>&lt;p&gt;我一边学一边记，本文章持续更新。&lt;/p&gt;
 &lt;h2 id=&#34;网络的分层模型&#34;&gt;网络的分层模型&lt;/h2&gt;
 &lt;p&gt;网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。&lt;/p&gt;

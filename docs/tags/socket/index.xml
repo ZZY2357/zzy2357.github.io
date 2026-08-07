@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Socket on zzy2357</title>
-    <link>http://localhost:1313/tags/socket/</link>
+    <link>https://zzy2357.github.io/tags/socket/</link>
     <description>Recent content in Socket on zzy2357</description>
     <image>
       <title>zzy2357</title>
@@ -12,12 +12,12 @@
     <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 05 Aug 2026 16:55:20 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/socket/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/socket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>手写 HTTP 服务器</title>
-      <link>http://localhost:1313/posts/writing-an-http-server-from-scratch/</link>
+      <link>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</link>
       <pubDate>Wed, 05 Aug 2026 16:55:20 +0800</pubDate>
-      <guid>http://localhost:1313/posts/writing-an-http-server-from-scratch/</guid>
+      <guid>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</guid>
       <description>&lt;p&gt;本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。&lt;/p&gt;
 &lt;h2 id=&#34;什么是-socket&#34;&gt;什么是 socket？&lt;/h2&gt;
 &lt;p&gt;Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。&lt;/p&gt;
