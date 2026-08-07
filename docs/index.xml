@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>zzy2357</title>
-    <link>https://zzy2357.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on zzy2357</description>
     <image>
       <title>zzy2357</title>
@@ -12,12 +12,12 @@
     <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 05 Aug 2026 16:55:20 +0800</lastBuildDate>
-    <atom:link href="https://zzy2357.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>手写 HTTP 服务器</title>
-      <link>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</link>
+      <link>http://localhost:1313/posts/writing-an-http-server-from-scratch/</link>
       <pubDate>Wed, 05 Aug 2026 16:55:20 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</guid>
+      <guid>http://localhost:1313/posts/writing-an-http-server-from-scratch/</guid>
       <description>&lt;p&gt;本文将从 TCP socket 出发，用 Python 手把手实现一个最小可用的 HTTP 服务器。&lt;/p&gt;
 &lt;h2 id=&#34;什么是-socket&#34;&gt;什么是 socket？&lt;/h2&gt;
 &lt;p&gt;Socket（套接字）是操作系统提供给应用程序的网络通信接口，支持 TCP 和 UDP 协议。有了 socket，你只需要发送和接收数据，而无需关心底层网卡、路由等复杂细节。Python 也拥有操作 socket 的标准库，可以使用 socket 在 Python 中接收和发送数据。&lt;/p&gt;
@@ -63,9 +63,9 @@
     </item>
     <item>
       <title>网络是如何运作的</title>
-      <link>https://zzy2357.github.io/posts/how-network-works/</link>
+      <link>http://localhost:1313/posts/how-network-works/</link>
       <pubDate>Sun, 02 Aug 2026 20:36:04 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/how-network-works/</guid>
+      <guid>http://localhost:1313/posts/how-network-works/</guid>
       <description>&lt;p&gt;我一边学一边记，本文章持续更新。&lt;/p&gt;
 &lt;h2 id=&#34;网络的分层模型&#34;&gt;网络的分层模型&lt;/h2&gt;
 &lt;p&gt;网络的分层模型有两种，一种是 OSI 七层模型，一种是 TCP/IP 四层模型。&lt;/p&gt;
@@ -141,9 +141,9 @@
     </item>
     <item>
       <title>MinGW-w64 编译通过运行崩？Code Runner 踩坑记</title>
-      <link>https://zzy2357.github.io/posts/cpp-mingw-segfault/</link>
+      <link>http://localhost:1313/posts/cpp-mingw-segfault/</link>
       <pubDate>Mon, 13 Jul 2026 18:20:00 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/cpp-mingw-segfault/</guid>
+      <guid>http://localhost:1313/posts/cpp-mingw-segfault/</guid>
       <description>&lt;h2 id=&#34;症状&#34;&gt;症状&lt;/h2&gt;
 &lt;p&gt;VS Code 里写了个 hello world：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
@@ -179,9 +179,9 @@ Segmentation fault
     </item>
     <item>
       <title>从 Vue &#43; fetch 到现代 Web 架构：一次对话后的认知刷新</title>
-      <link>https://zzy2357.github.io/posts/spa-ssr-bff/</link>
+      <link>http://localhost:1313/posts/spa-ssr-bff/</link>
       <pubDate>Tue, 07 Jul 2026 20:38:00 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/spa-ssr-bff/</guid>
+      <guid>http://localhost:1313/posts/spa-ssr-bff/</guid>
       <description>&lt;p&gt;最近和 GLM 聊前端架构，被纠正了一堆自以为是的认知。之前我对前后端分离的理解基本停留在&amp;quot;后端写接口、前端 &lt;code&gt;fetch&lt;/code&gt; 拿数据渲染&amp;quot;。聊完之后发现这四个点我之前全想错了。&lt;/p&gt;
 &lt;h2 id=&#34;url-里的--号&#34;&gt;URL 里的 # 号&lt;/h2&gt;
 &lt;p&gt;一开始路由全是 &lt;code&gt;localhost/#/user&lt;/code&gt; 这种带 &lt;code&gt;#&lt;/code&gt; 的，以为 Vue Router 就这样。后来才知道这是 Hash 模式——默认值，不需要后端配合但 URL 丑。&lt;/p&gt;
@@ -206,14 +206,14 @@ Segmentation fault
     </item>
     <item>
       <title>Friends</title>
-      <link>https://zzy2357.github.io/friends/</link>
+      <link>http://localhost:1313/friends/</link>
       <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://zzy2357.github.io/friends/</guid>
+      <guid>http://localhost:1313/friends/</guid>
       <description>&lt;div class=&#34;friend-links-container&#34;&gt;
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://ljnljn2005.github.io/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/ljnljn2005.png&#34; alt=&#34;ljnljn2005&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/ljnljn2005.png&#34; alt=&#34;ljnljn2005&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://ljnljn2005.github.io/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;ljnljn2005&lt;/a&gt;
@@ -223,7 +223,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;http://happyprimes.cn/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/saga131.webp&#34; alt=&#34;saga131&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/saga131.webp&#34; alt=&#34;saga131&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;http://happyprimes.cn/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;saga131&lt;/a&gt;
@@ -233,7 +233,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/Sevedy&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/sevedy.webp&#34; alt=&#34;Sevedy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/sevedy.webp&#34; alt=&#34;Sevedy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Sevedy&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Sevedy&lt;/a&gt;
@@ -243,7 +243,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/hxyz486&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/hxyz486.webp&#34; alt=&#34;hxyz486&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/hxyz486.webp&#34; alt=&#34;hxyz486&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/hxyz486&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;hxyz486&lt;/a&gt;
@@ -253,7 +253,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/c1zastar&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/c1za-star.webp&#34; alt=&#34;C1za_Star&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/c1za-star.webp&#34; alt=&#34;C1za_Star&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/c1zastar&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;C1za_Star&lt;/a&gt;
@@ -263,7 +263,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/fwxblog&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/yiyouyy.webp&#34; alt=&#34;yiyouyy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/yiyouyy.webp&#34; alt=&#34;yiyouyy&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/fwxblog&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;yiyouyy&lt;/a&gt;
@@ -273,7 +273,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/w0e6x-hiahiahia-go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/w0e6x.webp&#34; alt=&#34;w0e6x&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/w0e6x.webp&#34; alt=&#34;w0e6x&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/w0e6x-hiahiahia-go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;w0e6x&lt;/a&gt;
@@ -283,7 +283,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/1ceLAND&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/1celand.webp&#34; alt=&#34;1ceLAND&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/1celand.webp&#34; alt=&#34;1ceLAND&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/1ceLAND&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;1ceLAND&lt;/a&gt;
@@ -293,7 +293,7 @@ Segmentation fault
 
   &lt;div class=&#34;friend-card&#34;&gt;
     &lt;a class=&#34;friend-avatar-link&#34; href=&#34;https://www.cnblogs.com/Joyooo&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://zzy2357.github.io/assets/friends/joyooo.webp&#34; alt=&#34;Joyooo&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
+      &lt;img src=&#34;http://localhost:1313/assets/friends/joyooo.webp&#34; alt=&#34;Joyooo&#34; class=&#34;friend-avatar&#34; onerror=&#34;this.style.display=&#39;none&#39;&#34;&gt;
     &lt;/a&gt;
     &lt;div class=&#34;friend-name&#34;&gt;
       &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Joyooo&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34;&gt;Joyooo&lt;/a&gt;
@@ -305,9 +305,9 @@ Segmentation fault
     </item>
     <item>
       <title>Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录</title>
-      <link>https://zzy2357.github.io/posts/omo-agent-not-showing/</link>
+      <link>http://localhost:1313/posts/omo-agent-not-showing/</link>
       <pubDate>Sun, 28 Jun 2026 17:30:00 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/omo-agent-not-showing/</guid>
+      <guid>http://localhost:1313/posts/omo-agent-not-showing/</guid>
       <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
 &lt;p&gt;装了 oh-my-openagent 之后，&lt;code&gt;opencode agent list&lt;/code&gt; 和执行 &lt;code&gt;npx oh-my-openagent doctor&lt;/code&gt; 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里&lt;strong&gt;只显示 &lt;code&gt;plan&lt;/code&gt; 和 &lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。&lt;/p&gt;
 &lt;p&gt;这个问题在官方仓库有多人在追踪：&lt;/p&gt;
@@ -345,9 +345,9 @@ Segmentation fault
     </item>
     <item>
       <title>使用 SSH 建立 Socks5 代理</title>
-      <link>https://zzy2357.github.io/posts/ssh-socks5/</link>
+      <link>http://localhost:1313/posts/ssh-socks5/</link>
       <pubDate>Sat, 04 Apr 2026 12:38:49 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/ssh-socks5/</guid>
+      <guid>http://localhost:1313/posts/ssh-socks5/</guid>
       <description>&lt;p&gt;只要知道服务器的 IP 和 密码就能直接建立，不需要额外安装软件&lt;/p&gt;
 &lt;p&gt;在本地执行：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh -D port user@passwd
@@ -355,9 +355,9 @@ Segmentation fault
     </item>
     <item>
       <title>C&#43;&#43; String</title>
-      <link>https://zzy2357.github.io/posts/cpp-string/</link>
+      <link>http://localhost:1313/posts/cpp-string/</link>
       <pubDate>Mon, 09 Mar 2026 14:31:39 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/cpp-string/</guid>
+      <guid>http://localhost:1313/posts/cpp-string/</guid>
       <description>&lt;h2 id=&#34;创建&#34;&gt;创建&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 注意不是 &amp;lt;string.h&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
@@ -402,9 +402,9 @@ Segmentation fault
     </item>
     <item>
       <title>C&#43;&#43; Vector</title>
-      <link>https://zzy2357.github.io/posts/cpp-vector/</link>
+      <link>http://localhost:1313/posts/cpp-vector/</link>
       <pubDate>Mon, 09 Mar 2026 07:54:32 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/cpp-vector/</guid>
+      <guid>http://localhost:1313/posts/cpp-vector/</guid>
       <description>&lt;h2 id=&#34;创建-vector&#34;&gt;创建 vector&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
@@ -442,9 +442,9 @@ Segmentation fault
     </item>
     <item>
       <title>2026 新春杯 WP</title>
-      <link>https://zzy2357.github.io/posts/new-yer-cup-wp/</link>
+      <link>http://localhost:1313/posts/new-yer-cup-wp/</link>
       <pubDate>Sun, 08 Feb 2026 22:43:14 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/new-yer-cup-wp/</guid>
+      <guid>http://localhost:1313/posts/new-yer-cup-wp/</guid>
       <description>&lt;h2 id=&#34;web&#34;&gt;Web&lt;/h2&gt;
 &lt;h3 id=&#34;够了够了谢谢大家&#34;&gt;够了够了，谢谢大家&lt;/h3&gt;
 &lt;p&gt;写脚本注册 100 个账号并登录点赞，由于需要保持登录状态，所以需要用 &lt;code&gt;requests.session()&lt;/code&gt; 来保持会话：&lt;/p&gt;
@@ -510,9 +510,9 @@ Segmentation fault
     </item>
     <item>
       <title>2025 国赛 WP</title>
-      <link>https://zzy2357.github.io/posts/guosai-wp/</link>
+      <link>http://localhost:1313/posts/guosai-wp/</link>
       <pubDate>Thu, 08 Jan 2026 08:27:30 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/guosai-wp/</guid>
+      <guid>http://localhost:1313/posts/guosai-wp/</guid>
       <description>&lt;h2 id=&#34;流量分析&#34;&gt;流量分析&lt;/h2&gt;
 &lt;h3 id=&#34;1&#34;&gt;1&lt;/h3&gt;
 &lt;p&gt;应用过滤 http，找到最后一个 /admin/login&lt;/p&gt;
@@ -540,9 +540,9 @@ Segmentation fault
     </item>
     <item>
       <title>2025 纳新赛 WriteUp</title>
-      <link>https://zzy2357.github.io/posts/isa-wp/</link>
+      <link>http://localhost:1313/posts/isa-wp/</link>
       <pubDate>Sat, 06 Dec 2025 17:32:48 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/isa-wp/</guid>
+      <guid>http://localhost:1313/posts/isa-wp/</guid>
       <description>&lt;h2 id=&#34;misc&#34;&gt;Misc&lt;/h2&gt;
 &lt;h3 id=&#34;crossfire&#34;&gt;Crossfire&lt;/h3&gt;
 &lt;p&gt;用 010 Editor 打开发现是个 PNG，但是缺少文件头，补上后打开，发现这张图的大小不对，用随波逐流工具修复一下宽高，就能看到 flag 了。&lt;/p&gt;
@@ -651,9 +651,9 @@ Segmentation fault
     </item>
     <item>
       <title>2025 PCTF WriteUp</title>
-      <link>https://zzy2357.github.io/posts/pctf-wp/</link>
+      <link>http://localhost:1313/posts/pctf-wp/</link>
       <pubDate>Sun, 30 Nov 2025 21:09:19 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/pctf-wp/</guid>
+      <guid>http://localhost:1313/posts/pctf-wp/</guid>
       <description>&lt;h2 id=&#34;web&#34;&gt;Web&lt;/h2&gt;
 &lt;h3 id=&#34;ezphp&#34;&gt;EZPHP&lt;/h3&gt;
 &lt;p&gt;爆破数字，为 114514，然后发送 POST 请求 &lt;a href=&#34;http://challenge2.pctf.top:31855/?number=114514&amp;amp;action=include&#34;&gt;http://challenge2.pctf.top:31855/?number=114514&amp;action=include&lt;/a&gt;，&lt;code&gt;filename=data://text/plain,&amp;lt;?php system(&#39;ls -a /&#39;); ?&amp;gt;&lt;/code&gt;，看下 flag 在 &lt;code&gt;2t9I0T6BaYFEZGqu&lt;/code&gt; 这个文件里，然后再发送一个 &lt;code&gt;data://text/plain,&amp;lt;?php system(&#39;cat /2t9I0T6BaYFEZGqu&#39;); ?&amp;gt;&lt;/code&gt; 即可拿到 flag。&lt;/p&gt;
@@ -668,9 +668,9 @@ Segmentation fault
     </item>
     <item>
       <title>SQL 注入 - CTF Web 学习笔记</title>
-      <link>https://zzy2357.github.io/posts/sql-injection/</link>
+      <link>http://localhost:1313/posts/sql-injection/</link>
       <pubDate>Wed, 12 Nov 2025 19:32:31 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/sql-injection/</guid>
+      <guid>http://localhost:1313/posts/sql-injection/</guid>
       <description>&lt;p&gt;SQL 注入就是利用应用执行 SQL 语句注入非法内容从而执行恶意查询或增删改。&lt;/p&gt;
 &lt;h2 id=&#34;sql-基本查询语句&#34;&gt;SQL 基本查询语句&lt;/h2&gt;
 &lt;p&gt;从 &lt;code&gt;users&lt;/code&gt; 表中查询 &lt;code&gt;id&lt;/code&gt; 为 &lt;code&gt;123&lt;/code&gt; 的数据：&lt;/p&gt;

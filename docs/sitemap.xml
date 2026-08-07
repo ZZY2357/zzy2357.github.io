@@ -2,126 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zzy2357.github.io/tags/asyncio/</loc>
+    <loc>http://localhost:1313/tags/asyncio/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/http/</loc>
+    <loc>http://localhost:1313/tags/http/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/python/</loc>
+    <loc>http://localhost:1313/tags/python/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/socket/</loc>
+    <loc>http://localhost:1313/tags/socket/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/web/</loc>
+    <loc>http://localhost:1313/tags/web/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</loc>
+    <loc>http://localhost:1313/posts/writing-an-http-server-from-scratch/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/network/</loc>
+    <loc>http://localhost:1313/tags/network/</loc>
     <lastmod>2026-08-02T20:36:04+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/how-network-works/</loc>
+    <loc>http://localhost:1313/posts/how-network-works/</loc>
     <lastmod>2026-08-02T20:36:04+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/c&#43;&#43;/</loc>
+    <loc>http://localhost:1313/tags/c&#43;&#43;/</loc>
     <lastmod>2026-07-13T18:20:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/mingw/</loc>
+    <loc>http://localhost:1313/tags/mingw/</loc>
     <lastmod>2026-07-13T18:20:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/cpp-mingw-segfault/</loc>
+    <loc>http://localhost:1313/posts/cpp-mingw-segfault/</loc>
     <lastmod>2026-07-13T18:20:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/vscode/</loc>
+    <loc>http://localhost:1313/tags/vscode/</loc>
     <lastmod>2026-07-13T18:20:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/%E8%B8%A9%E5%9D%91/</loc>
+    <loc>http://localhost:1313/tags/%E8%B8%A9%E5%9D%91/</loc>
     <lastmod>2026-07-13T18:20:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/spring-boot/</loc>
+    <loc>http://localhost:1313/tags/spring-boot/</loc>
     <lastmod>2026-07-07T20:38:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/vue/</loc>
+    <loc>http://localhost:1313/tags/vue/</loc>
     <lastmod>2026-07-07T20:38:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/spa-ssr-bff/</loc>
+    <loc>http://localhost:1313/posts/spa-ssr-bff/</loc>
     <lastmod>2026-07-07T20:38:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/%E6%9E%B6%E6%9E%84/</loc>
+    <loc>http://localhost:1313/tags/%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2026-07-07T20:38:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>http://localhost:1313/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2026-07-07T20:38:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/friends/</loc>
+    <loc>http://localhost:1313/friends/</loc>
     <lastmod>2026-07-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/ai/</loc>
+    <loc>http://localhost:1313/tags/ai/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/omo-agent-not-showing/</loc>
+    <loc>http://localhost:1313/posts/omo-agent-not-showing/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/oh-my-openagent/</loc>
+    <loc>http://localhost:1313/tags/oh-my-openagent/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/omo/</loc>
+    <loc>http://localhost:1313/tags/omo/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/opencode/</loc>
+    <loc>http://localhost:1313/tags/opencode/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/ssh/</loc>
+    <loc>http://localhost:1313/tags/ssh/</loc>
     <lastmod>2026-04-04T12:38:49+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/ssh-socks5/</loc>
+    <loc>http://localhost:1313/posts/ssh-socks5/</loc>
     <lastmod>2026-04-04T12:38:49+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/cpp-string/</loc>
+    <loc>http://localhost:1313/posts/cpp-string/</loc>
     <lastmod>2026-03-09T14:31:39+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/cpp-vector/</loc>
+    <loc>http://localhost:1313/posts/cpp-vector/</loc>
     <lastmod>2026-03-09T07:54:32+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/stl/</loc>
+    <loc>http://localhost:1313/tags/stl/</loc>
     <lastmod>2026-03-09T07:54:32+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/new-yer-cup-wp/</loc>
+    <loc>http://localhost:1313/posts/new-yer-cup-wp/</loc>
     <lastmod>2026-02-08T22:43:14+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/ctf/</loc>
+    <loc>http://localhost:1313/tags/ctf/</loc>
     <lastmod>2026-02-08T22:43:14+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/write-up/</loc>
+    <loc>http://localhost:1313/tags/write-up/</loc>
     <lastmod>2026-02-08T22:43:14+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/guosai-wp/</loc>
+    <loc>http://localhost:1313/posts/guosai-wp/</loc>
     <lastmod>2026-01-08T08:27:30+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/isa-wp/</loc>
+    <loc>http://localhost:1313/posts/isa-wp/</loc>
     <lastmod>2025-12-06T17:32:48+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/pctf-wp/</loc>
+    <loc>http://localhost:1313/posts/pctf-wp/</loc>
     <lastmod>2025-11-30T21:09:19+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/sql/</loc>
+    <loc>http://localhost:1313/tags/sql/</loc>
     <lastmod>2025-11-12T19:32:31+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/posts/sql-injection/</loc>
+    <loc>http://localhost:1313/posts/sql-injection/</loc>
     <lastmod>2025-11-12T19:32:31+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url>
 </urlset>
