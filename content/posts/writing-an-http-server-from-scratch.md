@@ -43,12 +43,12 @@ server_socket = socket.socket(
     socket.AF_INET,		# 使用 IPv4
     socket.SOCK_STREAM	# 使用面向流的TCP协议
 )
+# 允许端口复用，避免重启时 "Address already in use"
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 # 绑定到 127.0.0.1:6767，此时还没有开始监听
 server_socket.bind(('127.0.0.1', 6767))
 # 开始监听，括号里填一个整数可以指定最大同时连接数
 server_socket.listen()
-# 允许端口复用，避免重启时 "Address already in use"
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 print('服务器正在运行')
 
 while True: # 重复等待连接
