@@ -1,6 +1,6 @@
 +++
 date = '2026-08-05T16:55:20+08:00'
-title = '手写 HTTP 服务器'
+title = '手写一个简单的 HTTP 服务器'
 showToc = true
 tags = ['http', 'web', 'python', 'socket', 'asyncio']
 
@@ -198,7 +198,7 @@ async with server:
     await server.serve_forever()
 ```
 
- 不过，为了更深入地理解异步 IO 与 socket 的底层交互原理，这里我们采用手动结合事件循环 (`loop.sock_accept` / `loop.sock_recv` / `loop.sock_sendall`) 操作原生 socket 的写法。
+不过，为了更深入地理解异步 IO 与 socket 的底层交互原理，这里我们采用手动结合事件循环 (`loop.sock_accept` / `loop.sock_recv` / `loop.sock_sendall`) 操作原生 socket 的写法。
 
 ## 开始写代码
 
@@ -351,5 +351,9 @@ asyncio.run(main())
 </html>
 
 ```
+
+### 最终效果
+
+![最终效果](writing-an-http-server-from-scratch.assets/final-result.jpg)
 
 这样，我们就完成了一个基于 `asyncio` 和原生 socket 的最小可用 HTTP 服务器的实现。你还可以继续完善它，比如让它不仅仅只响应 `index.html`，而是根据请求的路径来响应正确的内容；以及异常处理等功能。
