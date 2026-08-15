@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Ai on zzy2357</title>
-    <link>https://zzy2357.github.io/tags/ai/</link>
-    <description>Recent content in Ai on zzy2357</description>
+    <title>Harness on zzy2357</title>
+    <link>https://zzy2357.github.io/tags/harness/</link>
+    <description>Recent content in Harness on zzy2357</description>
     <image>
       <title>zzy2357</title>
       <url>https://avatars.githubusercontent.com/u/226872255?v=4</url>
@@ -12,7 +12,7 @@
     <generator>Hugo -- 0.164.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 15 Aug 2026 12:14:25 +0800</lastBuildDate>
-    <atom:link href="https://zzy2357.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zzy2357.github.io/tags/harness/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>手写一个简单的 Claude Code</title>
       <link>https://zzy2357.github.io/posts/writing-an-simple-claude-code/</link>
@@ -64,46 +64,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;messages&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;choices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# assistant: 你叫 Alice 呀～😄 刚才你告诉我的，我记得呢！&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;每次都把聊天记录附给 LLM，这样 LLM 就有了上下文。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Oh My OpenAgent 只显示 plan/build 两个 Agent 的修复记录</title>
-      <link>https://zzy2357.github.io/posts/omo-agent-not-showing/</link>
-      <pubDate>Sun, 28 Jun 2026 17:30:00 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/omo-agent-not-showing/</guid>
-      <description>&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
-&lt;p&gt;装了 oh-my-openagent 之后，&lt;code&gt;opencode agent list&lt;/code&gt; 和执行 &lt;code&gt;npx oh-my-openagent doctor&lt;/code&gt; 都显示正常，但 opencode TUI/Desktop 的 Agent 选择器里&lt;strong&gt;只显示 &lt;code&gt;plan&lt;/code&gt; 和 &lt;code&gt;build&lt;/code&gt;&lt;/strong&gt;，没有 Sisyphus、Prometheus、Oracle 等 OMO Agent。&lt;/p&gt;
-&lt;p&gt;这个问题在官方仓库有多人在追踪：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3456&#34;&gt;#3456&lt;/a&gt; — &amp;ldquo;[Question]: installed OMO, reopen opencode can not find Sisyphus in agents&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/code-yeongyu/oh-my-openagent/issues/3835&#34;&gt;#3835&lt;/a&gt; — &amp;ldquo;[Bug]: oh-my-openagent custom agents not showing in OpenCode Desktop UI after v1.14.x update&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/anomalyco/opencode/issues/30855&#34;&gt;anomalyco/opencode#30855&lt;/a&gt; — &amp;ldquo;Plugin-registered Agents Unavailable after Update Operation on Opencode Desktop&amp;rdquo;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;原因分析&#34;&gt;原因分析&lt;/h2&gt;
-&lt;p&gt;实际导致这个症状的原因有三种，严重程度递增：&lt;/p&gt;
-&lt;h3 id=&#34;原因一配置作用域不匹配&#34;&gt;原因一：配置作用域不匹配&lt;/h3&gt;
-&lt;p&gt;OpenCode 的配置文件有两个层级：&lt;/p&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;作用域&lt;/th&gt;
-					&lt;th&gt;路径&lt;/th&gt;
-					&lt;th&gt;优先级&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;全局&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
-					&lt;td&gt;低&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;项目本地&lt;/td&gt;
-					&lt;td&gt;&lt;code&gt;.opencode/opencode.json&lt;/code&gt;（启动目录下）&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;通过 &lt;code&gt;npx oh-my-openagent install&lt;/code&gt; 安装时，写入的是&lt;strong&gt;全局&lt;/strong&gt;配置。但如果启动 opencode 的工作目录下恰好存在 &lt;code&gt;.opencode/opencode.json&lt;/code&gt;（哪怕只有简单几行），opencode 就会优先读这个本地配置，而本地配置可能没有注册插件。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

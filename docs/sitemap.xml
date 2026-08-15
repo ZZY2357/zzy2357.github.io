@@ -2,13 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://zzy2357.github.io/tags/ai/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zzy2357.github.io/tags/harness/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zzy2357.github.io/posts/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zzy2357.github.io/tags/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zzy2357.github.io/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zzy2357.github.io/posts/writing-an-simple-claude-code/</loc>
+    <lastmod>2026-08-15T12:14:25+08:00</lastmod>
+  </url><url>
     <loc>https://zzy2357.github.io/tags/asyncio/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
     <loc>https://zzy2357.github.io/tags/http/</loc>
-    <lastmod>2026-08-05T16:55:20+08:00</lastmod>
-  </url><url>
-    <loc>https://zzy2357.github.io/posts/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
     <loc>https://zzy2357.github.io/tags/python/</loc>
@@ -17,13 +32,7 @@
     <loc>https://zzy2357.github.io/tags/socket/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
-    <loc>https://zzy2357.github.io/tags/</loc>
-    <lastmod>2026-08-05T16:55:20+08:00</lastmod>
-  </url><url>
     <loc>https://zzy2357.github.io/tags/web/</loc>
-    <lastmod>2026-08-05T16:55:20+08:00</lastmod>
-  </url><url>
-    <loc>https://zzy2357.github.io/</loc>
     <lastmod>2026-08-05T16:55:20+08:00</lastmod>
   </url><url>
     <loc>https://zzy2357.github.io/posts/writing-an-http-server-from-scratch/</loc>
@@ -67,9 +76,6 @@
   </url><url>
     <loc>https://zzy2357.github.io/friends/</loc>
     <lastmod>2026-07-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://zzy2357.github.io/tags/ai/</loc>
-    <lastmod>2026-06-28T17:30:00+08:00</lastmod>
   </url><url>
     <loc>https://zzy2357.github.io/posts/omo-agent-not-showing/</loc>
     <lastmod>2026-06-28T17:30:00+08:00</lastmod>
