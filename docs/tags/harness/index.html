@@ -171,7 +171,7 @@ import os from openai import OpenAI client = OpenAI( api_key=os.environ.get(&#39
 # 第一轮对话 messages.append({&#39;role&#39;: &#39;user&#39;, &#39;content&#39;: &#39;你好呀，我叫 Alice&#39;}) response = client.chat.completions.create( ... messages=messages ) messages.append(response.choices[0].message) # assistant: 你好呀，Alice！很高兴认识你 😊 # 第二轮对话 messages.append({&#39;role&#39;: &#39;user&#39;, &#39;content&#39;: &#39;我叫什么名字？&#39;}) response = client.chat.completions.create( ... messages=messages ) messages.append(response.choices[0].message) # assistant: 你叫 Alice 呀～😄 刚才你告诉我的，我记得呢！ 每次都把聊天记录附给 LLM，这样 LLM 就有了上下文。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2026-08-15 12:14:25 +0800 CST'>2026/08/15</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;2073 words&nbsp;·&nbsp;zzy2357</footer>
+  <footer class="entry-footer"><span title='2026-08-15 12:14:25 +0800 CST'>2026/08/15</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;2066 words&nbsp;·&nbsp;zzy2357</footer>
   <a class="entry-link" aria-label="post link to 手写一个简单的 Claude Code" href="https://zzy2357.github.io/posts/writing-an-simple-claude-code/"></a>
 </article>
     </main>
