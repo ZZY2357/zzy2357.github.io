@@ -15,9 +15,9 @@
     <atom:link href="https://zzy2357.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>手写一个简单的 Claude Code</title>
-      <link>https://zzy2357.github.io/posts/writing-an-simple-claude-code/</link>
+      <link>https://zzy2357.github.io/posts/writing-a-simple-claude-code/</link>
       <pubDate>Sat, 15 Aug 2026 12:14:25 +0800</pubDate>
-      <guid>https://zzy2357.github.io/posts/writing-an-simple-claude-code/</guid>
+      <guid>https://zzy2357.github.io/posts/writing-a-simple-claude-code/</guid>
       <description>&lt;p&gt;本文将带你手把手写一个简单的 Claude Code，以了解 harness 的基本原理。&lt;/p&gt;
 &lt;h2 id=&#34;openai-库&#34;&gt;&lt;code&gt;openai&lt;/code&gt; 库&lt;/h2&gt;
 &lt;p&gt;Chat Completions API 是由 OpenAI 提出的一套对话接口规范，很多模型厂商都选择兼容它（比如本文要用的 DeepSeek，接口格式和 OpenAI 几乎一模一样）。&lt;/p&gt;
