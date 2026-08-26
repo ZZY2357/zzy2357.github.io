@@ -18,11 +18,13 @@ hugo server -D
 # Production build (outputs to docs/):
 hugo
 
-# New post:
+# New post (page bundle — required if the post has local images):
+hugo new content posts/my-post/index.md
+# ...or a plain single file (no local images):
 hugo new content posts/my-post.md
 ```
 
-All posts go in `content/posts/`. The `archetypes/default.md` adds front matter automatically.
+Every post is a **page bundle**: `content/posts/<slug>/index.md` (leaf bundle). Local images live in the same folder as `index.md` and are referenced by bare filename (see Content conventions). The `archetypes/default.md` adds front matter automatically.
 
 ## Important paths
 
@@ -53,6 +55,7 @@ All posts go in `content/posts/`. The `archetypes/default.md` adds front matter 
 - **Syntax highlighting**: Hugo Chroma via `pygmentsUseClasses: true` (no highlight.js)
 - **Comments**: Enabled (`comments: true`), depends on PaperMod's comment system
 - **Post types**: CTF writeups (guosai, isa, pctf, etc.), C++ technical notes, dev tooling posts
+- **Local images**: each post is a page bundle — images sit next to `index.md` and are referenced by bare filename, e.g. `![preview](preview.png)`. Hugo publishes them inside the post's URL folder, so relative paths resolve correctly on `hugo server` and GitHub Pages. **Never** use Typora's default `xxx.assets/` relative paths (`![x](post.assets/img.png)`) — Typora resolves them against the file's folder, but Hugo leaves the `src` verbatim and the browser resolves it against the **page URL**, so the image 404s (the `.assets` dir gets published as a sibling of the page folder). If Typora creates a `.assets` folder, move the images into the post's bundle folder and rewrite the references.
 
 ## Architecture notes
 

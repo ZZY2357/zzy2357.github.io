@@ -204,9 +204,13 @@ response = client.chat.completions.create(
 
 ## `rich` 库
 
-`rich` 是一个 Python 终端格式化库，用来给终端输出加颜色和排版，`pip install rich` 就能用。代码里主要用到了四样东西。
+`rich` 是一个 Python 终端格式化库，用来给终端输出加颜色和排版。
 
-首先是 `Console`，`rich` 的打印入口，先 `console = Console()` 创建实例，之后统一用 `console.print(...)` 输出——内置 `print` 没有样式能力。
+```bash
+pip install rich
+```
+
+代码里主要用到了四样东西。首先是 `Console`，`rich` 的打印入口，先 `console = Console()` 创建实例，之后统一用 `console.print(...)` 输出——内置 `print` 没有样式能力。
 
 启动时的欢迎信息是用 `Panel` 包起来的，就是带边框的面板，`title` / `subtitle` 会显示在边框上。
 
@@ -829,4 +833,4 @@ while True:
 
 ## 最终效果
 
-![preview](writing-an-simple-claude-code.assets/preview.png)
+![preview](preview.png)

@@ -354,6 +354,6 @@ asyncio.run(main())
 
 ### 最终效果
 
-![最终效果](writing-an-http-server-from-scratch.assets/final-result.jpg)
+![最终效果](final-result.jpg)
 
 这样，我们就完成了一个基于 `asyncio` 和原生 socket 的最小可用 HTTP 服务器的实现。你还可以继续完善它，比如让它不仅仅只响应 `index.html`，而是根据请求的路径来响应正确的内容；以及异常处理等功能。
